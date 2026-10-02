@@ -31,11 +31,9 @@
 
 .main-logo-text{
     margin-top:8px;
-
     font-size:clamp(28px,6vw,52px);
     font-weight:900;
     letter-spacing:5px;
-
     color:#ffd16b;
 
     text-shadow:
@@ -57,10 +55,13 @@
     background:linear-gradient(135deg,#ffd86b,#ff8a20);
     border:3px solid #ffe7a3;
     border-radius:18px;
+
     box-shadow:
         0 0 20px #ff6a1c,
         0 8px 25px #000;
+
     cursor:pointer;
+
     transition:
         transform .2s,
         box-shadow .2s;
@@ -68,6 +69,7 @@
 
 .play-button:hover{
     transform:scale(1.07);
+
     box-shadow:
         0 0 35px #ff7b20,
         0 12px 30px #000;
@@ -82,6 +84,7 @@
     margin-top:10px;
     font-size:16px;
 }
+
 html,body{
     margin:0;
     min-height:100%;
@@ -93,8 +96,16 @@ html,body{
 
 body{
     background:
-        radial-gradient(circle at 50% 0%,rgba(255,90,20,.25),transparent 38%),
-        linear-gradient(180deg,#24100a,#090404 70%);
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,90,20,.25),
+            transparent 38%
+        ),
+        linear-gradient(
+            180deg,
+            #24100a,
+            #090404 70%
+        );
 }
 
 button{
@@ -124,6 +135,7 @@ header{
 
     background:rgba(10,4,3,.94);
     border-bottom:1px solid #743717;
+
     backdrop-filter:blur(10px);
 }
 
@@ -131,20 +143,6 @@ header{
     height:45px;
     width:auto;
     display:block;
-}
-
-.main-logo{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:10px auto 20px;
-}
-
-.main-logo img{
-    width:min(600px,90vw);
-    max-height:280px;
-    object-fit:contain;
-    filter:drop-shadow(0 8px 20px rgba(0,0,0,.7));
 }
 
 .brand-image{
@@ -156,25 +154,36 @@ header{
     vertical-align:middle;
 }
 
-
 .startup-screen{
     position:fixed;
     inset:0;
     z-index:1000;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:24px;
     text-align:center;
-    background:radial-gradient(circle at 50% 35%,#52200e,#130806 65%,#080303);
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #52200e,
+            #130806 65%,
+            #080303
+        );
 }
 
 .startup-card{
     width:min(560px,100%);
     padding:38px 24px;
+
     border:1px solid #a4531e;
     border-radius:24px;
+
     background:#160906dd;
+
     box-shadow:0 0 60px #000;
 }
 
@@ -205,17 +214,26 @@ header{
     padding:8px 14px;
     color:#ffd987;
 }
+
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    grid-template-columns:
+        repeat(auto-fit,minmax(230px,1fr));
     gap:18px;
 }
 
 .card{
-    background:linear-gradient(180deg,#2a130d,#170907);
+    background:
+        linear-gradient(
+            180deg,
+            #2a130d,
+            #170907
+        );
+
     border:1px solid #75401f;
     border-radius:18px;
     padding:23px;
+
     box-shadow:0 12px 30px #0009;
 }
 
@@ -239,9 +257,11 @@ header{
     padding:18px;
     max-width:850px;
     text-align:center;
+
     background:#24120d;
     border:1px solid #74421f;
     border-radius:14px;
+
     color:#e9d4bf;
     line-height:1.6;
 }
@@ -264,8 +284,10 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
+
     gap:8px;
     flex-wrap:wrap;
+
     margin-bottom:10px;
 }
 
@@ -283,10 +305,14 @@ header{
     max-width:960px;
     height:auto;
     margin:auto;
+
     border:2px solid #8e481d;
     border-radius:16px;
+
     background:#090404;
+
     box-shadow:0 0 35px #000;
+
     touch-action:none;
 }
 
@@ -294,20 +320,27 @@ header{
     display:flex;
     justify-content:center;
     gap:15px;
+
     margin:15px auto 5px;
 }
 
 .control-btn{
     width:90px;
     height:58px;
+
     border-radius:15px;
     border:1px solid #a55320;
+
     background:#32150c;
     color:#ffd06b;
+
     font-size:25px;
+
     box-shadow:0 5px 15px #000;
+
     user-select:none;
     -webkit-user-select:none;
+
     touch-action:none;
 }
 
@@ -326,10 +359,14 @@ header{
     position:fixed;
     inset:0;
     z-index:500;
+
     display:none;
+
     align-items:center;
     justify-content:center;
+
     padding:20px;
+
     background:rgba(0,0,0,.82);
 }
 
@@ -340,10 +377,20 @@ header{
 .overlay-box{
     width:min(600px,94%);
     text-align:center;
+
     padding:35px;
+
     border-radius:22px;
-    background:linear-gradient(180deg,#32150d,#120605);
+
+    background:
+        linear-gradient(
+            180deg,
+            #32150d,
+            #120605
+        );
+
     border:2px solid #a4531e;
+
     box-shadow:0 0 50px #000;
 }
 
@@ -369,9 +416,11 @@ header{
 .event{
     margin-bottom:20px;
     padding:15px;
+
     background:#21100b;
     border:1px solid #62351e;
     border-radius:12px;
+
     line-height:1.6;
 }
 
@@ -395,7 +444,9 @@ header{
 
 .statgrid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:12px;
     margin:20px 0;
 }
@@ -424,6 +475,96 @@ footer{
     display:none!important;
 }
 
+/* BUTTONS */
+
+.btn{
+    border:1px solid #8e481d;
+    border-radius:12px;
+
+    padding:11px 18px;
+
+    margin:5px;
+
+    color:#f4d3a5;
+
+    background:#2a120c;
+
+    box-shadow:0 4px 12px #0008;
+
+    transition:
+        transform .15s,
+        background .15s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    background:#421a0d;
+}
+
+.btn:active{
+    transform:scale(.96);
+}
+
+.btn.gold{
+    color:#1b0803;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd86b,
+            #ff8a20
+        );
+
+    border-color:#ffe7a3;
+
+    font-weight:bold;
+}
+
+/* HIT FLASH */
+
+#gameCanvas.hit{
+    animation:hitFlash .18s linear 2;
+}
+
+@keyframes hitFlash{
+
+    0%{
+        filter:brightness(1);
+    }
+
+    50%{
+        filter:
+            brightness(2)
+            saturate(1.5);
+    }
+
+    100%{
+        filter:brightness(1);
+    }
+
+}
+
+/* PLAYER INVINCIBILITY */
+
+.invincible{
+    animation:
+        playerBlink .12s
+        linear
+        infinite alternate;
+}
+
+@keyframes playerBlink{
+
+    from{
+        opacity:.35;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
 @media(max-width:600px){
 
     header{
@@ -450,6 +591,7 @@ footer{
         width:80px;
         height:55px;
     }
+
 }
 
 </style>
@@ -460,8 +602,8 @@ footer{
 <header>
 
     <div class="logo">
-    <img src="logo.png" alt="FIRE & FURY Logo">
-</div>
+        <img src="logo.png" alt="FIRE & FURY Logo">
+    </div>
 
     <div class="score-pill">
         🏆 <span id="headerScore">0</span> pts
@@ -479,25 +621,39 @@ footer{
 <div class="hero">
 
 <div class="main-logo">
+
     <img src="logo.png" alt="FIRE & FURY">
 
     <div class="main-logo-text">
         FIRE AND FURY
     </div>
+
 </div>
 
-    <p class="subtitle">
-        HISTORY AND GEOGRAPHY HAS ENTERED ARCADE MODE.
-        <br>
-        🌋 Volcanic Eruptions • 🚀 Mysorean Rockets
-    </p>
+<p class="subtitle">
 
-    <div class="main-play">
-    <button class="play-button" onclick="show('missions')">
+    HISTORY AND GEOGRAPHY HAS ENTERED ARCADE MODE.
+
+    <br>
+
+    🌋 Volcanic Eruptions • 🚀 Mysorean Rockets
+
+</p>
+
+<div class="main-play">
+
+    <button
+        class="play-button"
+        onclick="show('missions')">
+
         🎮 PLAY NOW
+
     </button>
 
-    <p>Enter the FIRE & FURY arcade</p>
+    <p>
+        Enter the FIRE & FURY arcade
+    </p>
+
 </div>
 
 
@@ -518,32 +674,52 @@ footer{
 <div class="grid">
 
     <div class="card">
+
         <div class="emoji">🌋</div>
-        <h3>VOLCANO RUSH</h3>
+
+        <h3>
+            VOLCANO RUSH
+        </h3>
+
         <p>
             Control the eruption zone, collect
             the correct materials and survive
             volcanic hazards.
         </p>
+
     </div>
 
+
     <div class="card">
+
         <div class="emoji">🚀</div>
-        <h3>ROCKET BATTLE</h3>
+
+        <h3>
+            ROCKET BATTLE
+        </h3>
+
         <p>
             Control a Mysorean rocket, destroy
             incoming targets and collect historical
             knowledge.
         </p>
+
     </div>
 
+
     <div class="card">
+
         <div class="emoji">🔥</div>
-        <h3>FINAL FURY</h3>
+
+        <h3>
+            FINAL FURY
+        </h3>
+
         <p>
             Combine both worlds in the final
             arcade challenge.
         </p>
+
     </div>
 
 </div>
@@ -551,7 +727,8 @@ footer{
 
 <div class="notice">
 
-    🏫 <div></diV>DEMONSTRATION MODE
+    🏫 DEMONSTRATION MODE
+
     <br><br>
 
     After completing a digital mission,
@@ -560,8 +737,12 @@ footer{
 
 </div>
 
+
 <footer>
-    FIRE & FURY • A Demonstration of the Power of Volcanoes and The Strength of The Ingenious Mysorean Rockets of Tippu Sultan
+
+    FIRE & FURY • A Demonstration of the Power of Volcanoes
+    and The Strength of The Ingenious Mysorean Rockets of Tippu Sultan
+
 </footer>
 
 </div>
@@ -575,11 +756,17 @@ footer{
 
 <div class="wrap">
 
-<h2 class="section-title">🎮 SELECT YOUR MISSION</h2>
+<h2 class="section-title">
+    🎮 SELECT YOUR MISSION
+</h2>
 
-<p class="subtitle" style="text-align:center">
+<p
+    class="subtitle"
+    style="text-align:center">
+
     Choose a game. Survive it. Learn something.
     This team has groundbreakingly made History entertaining.
+
 </p>
 
 
@@ -589,21 +776,31 @@ footer{
 
     <div class="emoji">🌋</div>
 
-    <h3>VOLCANO RUSH</h3>
+    <h3>
+        VOLCANO RUSH
+    </h3>
 
     <p>
+
         Move across the volcanic field.
         Collect eruption materials and
         avoid dangerous rocks.
+
     </p>
 
     <p>
-        <b>Goal:</b> Reach 2,000 points.
+
+        <b>Goal:</b>
+        Reach 2,000 points.
+
     </p>
 
-    <button class="btn gold"
-            onclick="startGame('volcano')">
+    <button
+        class="btn gold"
+        onclick="startGame('volcano')">
+
         PLAY 🌋
+
     </button>
 
 </div>
@@ -613,21 +810,31 @@ footer{
 
     <div class="emoji">🚀</div>
 
-    <h3>ROCKET BATTLE</h3>
+    <h3>
+        ROCKET BATTLE
+    </h3>
 
     <p>
+
         Pilot your Mysorean rocket.
         Destroy targets and collect
         historical scrolls.
+
     </p>
 
     <p>
-        <b>Goal:</b> Survive the wave.
+
+        <b>Goal:</b>
+        Survive the wave.
+
     </p>
 
-    <button class="btn gold"
-            onclick="startGame('rocket')">
+    <button
+        class="btn gold"
+        onclick="startGame('rocket')">
+
         PLAY 🚀
+
     </button>
 
 </div>
@@ -637,21 +844,31 @@ footer{
 
     <div class="emoji">🔥</div>
 
-    <h3>FINAL FURY</h3>
+    <h3>
+        FINAL FURY
+    </h3>
 
     <p>
+
         The volcanoes and rockets have
         decided to cooperate. Unfortunately
         for you.
+
     </p>
 
     <p>
-        <b>Goal:</b> Survive 60 seconds.
+
+        <b>Goal:</b>
+        Survive 60 seconds.
+
     </p>
 
-    <button class="btn gold"
-            onclick="startGame('final')">
+    <button
+        class="btn gold"
+        onclick="startGame('final')">
+
         PLAY 🔥
+
     </button>
 
 </div>
@@ -659,16 +876,23 @@ footer{
 </div>
 
 
-<div style="text-align:center;margin-top:25px">
+<div
+    style="text-align:center;margin-top:25px">
 
-    <button class="btn"
-            onclick="show('home')">
+    <button
+        class="btn"
+        onclick="show('home')">
+
         ← HOME
+
     </button>
 
-    <button class="btn"
-            onclick="show('history')">
+    <button
+        class="btn"
+        onclick="show('history')">
+
         📜 HISTORY
+
     </button>
 
 </div>
@@ -687,65 +911,106 @@ footer{
 <div class="game-head">
 
     <div class="game-stat">
-        🎮 <span id="gameName">GAME</span>
+
+        🎮
+        <span id="gameName">
+            GAME
+        </span>
+
     </div>
 
     <div class="game-stat">
-        ⭐ <span id="gameScore">0</span>
+
+        ⭐
+        <span id="gameScore">
+            0
+        </span>
+
     </div>
 
     <div class="game-stat">
-        ❤️ <span id="gameLives">3</span>
+
+        ❤️
+        <span id="gameLives">
+            3
+        </span>
+
     </div>
 
     <div class="game-stat">
-        🔥 COMBO <span id="gameCombo">0</span>
+
+        🔥 COMBO
+        <span id="gameCombo">
+            0
+        </span>
+
     </div>
 
     <div class="game-stat">
-        ⏱️ <span id="gameTime">60</span>
+
+        ⏱️
+        <span id="gameTime">
+            60
+        </span>
+
     </div>
 
 </div>
 
 
-<canvas id="gameCanvas"
-        width="960"
-        height="600">
+<canvas
+    id="gameCanvas"
+    width="960"
+    height="600">
 </canvas>
 
 
 <div class="controls">
 
-    <button class="control-btn"
-            id="leftBtn">
+    <button
+        class="control-btn"
+        id="leftBtn">
+
         ◀
+
     </button>
 
-    <button class="control-btn"
-            id="fireBtn">
+    <button
+        class="control-btn"
+        id="fireBtn">
+
         🔥
+
     </button>
 
-    <button class="control-btn"
-            id="rightBtn">
+    <button
+        class="control-btn"
+        id="rightBtn">
+
         ▶
+
     </button>
 
 </div>
 
 
-<div class="game-message"
-     id="gameMessage">
+<div
+    class="game-message"
+    id="gameMessage">
+
     Loading mission...
+
 </div>
 
 
 <div style="text-align:center">
 
-    <button class="btn"
-            onclick="quitGame()">
+    <button
+        class="btn"
+        onclick="quitGame()">
+
         ✕ QUIT
+
     </button>
 
 </div>
@@ -768,13 +1033,17 @@ footer{
 
 <div class="card">
 
-<h3>🌋 FOUR ERUPTION STYLES</h3>
+<h3>
+    🌋 FOUR ERUPTION STYLES
+</h3>
 
 <div class="timeline">
 
 <div class="event">
 
-<strong>HAWAIIAN</strong>
+<strong>
+    HAWAIIAN
+</strong>
 
 <br>
 
@@ -786,7 +1055,9 @@ lava and relatively gentle, steady flows.
 
 <div class="event">
 
-<strong>STROMBOLIAN</strong>
+<strong>
+    STROMBOLIAN
+</strong>
 
 <br>
 
@@ -798,7 +1069,9 @@ by gas bubbles breaking through magma.
 
 <div class="event">
 
-<strong>VULCANIAN</strong>
+<strong>
+    VULCANIAN
+</strong>
 
 <br>
 
@@ -811,7 +1084,9 @@ a plug is disrupted.
 
 <div class="event">
 
-<strong>PLINIAN</strong>
+<strong>
+    PLINIAN
+</strong>
 
 <br>
 
@@ -825,15 +1100,21 @@ rise many kilometres into the atmosphere.
 </div>
 
 
-<div class="card" style="margin-top:18px">
+<div
+    class="card"
+    style="margin-top:18px">
 
-<h3>🚀 MYSOREAN ROCKETS</h3>
+<h3>
+    🚀 MYSOREAN ROCKETS
+</h3>
 
 <div class="timeline">
 
 <div class="event">
 
-<strong>18TH CENTURY</strong>
+<strong>
+    18TH CENTURY
+</strong>
 
 <br>
 
@@ -846,7 +1127,9 @@ the armies of Hyder Ali and Tipu Sultan.
 
 <div class="event">
 
-<strong>ANGLO-MYSORE WARS</strong>
+<strong>
+    ANGLO-MYSORE WARS
+</strong>
 
 <br>
 
@@ -858,7 +1141,9 @@ rockets during conflicts with Mysore.
 
 <div class="event">
 
-<strong>CONGREVE ROCKETS</strong>
+<strong>
+    CONGREVE ROCKETS
+</strong>
 
 <br>
 
@@ -871,7 +1156,9 @@ developed a British military rocket system.
 
 <div class="event">
 
-<strong>HISTORICAL SIGNIFICANCE</strong>
+<strong>
+    HISTORICAL SIGNIFICANCE
+</strong>
 
 <br>
 
@@ -903,9 +1190,12 @@ Your real models are the exhibition layer.
 
 <div style="text-align:center">
 
-<button class="btn"
-        onclick="show('missions')">
+<button
+    class="btn"
+    onclick="show('missions')">
+
     ← MISSIONS
+
 </button>
 
 </div>
@@ -923,55 +1213,86 @@ Your real models are the exhibition layer.
 
 <div class="result">
 
-<div class="fire">🏆</div>
+<div class="fire">
+    🏆
+</div>
 
 <h2 class="section-title">
     MISSION COMPLETE
 </h2>
 
-<div class="bigscore"
-     id="resultScore">
+<div
+    class="bigscore"
+    id="resultScore">
+
     0
+
 </div>
 
-<p class="subtitle"
-   id="resultTitle">
+<p
+    class="subtitle"
+    id="resultTitle">
 </p>
 
 
 <div class="statgrid">
 
 <div class="stat">
+
     SCORE
-    <b id="resultPoints">0</b>
+
+    <b id="resultPoints">
+        0
+    </b>
+
 </div>
 
+
 <div class="stat">
+
     BEST
-    <b id="resultBest">0</b>
+
+    <b id="resultBest">
+        0
+    </b>
+
 </div>
+
 
 <div class="stat">
+
     COMBO
-    <b id="resultCombo">0</b>
-</div>
+
+    <b id="resultCombo">
+        0
+    </b>
 
 </div>
 
-
-<div class="notice"
-     id="resultNotice">
 </div>
 
 
-<button class="btn gold"
-        onclick="show('missions')">
+<div
+    class="notice"
+    id="resultNotice">
+</div>
+
+
+<button
+    class="btn gold"
+    onclick="show('missions')">
+
     🎮 PLAY AGAIN
+
 </button>
 
-<button class="btn"
-        onclick="show('history')">
+
+<button
+    class="btn"
+    onclick="show('history')">
+
     📜 HISTORY
+
 </button>
 
 </div>
@@ -981,8 +1302,11 @@ Your real models are the exhibition layer.
 </section>
 
 
-<div class="game-overlay"
-     id="overlay">
+<!-- GAME OVER OVERLAY -->
+
+<div
+    class="game-overlay"
+    id="overlay">
 
 <div class="overlay-box">
 
@@ -990,17 +1314,23 @@ Your real models are the exhibition layer.
     GAME OVER
 </h2>
 
-<div class="overlay-score"
-     id="overlayScore">
+<div
+    class="overlay-score"
+    id="overlayScore">
+
     0
+
 </div>
 
 <p id="overlayText">
 </p>
 
-<button class="btn gold"
-        onclick="closeOverlayToMissions()">
+<button
+    class="btn gold"
+    onclick="closeOverlayToMissions()">
+
     CONTINUE
+
 </button>
 
 </div>
@@ -1012,6 +1342,12 @@ Your real models are the exhibition layer.
 
 /* =====================================================
    FIRE & FURY ARCADE ENGINE
+   FIXED VERSION
+===================================================== */
+
+
+/* =====================================================
+   CANVAS
 ===================================================== */
 
 const canvas =
@@ -1020,6 +1356,10 @@ const canvas =
 const ctx =
     canvas.getContext("2d");
 
+
+/* =====================================================
+   GAME STATE
+===================================================== */
 
 let animationID = null;
 
@@ -1043,11 +1383,28 @@ let spawnTimer = 0;
 
 let fireCooldown = 0;
 
+
+/*
+    IMPORTANT:
+    After being hit, the player cannot be hit again
+    until this reaches zero.
+*/
+
+let invincibilityTimer = 0;
+
+const INVINCIBILITY_TIME = 1.15;
+
+
 let keys = {
+
     left:false,
+
     right:false,
+
     fire:false
+
 };
+
 
 let player;
 
@@ -1085,7 +1442,8 @@ function show(id){
 
 function updateHeader(){
 
-    document.getElementById("headerScore")
+    document
+        .getElementById("headerScore")
         .textContent = score;
 
 }
@@ -1097,24 +1455,49 @@ function updateHeader(){
 
 function startGame(type){
 
+    /*
+        If another game is running, stop it first.
+    */
+
+    gameRunning = false;
+
+    if(animationID){
+
+        cancelAnimationFrame(animationID);
+
+    }
+
+
     gameType = type;
 
     score = 0;
+
     lives = 3;
+
     combo = 0;
+
     bestCombo = 0;
+
 
     timeLeft =
         type === "final"
             ? 60
             : 45;
 
+
     objects = [];
+
     particles = [];
+
     floatingTexts = [];
 
-    spawnTimer = 0;
+
+    spawnTimer = .35;
+
     fireCooldown = 0;
+
+    invincibilityTimer = 0;
+
 
     player = {
 
@@ -1131,21 +1514,40 @@ function startGame(type){
     };
 
 
-    document.getElementById("gameName")
+    /*
+        Remove any leftover visual hit state.
+    */
+
+    canvas.classList.remove("hit");
+
+
+    document
+        .getElementById("gameName")
         .textContent =
+
         type === "volcano"
+
             ? "🌋 VOLCANO RUSH"
+
             : type === "rocket"
+
                 ? "🚀 ROCKET BATTLE"
+
                 : "🔥 FINAL FURY";
 
 
-    document.getElementById("gameMessage")
+    document
+        .getElementById("gameMessage")
         .textContent =
+
         type === "volcano"
-            ? "Catch useful eruption materials. Avoid falling rocks!"
+
+            ? "Collect eruption materials ⭐ and avoid falling rocks ☠️!"
+
             : type === "rocket"
-                ? "Destroy targets and collect history scrolls!"
+
+                ? "Shoot targets 🎯 and collect historical scrolls 📜!"
+
                 : "Survive the combined FIRE & FURY assault!";
 
 
@@ -1153,9 +1555,11 @@ function startGame(type){
 
     show("game");
 
+
     gameRunning = true;
 
     lastTime = performance.now();
+
 
     animationID =
         requestAnimationFrame(gameLoop);
@@ -1172,17 +1576,28 @@ function gameLoop(now){
     if(!gameRunning)
         return;
 
+
     const dt =
-        Math.min((now-lastTime)/1000,.035);
+        Math.min(
+            (now-lastTime)/1000,
+            .035
+        );
+
 
     lastTime = now;
+
 
     update(dt);
 
     draw();
 
-    animationID =
-        requestAnimationFrame(gameLoop);
+
+    if(gameRunning){
+
+        animationID =
+            requestAnimationFrame(gameLoop);
+
+    }
 
 }
 
@@ -1193,7 +1608,10 @@ function gameLoop(now){
 
 function update(dt){
 
+    /* TIME */
+
     timeLeft -= dt;
+
 
     if(timeLeft <= 0){
 
@@ -1206,13 +1624,37 @@ function update(dt){
     }
 
 
+    /* INVINCIBILITY */
+
+    if(invincibilityTimer > 0){
+
+        invincibilityTimer -= dt;
+
+        if(invincibilityTimer < 0){
+
+            invincibilityTimer = 0;
+
+        }
+
+    }
+
+
     /* PLAYER */
 
-    if(keys.left)
-        player.x -= player.speed * dt;
+    if(keys.left){
 
-    if(keys.right)
-        player.x += player.speed * dt;
+        player.x -=
+            player.speed * dt;
+
+    }
+
+
+    if(keys.right){
+
+        player.x +=
+            player.speed * dt;
+
+    }
 
 
     player.x =
@@ -1228,6 +1670,7 @@ function update(dt){
     /* FIRE */
 
     fireCooldown -= dt;
+
 
     if(
         keys.fire &&
@@ -1248,29 +1691,64 @@ function update(dt){
 
     spawnTimer -= dt;
 
+
     if(spawnTimer <= 0){
 
         spawnObject();
 
-        spawnTimer =
-            gameType === "final"
-                ? .38
-                : .55;
+
+        /*
+            Gradually increase difficulty.
+        */
+
+        const difficulty =
+            Math.min(
+                timeLeft < 20 ? .30 : .45,
+                gameType === "final"
+                    ? .40
+                    : .58
+            );
+
+
+        spawnTimer = difficulty;
 
     }
 
 
-    /* OBJECTS */
+    /* =================================================
+       NORMAL OBJECTS
+    ================================================= */
 
-    for(let i=objects.length-1;i>=0;i--){
+    for(
+        let i=objects.length-1;
+        i>=0;
+        i--
+    ){
 
         const o = objects[i];
 
-        o.y += o.speed * dt;
 
-        if(o.type === "enemy" ||
-           o.type === "rock" ||
-           o.type === "hazard"){
+        /*
+            Bullets are handled separately.
+        */
+
+        if(o.type === "bullet")
+            continue;
+
+
+        o.y +=
+            o.speed * dt;
+
+
+        /*
+            Rotate physical objects.
+        */
+
+        if(
+            o.type === "enemy" ||
+            o.type === "rock" ||
+            o.type === "hazard"
+        ){
 
             o.rotation +=
                 o.spin * dt;
@@ -1278,19 +1756,36 @@ function update(dt){
         }
 
 
+        /* =================================================
+           HAZARD COLLISION
+        ================================================= */
+
+        /*
+            THIS IS THE IMPORTANT FIX.
+
+            Only objects with:
+                o.hazard === true
+
+            can hurt the player.
+        */
+
         if(
+            o.hazard === true &&
+            invincibilityTimer <= 0 &&
             collision(
                 player,
-                {
-                    x:o.x,
-                    y:o.y,
-                    width:o.size,
-                    height:o.size
-                }
+                objectHitbox(o)
             )
         ){
 
             playerHit();
+
+
+            /*
+                Remove the hazard immediately.
+                This prevents the same hazard from
+                hitting the player repeatedly.
+            */
 
             objects.splice(i,1);
 
@@ -1299,18 +1794,33 @@ function update(dt){
         }
 
 
+        /* =================================================
+           COLLECTIBLE COLLISION
+        ================================================= */
+
         if(
-            o.y > canvas.height+70
+            o.collectible === true &&
+            collision(
+                player,
+                objectHitbox(o)
+            )
         ){
 
-            if(
-                o.good &&
-                gameType === "volcano"
-            ){
+            collectObject(o);
 
-                combo = 0;
+            objects.splice(i,1);
 
-            }
+            continue;
+
+        }
+
+
+        /* OBJECT LEFT SCREEN */
+
+        if(
+            o.y >
+            canvas.height + 80
+        ){
 
             objects.splice(i,1);
 
@@ -1319,16 +1829,29 @@ function update(dt){
     }
 
 
-        /* PROJECTILES */
+    /* =====================================================
+       PROJECTILES
+    ===================================================== */
 
-    for(let i=objects.length-1;i>=0;i--){
+    for(
+        let i=objects.length-1;
+        i>=0;
+        i--
+    ){
 
-        const o=objects[i];
+        const o = objects[i];
+
 
         if(o.type !== "bullet")
             continue;
 
-        o.y -= o.speed * dt;
+
+        o.y -=
+            o.speed * dt;
+
+
+        let bulletDestroyed = false;
+
 
         for(
             let j=objects.length-1;
@@ -1336,11 +1859,16 @@ function update(dt){
             j--
         ){
 
-            const target=objects[j];
+            const target =
+                objects[j];
+
+
+            /*
+                Bullets can destroy ONLY shootable targets.
+            */
 
             if(
-                target.type === "target" ||
-                target.type === "enemy"
+                target.shootable === true
             ){
 
                 if(
@@ -1351,20 +1879,37 @@ function update(dt){
                             width:8,
                             height:18
                         },
-                        {
-                            x:target.x,
-                            y:target.y,
-                            width:target.size,
-                            height:target.size
-                        }
+
+                        objectHitbox(target)
                     )
                 ){
 
                     destroyTarget(target);
 
+
                     objects.splice(j,1);
 
-                    objects.splice(i,1);
+
+                    /*
+                        The bullet's index can change
+                        when another object is removed.
+                    */
+
+                    const currentIndex =
+                        objects.indexOf(o);
+
+
+                    if(currentIndex !== -1){
+
+                        objects.splice(
+                            currentIndex,
+                            1
+                        );
+
+                    }
+
+
+                    bulletDestroyed = true;
 
                     break;
 
@@ -1375,8 +1920,26 @@ function update(dt){
         }
 
 
-        if(o.y < -30)
-            objects.splice(i,1);
+        if(bulletDestroyed)
+            continue;
+
+
+        if(o.y < -30){
+
+            const currentIndex =
+                objects.indexOf(o);
+
+
+            if(currentIndex !== -1){
+
+                objects.splice(
+                    currentIndex,
+                    1
+                );
+
+            }
+
+        }
 
     }
 
@@ -1391,6 +1954,34 @@ function update(dt){
 
 
 /* =====================================================
+   OBJECT HITBOX
+===================================================== */
+
+function objectHitbox(o){
+
+    /*
+        Every object uses x/y as its CENTER.
+
+        This keeps collision consistent with
+        the player's collision system.
+    */
+
+    return {
+
+        x:o.x,
+
+        y:o.y,
+
+        width:o.size,
+
+        height:o.size
+
+    };
+
+}
+
+
+/* =====================================================
    SPAWN OBJECTS
 ===================================================== */
 
@@ -1398,110 +1989,244 @@ function spawnObject(){
 
     let o = {
 
-        x:30+Math.random()*(canvas.width-60),
+        x:
+            30 +
+            Math.random() *
+            (canvas.width - 60),
 
         y:-50,
 
         size:38,
 
-        speed:100+Math.random()*130,
+        speed:
+            100 +
+            Math.random() *
+            130,
 
         rotation:0,
 
-        spin:(Math.random()-.5)*5,
+        spin:
+            (Math.random()-.5)*5,
 
         type:"",
 
         good:false,
 
-        value:0
+        value:0,
+
+        hazard:false,
+
+        collectible:false,
+
+        shootable:false
 
     };
 
 
+    /* =================================================
+       VOLCANO
+    ================================================= */
+
     if(gameType === "volcano"){
 
-        const r=Math.random();
+        const r =
+            Math.random();
+
 
         if(r < .23){
 
-            o.type="water";
-            o.good=true;
-            o.value=100;
+            /*
+                SAFE COLLECTIBLE
+            */
 
-        }else if(r < .46){
+            o.type = "water";
 
-            o.type="lava";
-            o.good=true;
-            o.value=150;
+            o.good = true;
 
-        }else if(r < .65){
+            o.collectible = true;
 
-            o.type="gas";
-            o.good=true;
-            o.value=200;
+            o.value = 100;
 
-        }else if(r < .80){
+        }
 
-            o.type="ash";
-            o.good=true;
-            o.value=250;
+        else if(r < .46){
 
-        }else{
+            /*
+                SAFE COLLECTIBLE
+            */
 
-            o.type="rock";
-            o.good=false;
+            o.type = "lava";
+
+            o.good = true;
+
+            o.collectible = true;
+
+            o.value = 150;
+
+        }
+
+        else if(r < .65){
+
+            /*
+                SAFE COLLECTIBLE
+            */
+
+            o.type = "gas";
+
+            o.good = true;
+
+            o.collectible = true;
+
+            o.value = 200;
+
+        }
+
+        else if(r < .80){
+
+            /*
+                SAFE COLLECTIBLE
+            */
+
+            o.type = "ash";
+
+            o.good = true;
+
+            o.collectible = true;
+
+            o.value = 250;
+
+        }
+
+        else{
+
+            /*
+                ACTUAL HAZARD
+            */
+
+            o.type = "rock";
+
+            o.good = false;
+
+            o.hazard = true;
 
         }
 
     }
 
+
+    /* =================================================
+       ROCKET
+    ================================================= */
 
     else if(gameType === "rocket"){
 
-        const r=Math.random();
+        const r =
+            Math.random();
+
 
         if(r < .72){
 
-            o.type="target";
-            o.value=200;
+            /*
+                SHOOTABLE TARGET
 
-        }else{
+                It does NOT hurt the player
+                merely by touching it.
+            */
 
-            o.type="scroll";
-            o.good=true;
-            o.value=500;
+            o.type = "target";
+
+            o.value = 200;
+
+            o.shootable = true;
+
+        }
+
+        else{
+
+            /*
+                SAFE HISTORICAL COLLECTIBLE
+            */
+
+            o.type = "scroll";
+
+            o.good = true;
+
+            o.collectible = true;
+
+            o.value = 500;
 
         }
 
     }
 
 
+    /* =================================================
+       FINAL FURY
+    ================================================= */
+
     else{
 
-        const r=Math.random();
+        const r =
+            Math.random();
+
 
         if(r < .38){
 
-            o.type="enemy";
-            o.value=250;
+            /*
+                ACTUAL DANGEROUS ENEMY
+            */
 
-        }else if(r < .60){
+            o.type = "enemy";
 
-            o.type="scroll";
-            o.good=true;
-            o.value=500;
+            o.value = 250;
 
-        }else if(r < .78){
+            o.hazard = true;
 
-            o.type="lava";
-            o.good=true;
-            o.value=150;
+        }
 
-        }else{
+        else if(r < .60){
 
-            o.type="rock";
-            o.good=false;
+            /*
+                SAFE COLLECTIBLE
+            */
+
+            o.type = "scroll";
+
+            o.good = true;
+
+            o.collectible = true;
+
+            o.value = 500;
+
+        }
+
+        else if(r < .78){
+
+            /*
+                SAFE BONUS MATERIAL
+            */
+
+            o.type = "lava";
+
+            o.good = true;
+
+            o.collectible = true;
+
+            o.value = 150;
+
+        }
+
+        else{
+
+            /*
+                ACTUAL DANGEROUS ROCK
+            */
+
+            o.type = "rock";
+
+            o.good = false;
+
+            o.hazard = true;
 
         }
 
@@ -1514,24 +2239,89 @@ function spawnObject(){
 
 
 /* =====================================================
+   COLLECT OBJECT
+===================================================== */
+
+function collectObject(o){
+
+    const value =
+        o.value || 100;
+
+
+    score += value;
+
+
+    combo++;
+
+
+    bestCombo =
+        Math.max(
+            bestCombo,
+            combo
+        );
+
+
+    /*
+        Combo bonus
+    */
+
+    if(combo >= 3){
+
+        const bonus =
+            combo * 10;
+
+        score += bonus;
+
+        floatingText(
+            o.x,
+            o.y - 20,
+            "+" + value +
+            " +COMBO"
+        );
+
+    }
+
+    else{
+
+        floatingText(
+            o.x,
+            o.y,
+            "+" + value
+        );
+
+    }
+
+
+    createParticles(
+        o.x,
+        o.y,
+        12,
+        "#ffd35c"
+    );
+
+}
+
+
+/* =====================================================
    FIRE
 ===================================================== */
 
-function fire() {
+function fire(){
 
     objects.push({
 
-        type: "bullet",
+        type:"bullet",
 
-        x: player.x,
+        x:player.x,
 
-        y: player.y - 30,
+        y:player.y - 30,
 
-        speed: 650,
+        speed:650,
 
-        size: 8
+        size:8
 
     });
+
 
     createParticles(
         player.x,
@@ -1547,27 +2337,39 @@ function fire() {
    DESTROY TARGET
 ===================================================== */
 
-function destroyTarget(o) {
+function destroyTarget(o){
 
-    score += o.value || 200;
+    const value =
+        o.value || 200;
+
+
+    score += value;
+
 
     combo++;
 
-    bestCombo =
-        Math.max(bestCombo, combo);
 
-    if (combo >= 3) {
+    bestCombo =
+        Math.max(
+            bestCombo,
+            combo
+        );
+
+
+    if(combo >= 3){
 
         score +=
             combo * 25;
 
     }
 
+
     floatingText(
         o.x,
         o.y,
-        "+" + (o.value || 200)
+        "+" + value
     );
+
 
     createParticles(
         o.x,
@@ -1583,11 +2385,32 @@ function destroyTarget(o) {
    PLAYER HIT
 ===================================================== */
 
-function playerHit() {
+function playerHit(){
+
+    /*
+        Safety check.
+
+        If the player is already invincible,
+        NOTHING happens.
+    */
+
+    if(invincibilityTimer > 0)
+        return;
+
 
     lives--;
 
+
     combo = 0;
+
+
+    /*
+        Start invincibility immediately.
+    */
+
+    invincibilityTimer =
+        INVINCIBILITY_TIME;
+
 
     createParticles(
         player.x,
@@ -1596,6 +2419,7 @@ function playerHit() {
         "#ff351d"
     );
 
+
     floatingText(
         player.x,
         player.y,
@@ -1603,9 +2427,26 @@ function playerHit() {
     );
 
 
-    if (lives <= 0) {
+    /*
+        Visual feedback.
+    */
+
+    canvas.classList.remove("hit");
+
+    /*
+        Force animation restart.
+    */
+
+    void canvas.offsetWidth;
+
+    canvas.classList.add("hit");
+
+
+    if(lives <= 0){
 
         lives = 0;
+
+        updateGameUI();
 
         endGame("LIVES");
 
@@ -1618,7 +2459,7 @@ function playerHit() {
    COLLISION
 ===================================================== */
 
-function collision(a, b) {
+function collision(a,b){
 
     return (
 
@@ -1643,7 +2484,7 @@ function collision(a, b) {
    DRAW
 ===================================================== */
 
-function draw() {
+function draw(){
 
     ctx.clearRect(
         0,
@@ -1651,6 +2492,7 @@ function draw() {
         canvas.width,
         canvas.height
     );
+
 
     drawBackground();
 
@@ -1669,7 +2511,7 @@ function draw() {
    BACKGROUND
 ===================================================== */
 
-function drawBackground() {
+function drawBackground(){
 
     const g =
         ctx.createLinearGradient(
@@ -1680,32 +2522,66 @@ function drawBackground() {
         );
 
 
-    if (gameType === "volcano") {
+    if(gameType === "volcano"){
 
-        g.addColorStop(0, "#261006");
-        g.addColorStop(.55, "#160807");
-        g.addColorStop(1, "#080303");
+        g.addColorStop(
+            0,
+            "#261006"
+        );
+
+        g.addColorStop(
+            .55,
+            "#160807"
+        );
+
+        g.addColorStop(
+            1,
+            "#080303"
+        );
 
     }
 
-    else if (gameType === "rocket") {
+    else if(gameType === "rocket"){
 
-        g.addColorStop(0, "#080d25");
-        g.addColorStop(.55, "#100a20");
-        g.addColorStop(1, "#050306");
+        g.addColorStop(
+            0,
+            "#080d25"
+        );
+
+        g.addColorStop(
+            .55,
+            "#100a20"
+        );
+
+        g.addColorStop(
+            1,
+            "#050306"
+        );
 
     }
 
-    else {
+    else{
 
-        g.addColorStop(0, "#281006");
-        g.addColorStop(.5, "#110817");
-        g.addColorStop(1, "#050303");
+        g.addColorStop(
+            0,
+            "#281006"
+        );
+
+        g.addColorStop(
+            .5,
+            "#110817"
+        );
+
+        g.addColorStop(
+            1,
+            "#050303"
+        );
 
     }
 
 
     ctx.fillStyle = g;
+
 
     ctx.fillRect(
         0,
@@ -1717,15 +2593,25 @@ function drawBackground() {
 
     /* STARS */
 
-    ctx.fillStyle = "#ffffff55";
+    ctx.fillStyle =
+        "#ffffff55";
 
-    for (let i = 0; i < 55; i++) {
+
+    for(
+        let i=0;
+        i<55;
+        i++
+    ){
 
         const x =
-            (i * 173) % canvas.width;
+            (i*173) %
+            canvas.width;
+
 
         const y =
-            (i * 83) % canvas.height;
+            (i*83) %
+            canvas.height;
+
 
         ctx.fillRect(
             x,
@@ -1737,30 +2623,52 @@ function drawBackground() {
     }
 
 
-    if (gameType === "volcano") {
+    if(gameType === "volcano"){
 
-        ctx.fillStyle = "#ff5a1530";
+        ctx.fillStyle =
+            "#ff5a1530";
+
 
         ctx.beginPath();
 
-        ctx.moveTo(0, canvas.height);
+        ctx.moveTo(
+            0,
+            canvas.height
+        );
 
-        ctx.lineTo(180, 430);
+        ctx.lineTo(
+            180,
+            430
+        );
 
-        ctx.lineTo(310, canvas.height);
+        ctx.lineTo(
+            310,
+            canvas.height
+        );
 
         ctx.fill();
 
 
-        ctx.fillStyle = "#ff781d22";
+        ctx.fillStyle =
+            "#ff781d22";
+
 
         ctx.beginPath();
 
-        ctx.moveTo(580, canvas.height);
+        ctx.moveTo(
+            580,
+            canvas.height
+        );
 
-        ctx.lineTo(720, 400);
+        ctx.lineTo(
+            720,
+            400
+        );
 
-        ctx.lineTo(960, canvas.height);
+        ctx.lineTo(
+            960,
+            canvas.height
+        );
 
         ctx.fill();
 
@@ -1773,9 +2681,10 @@ function drawBackground() {
    DRAW PLAYER
 ===================================================== */
 
-function drawPlayer() {
+function drawPlayer(){
 
     ctx.save();
+
 
     ctx.translate(
         player.x,
@@ -1783,26 +2692,58 @@ function drawPlayer() {
     );
 
 
-    if (gameType === "rocket") {
+    /*
+        Blink while invincible.
+    */
 
-        ctx.fillStyle = "#d4d4d4";
+    if(
+        invincibilityTimer > 0 &&
+        Math.floor(
+            invincibilityTimer * 12
+        ) % 2 === 0
+    ){
+
+        ctx.globalAlpha = .35;
+
+    }
+
+
+    if(gameType === "rocket"){
+
+        ctx.fillStyle =
+            "#d4d4d4";
+
 
         ctx.beginPath();
 
-        ctx.moveTo(0, -30);
+        ctx.moveTo(
+            0,
+            -30
+        );
 
-        ctx.lineTo(18, 20);
+        ctx.lineTo(
+            18,
+            20
+        );
 
-        ctx.lineTo(0, 12);
+        ctx.lineTo(
+            0,
+            12
+        );
 
-        ctx.lineTo(-18, 20);
+        ctx.lineTo(
+            -18,
+            20
+        );
 
         ctx.closePath();
 
         ctx.fill();
 
 
-        ctx.fillStyle = "#b43b18";
+        ctx.fillStyle =
+            "#b43b18";
+
 
         ctx.fillRect(
             -12,
@@ -1812,27 +2753,42 @@ function drawPlayer() {
         );
 
 
-        ctx.fillStyle = "#ffbd35";
+        ctx.fillStyle =
+            "#ffbd35";
+
 
         ctx.beginPath();
 
-        ctx.moveTo(-9, 24);
+        ctx.moveTo(
+            -9,
+            24
+        );
 
-        ctx.lineTo(0, 48);
+        ctx.lineTo(
+            0,
+            48
+        );
 
-        ctx.lineTo(9, 24);
+        ctx.lineTo(
+            9,
+            24
+        );
 
         ctx.fill();
 
     }
 
-    else {
+    else{
 
-        ctx.font = "45px serif";
+        ctx.font =
+            "45px serif";
 
-        ctx.textAlign = "center";
+        ctx.textAlign =
+            "center";
 
-        ctx.textBaseline = "middle";
+        ctx.textBaseline =
+            "middle";
+
 
         ctx.fillText(
             "🌋",
@@ -1841,6 +2797,7 @@ function drawPlayer() {
         );
 
     }
+
 
     ctx.restore();
 
@@ -1851,25 +2808,32 @@ function drawPlayer() {
    DRAW OBJECTS
 ===================================================== */
 
-function drawObjects() {
+function drawObjects(){
 
     objects.forEach(o => {
 
         ctx.save();
+
 
         ctx.translate(
             o.x,
             o.y
         );
 
-        ctx.rotate(o.rotation);
+
+        ctx.rotate(
+            o.rotation || 0
+        );
 
 
-        if (o.type === "water") {
+        if(o.type === "water"){
 
-            ctx.font = "34px serif";
+            ctx.font =
+                "34px serif";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.fillText(
                 "💧",
@@ -1879,11 +2843,14 @@ function drawObjects() {
 
         }
 
-        else if (o.type === "lava") {
+        else if(o.type === "lava"){
 
-            ctx.font = "34px serif";
+            ctx.font =
+                "34px serif";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.fillText(
                 "🔥",
@@ -1893,11 +2860,14 @@ function drawObjects() {
 
         }
 
-        else if (o.type === "gas") {
+        else if(o.type === "gas"){
 
-            ctx.font = "34px serif";
+            ctx.font =
+                "34px serif";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.fillText(
                 "💨",
@@ -1907,11 +2877,14 @@ function drawObjects() {
 
         }
 
-        else if (o.type === "ash") {
+        else if(o.type === "ash"){
 
-            ctx.font = "34px serif";
+            ctx.font =
+                "34px serif";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.fillText(
                 "☁️",
@@ -1921,11 +2894,14 @@ function drawObjects() {
 
         }
 
-        else if (o.type === "rock") {
+        else if(o.type === "rock"){
 
-            ctx.font = "35px serif";
+            ctx.font =
+                "35px serif";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.fillText(
                 "🪨",
@@ -1935,11 +2911,14 @@ function drawObjects() {
 
         }
 
-        else if (o.type === "target") {
+        else if(o.type === "target"){
 
-            ctx.font = "38px serif";
+            ctx.font =
+                "38px serif";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.fillText(
                 "🎯",
@@ -1949,11 +2928,14 @@ function drawObjects() {
 
         }
 
-        else if (o.type === "scroll") {
+        else if(o.type === "scroll"){
 
-            ctx.font = "34px serif";
+            ctx.font =
+                "34px serif";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.fillText(
                 "📜",
@@ -1963,11 +2945,14 @@ function drawObjects() {
 
         }
 
-        else if (o.type === "enemy") {
+        else if(o.type === "enemy"){
 
-            ctx.font = "38px serif";
+            ctx.font =
+                "38px serif";
 
-            ctx.textAlign = "center";
+            ctx.textAlign =
+                "center";
+
 
             ctx.fillText(
                 "💥",
@@ -1977,13 +2962,19 @@ function drawObjects() {
 
         }
 
-        else if (o.type === "bullet") {
+        else if(o.type === "bullet"){
 
-            ctx.fillStyle = "#ffd04c";
+            ctx.fillStyle =
+                "#ffd04c";
 
-            ctx.shadowColor = "#ff6b18";
 
-            ctx.shadowBlur = 15;
+            ctx.shadowColor =
+                "#ff6b18";
+
+
+            ctx.shadowBlur =
+                15;
+
 
             ctx.fillRect(
                 -4,
@@ -1993,6 +2984,7 @@ function drawObjects() {
             );
 
         }
+
 
         ctx.restore();
 
@@ -2010,27 +3002,42 @@ function createParticles(
     y,
     count,
     color
-) {
+){
 
-    for (let i = 0; i < count; i++) {
+    for(
+        let i=0;
+        i<count;
+        i++
+    ){
+
+        const life =
+            .5 +
+            Math.random() * .7;
+
 
         particles.push({
 
-            x: x,
+            x:x,
 
-            y: y,
+            y:y,
 
-            vx: (Math.random() - .5) * 250,
+            vx:
+                (Math.random()-.5)
+                * 250,
 
-            vy: (Math.random() - .5) * 250,
+            vy:
+                (Math.random()-.5)
+                * 250,
 
-            life: .5 + Math.random() * .7,
+            life:life,
 
-            max: .5 + Math.random() * .7,
+            max:life,
 
-            color: color,
+            color:color,
 
-            size: 3 + Math.random() * 5
+            size:
+                3 +
+                Math.random() * 5
 
         });
 
@@ -2039,27 +3046,39 @@ function createParticles(
 }
 
 
-function updateParticles(dt) {
+function updateParticles(dt){
 
-    for (
-        let i = particles.length - 1;
-        i >= 0;
+    for(
+        let i=particles.length-1;
+        i>=0;
         i--
-    ) {
+    ){
 
-        const p = particles[i];
+        const p =
+            particles[i];
 
-        p.x += p.vx * dt;
 
-        p.y += p.vy * dt;
+        p.x +=
+            p.vx * dt;
 
-        p.vy += 180 * dt;
+
+        p.y +=
+            p.vy * dt;
+
+
+        p.vy +=
+            180 * dt;
+
 
         p.life -= dt;
 
-        if (p.life <= 0) {
 
-            particles.splice(i, 1);
+        if(p.life <= 0){
+
+            particles.splice(
+                i,
+                1
+            );
 
         }
 
@@ -2068,7 +3087,7 @@ function updateParticles(dt) {
 }
 
 
-function drawParticles() {
+function drawParticles(){
 
     particles.forEach(p => {
 
@@ -2078,9 +3097,13 @@ function drawParticles() {
                 p.life / p.max
             );
 
-        ctx.fillStyle = p.color;
+
+        ctx.fillStyle =
+            p.color;
+
 
         ctx.beginPath();
+
 
         ctx.arc(
             p.x,
@@ -2090,9 +3113,11 @@ function drawParticles() {
             Math.PI * 2
         );
 
+
         ctx.fill();
 
     });
+
 
     ctx.globalAlpha = 1;
 
@@ -2107,63 +3132,77 @@ function floatingText(
     x,
     y,
     text
-) {
+){
 
     floatingTexts.push({
 
-        x: x,
+        x:x,
 
-        y: y,
+        y:y,
 
-        text: text,
+        text:text,
 
-        life: 1
+        life:1
 
     });
 
 }
 
 
-function updateFloatingTexts(dt) {
+function updateFloatingTexts(dt){
 
     floatingTexts.forEach(
         t => {
 
-            t.y -= 45 * dt;
+            t.y -=
+                45 * dt;
 
-            t.life -= dt;
+            t.life -=
+                dt;
 
         }
     );
 
+
     floatingTexts =
         floatingTexts.filter(
-            t => t.life > 0
+            t =>
+                t.life > 0
         );
 
 }
 
 
-function drawFloatingTexts() {
+function drawFloatingTexts(){
 
-    floatingTexts.forEach(t => {
+    floatingTexts.forEach(
+        t => {
 
-        ctx.globalAlpha = t.life;
+            ctx.globalAlpha =
+                t.life;
 
-        ctx.fillStyle = "#ffd35c";
 
-        ctx.font =
-            "bold 22px Georgia";
+            ctx.fillStyle =
+                "#ffd35c";
 
-        ctx.textAlign = "center";
 
-        ctx.fillText(
-            t.text,
-            t.x,
-            t.y
-        );
+            ctx.font =
+                "bold 22px Georgia";
 
-    });
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.fillText(
+                t.text,
+                t.x,
+                t.y
+            );
+
+        }
+    );
+
 
     ctx.globalAlpha = 1;
 
@@ -2174,20 +3213,28 @@ function drawFloatingTexts() {
    UI
 ===================================================== */
 
-function updateGameUI() {
+function updateGameUI(){
 
-    document.getElementById("gameScore")
+    document
+        .getElementById("gameScore")
         .textContent = score;
 
-    document.getElementById("gameLives")
+
+    document
+        .getElementById("gameLives")
         .textContent = lives;
 
-    document.getElementById("gameCombo")
+
+    document
+        .getElementById("gameCombo")
         .textContent = combo;
 
-    document.getElementById("gameTime")
+
+    document
+        .getElementById("gameTime")
         .textContent =
         Math.ceil(timeLeft);
+
 
     updateHeader();
 
@@ -2198,25 +3245,36 @@ function updateGameUI() {
    END GAME
 ===================================================== */
 
-function endGame(reason) {
+function endGame(reason){
 
-    if (!gameRunning)
+    if(!gameRunning)
         return;
 
+
     gameRunning = false;
+
 
     cancelAnimationFrame(
         animationID
     );
 
 
+    keys.left = false;
+
+    keys.right = false;
+
+    keys.fire = false;
+
+
     const key =
-        "fireFury_" + gameType;
+        "fireFury_" +
+        gameType;
 
 
     const old =
         Number(
-            localStorage.getItem(key) || 0
+            localStorage.getItem(key) ||
+            0
         );
 
 
@@ -2233,63 +3291,100 @@ function endGame(reason) {
     );
 
 
-    document.getElementById("resultScore")
+    document
+        .getElementById("resultScore")
         .textContent = score;
 
-    document.getElementById("resultPoints")
+
+    document
+        .getElementById("resultPoints")
         .textContent = score;
 
-    document.getElementById("resultBest")
+
+    document
+        .getElementById("resultBest")
         .textContent = best;
 
-    document.getElementById("resultCombo")
+
+    document
+        .getElementById("resultCombo")
         .textContent = bestCombo;
 
 
     let title = "";
 
 
-    if (score >= 5000) {
+    if(score >= 5000){
 
-        title = "🔥 LEGENDARY RUN!";
-
-    }
-
-    else if (score >= 3000) {
-
-        title = "⚡ FANTASTIC RUN!";
+        title =
+            "🔥 LEGENDARY RUN!";
 
     }
 
-    else if (score >= 1500) {
+    else if(score >= 3000){
 
-        title = "🚀 STRONG RUN!";
-
-    }
-
-    else {
-
-        title = "📚 KEEP TRAINING!";
+        title =
+            "⚡ FANTASTIC RUN!";
 
     }
 
+    else if(score >= 1500){
 
-    document.getElementById("resultTitle")
+        title =
+            "🚀 STRONG RUN!";
+
+    }
+
+    else{
+
+        title =
+            "📚 KEEP TRAINING!";
+
+    }
+
+
+    document
+        .getElementById("resultTitle")
         .textContent = title;
 
 
-    document.getElementById("resultNotice")
+    let reasonText = "";
+
+
+    if(reason === "LIVES"){
+
+        reasonText =
+            "💥 You ran out of lives. The hazards finally got you.";
+
+    }
+
+    else{
+
+        reasonText =
+            "⏱️ Time's up! You survived the mission timer.";
+
+    }
+
+
+    document
+        .getElementById("resultNotice")
         .innerHTML =
 
-        gameType === "volcano"
+        reasonText +
 
-        ? "🌋 Now connect what you played to your physical volcano models. Explain Hawaiian, Strombolian, Vulcanian and Plinian eruptions to your visitor."
+        "<br><br>" +
 
-        : gameType === "rocket"
+        (
+            gameType === "volcano"
 
-        ? "🚀 Now show your Mysorean Rocket model and explain why iron casing was historically important."
+            ? "🌋 Now connect what you played to your physical volcano models. Explain Hawaiian, Strombolian, Vulcanian and Plinian eruptions to your visitor."
 
-        : "🔥 You completed the combined FIRE & FURY challenge. Now challenge your visitor to explain both halves of the exhibition.";
+            : gameType === "rocket"
+
+            ? "🚀 Now show your Mysorean Rocket model and explain why iron casing was historically important."
+
+            : "🔥 You completed the combined FIRE & FURY challenge. Now challenge your visitor to explain both halves of the exhibition."
+        );
 
 
     show("results");
@@ -2301,13 +3396,38 @@ function endGame(reason) {
    QUIT
 ===================================================== */
 
-function quitGame() {
+function quitGame(){
 
     gameRunning = false;
+
 
     cancelAnimationFrame(
         animationID
     );
+
+
+    keys.left = false;
+
+    keys.right = false;
+
+    keys.fire = false;
+
+
+    show("missions");
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+function closeOverlayToMissions(){
+
+    document
+        .getElementById("overlay")
+        .classList.remove("show");
+
 
     show("missions");
 
@@ -2322,27 +3442,27 @@ document.addEventListener(
     "keydown",
     e => {
 
-        if (
+        if(
             e.key === "ArrowLeft" ||
             e.key.toLowerCase() === "a"
-        ) {
+        ){
 
             keys.left = true;
 
         }
 
 
-        if (
+        if(
             e.key === "ArrowRight" ||
             e.key.toLowerCase() === "d"
-        ) {
+        ){
 
             keys.right = true;
 
         }
 
 
-        if (e.code === "Space") {
+        if(e.code === "Space"){
 
             keys.fire = true;
 
@@ -2358,27 +3478,27 @@ document.addEventListener(
     "keyup",
     e => {
 
-        if (
+        if(
             e.key === "ArrowLeft" ||
             e.key.toLowerCase() === "a"
-        ) {
+        ){
 
             keys.left = false;
 
         }
 
 
-        if (
+        if(
             e.key === "ArrowRight" ||
             e.key.toLowerCase() === "d"
-        ) {
+        ){
 
             keys.right = false;
 
         }
 
 
-        if (e.code === "Space") {
+        if(e.code === "Space"){
 
             keys.fire = false;
 
@@ -2395,7 +3515,7 @@ document.addEventListener(
 function holdButton(
     element,
     property
-) {
+){
 
     element.addEventListener(
         "pointerdown",
