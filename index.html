@@ -1,0 +1,2491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>FIRE & FURY | Arcade Exhibition</title>
+
+<meta name="theme-color" content="#160b08">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+.main-logo{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:10px auto 20px;
+}
+
+.main-logo img{
+    width:min(600px,90vw);
+    max-height:280px;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 20px rgba(0,0,0,.7));
+}
+
+.main-logo-text{
+    margin-top:8px;
+
+    font-size:clamp(28px,6vw,52px);
+    font-weight:900;
+    letter-spacing:5px;
+
+    color:#ffd16b;
+
+    text-shadow:
+        0 3px 8px #000,
+        0 0 18px #ff641c;
+}
+
+.main-play{
+    margin:30px auto 45px;
+    text-align:center;
+}
+
+.play-button{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(24px,5vw,38px);
+    font-weight:bold;
+    padding:18px 55px;
+    color:#1a0803;
+    background:linear-gradient(135deg,#ffd86b,#ff8a20);
+    border:3px solid #ffe7a3;
+    border-radius:18px;
+    box-shadow:
+        0 0 20px #ff6a1c,
+        0 8px 25px #000;
+    cursor:pointer;
+    transition:
+        transform .2s,
+        box-shadow .2s;
+}
+
+.play-button:hover{
+    transform:scale(1.07);
+    box-shadow:
+        0 0 35px #ff7b20,
+        0 12px 30px #000;
+}
+
+.play-button:active{
+    transform:scale(.96);
+}
+
+.main-play p{
+    color:#d8bda8;
+    margin-top:10px;
+    font-size:16px;
+}
+html,body{
+    margin:0;
+    min-height:100%;
+    font-family:Georgia,"Times New Roman",serif;
+    background:#080303;
+    color:white;
+    overflow-x:hidden;
+}
+
+body{
+    background:
+        radial-gradient(circle at 50% 0%,rgba(255,90,20,.25),transparent 38%),
+        linear-gradient(180deg,#24100a,#090404 70%);
+}
+
+button{
+    font:inherit;
+    cursor:pointer;
+}
+
+.screen{
+    display:none;
+    min-height:100vh;
+}
+
+.screen.active{
+    display:block;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:13px 20px;
+
+    background:rgba(10,4,3,.94);
+    border-bottom:1px solid #743717;
+    backdrop-filter:blur(10px);
+}
+
+.logo img{
+    height:45px;
+    width:auto;
+    display:block;
+}
+
+.main-logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:10px auto 20px;
+}
+
+.main-logo img{
+    width:min(600px,90vw);
+    max-height:280px;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 20px rgba(0,0,0,.7));
+}
+
+.brand-image{
+    display:none;
+    width:42px;
+    height:42px;
+    margin-right:10px;
+    object-fit:contain;
+    vertical-align:middle;
+}
+
+
+.startup-screen{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    text-align:center;
+    background:radial-gradient(circle at 50% 35%,#52200e,#130806 65%,#080303);
+}
+
+.startup-card{
+    width:min(560px,100%);
+    padding:38px 24px;
+    border:1px solid #a4531e;
+    border-radius:24px;
+    background:#160906dd;
+    box-shadow:0 0 60px #000;
+}
+
+.startup-logo{
+    display:none;
+    width:min(280px,70vw);
+    max-height:220px;
+    margin:0 auto 16px;
+    object-fit:contain;
+    filter:drop-shadow(0 0 18px #ff5b18);
+}
+
+.startup-title{
+    margin:10px 0;
+    color:#ffd16b;
+    font-size:clamp(38px,9vw,64px);
+    text-shadow:0 5px 25px #000;
+}
+
+.startup-screen[hidden]{
+    display:none;
+}
+
+.score-pill{
+    background:#2a120c;
+    border:1px solid #8c451c;
+    border-radius:30px;
+    padding:8px 14px;
+    color:#ffd987;
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:linear-gradient(180deg,#2a130d,#170907);
+    border:1px solid #75401f;
+    border-radius:18px;
+    padding:23px;
+    box-shadow:0 12px 30px #0009;
+}
+
+.card .emoji{
+    font-size:54px;
+}
+
+.card h3{
+    color:#ffc65f;
+    font-size:24px;
+    margin:12px 0 8px;
+}
+
+.card p{
+    color:#d8c1ad;
+    line-height:1.5;
+}
+
+.notice{
+    margin:25px auto;
+    padding:18px;
+    max-width:850px;
+    text-align:center;
+    background:#24120d;
+    border:1px solid #74421f;
+    border-radius:14px;
+    color:#e9d4bf;
+    line-height:1.6;
+}
+
+.section-title{
+    text-align:center;
+    color:#ffd16b;
+    font-size:38px;
+}
+
+/* GAME */
+
+.game-wrap{
+    width:min(1000px,96%);
+    margin:auto;
+    padding:15px 0 30px;
+}
+
+.game-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+}
+
+.game-stat{
+    background:#21100b;
+    border:1px solid #713b1b;
+    border-radius:10px;
+    padding:8px 12px;
+    color:#ffd16b;
+}
+
+#gameCanvas{
+    display:block;
+    width:100%;
+    max-width:960px;
+    height:auto;
+    margin:auto;
+    border:2px solid #8e481d;
+    border-radius:16px;
+    background:#090404;
+    box-shadow:0 0 35px #000;
+    touch-action:none;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:15px auto 5px;
+}
+
+.control-btn{
+    width:90px;
+    height:58px;
+    border-radius:15px;
+    border:1px solid #a55320;
+    background:#32150c;
+    color:#ffd06b;
+    font-size:25px;
+    box-shadow:0 5px 15px #000;
+    user-select:none;
+    -webkit-user-select:none;
+    touch-action:none;
+}
+
+.control-btn:active{
+    transform:scale(.94);
+    background:#63200e;
+}
+
+.game-message{
+    text-align:center;
+    color:#e9cdb6;
+    min-height:25px;
+}
+
+.game-overlay{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.82);
+}
+
+.game-overlay.show{
+    display:flex;
+}
+
+.overlay-box{
+    width:min(600px,94%);
+    text-align:center;
+    padding:35px;
+    border-radius:22px;
+    background:linear-gradient(180deg,#32150d,#120605);
+    border:2px solid #a4531e;
+    box-shadow:0 0 50px #000;
+}
+
+.overlay-score{
+    font-size:60px;
+    color:#ffd15c;
+    text-shadow:0 0 20px #ff5d16;
+}
+
+.history-scroll{
+    position:absolute;
+    pointer-events:none;
+}
+
+/* TIMELINE */
+
+.timeline{
+    border-left:3px solid #a9541e;
+    padding-left:25px;
+    margin:25px 0;
+}
+
+.event{
+    margin-bottom:20px;
+    padding:15px;
+    background:#21100b;
+    border:1px solid #62351e;
+    border-radius:12px;
+    line-height:1.6;
+}
+
+.event strong{
+    color:#ffc45d;
+}
+
+/* RESULTS */
+
+.result{
+    text-align:center;
+    max-width:750px;
+    margin:auto;
+}
+
+.bigscore{
+    font-size:80px;
+    color:#ffd05d;
+    text-shadow:0 0 25px #ff701d;
+}
+
+.statgrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:20px 0;
+}
+
+.stat{
+    background:#24110c;
+    border:1px solid #6e3a1b;
+    border-radius:12px;
+    padding:16px;
+}
+
+.stat b{
+    display:block;
+    font-size:30px;
+    color:#ffc35b;
+    margin-top:5px;
+}
+
+footer{
+    text-align:center;
+    color:#9f8677;
+    padding:30px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:11px 13px;
+    }
+
+    .logo{
+        font-size:14px;
+    }
+
+    .score-pill{
+        font-size:13px;
+    }
+
+    .fire{
+        font-size:58px;
+    }
+
+    .statgrid{
+        grid-template-columns:1fr;
+    }
+
+    .control-btn{
+        width:80px;
+        height:55px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+    <img src="logo.png" alt="FIRE & FURY Logo">
+</div>
+
+    <div class="score-pill">
+        🏆 <span id="headerScore">0</span> pts
+    </div>
+
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="screen active">
+
+<div class="wrap">
+
+<div class="hero">
+
+<div class="main-logo">
+    <img src="logo.png" alt="FIRE & FURY">
+
+    <div class="main-logo-text">
+        FIRE AND FURY
+    </div>
+</div>
+
+    <p class="subtitle">
+        HISTORY AND GEOGRAPHY HAS ENTERED ARCADE MODE.
+        <br>
+        🌋 Volcanic Eruptions • 🚀 Mysorean Rockets
+    </p>
+
+    <div class="main-play">
+    <button class="play-button" onclick="show('missions')">
+        🎮 PLAY NOW
+    </button>
+
+    <p>Enter the FIRE & FURY arcade</p>
+</div>
+
+
+<div class="notice">
+
+    <b>🎯 YOUR MISSION</b>
+
+    <br><br>
+
+    Play the arcade missions, earn points,
+    unlock history and geography facts and then connect
+    what you discover to the team's real
+    physical exhibition models.
+
+</div>
+
+
+<div class="grid">
+
+    <div class="card">
+        <div class="emoji">🌋</div>
+        <h3>VOLCANO RUSH</h3>
+        <p>
+            Control the eruption zone, collect
+            the correct materials and survive
+            volcanic hazards.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="emoji">🚀</div>
+        <h3>ROCKET BATTLE</h3>
+        <p>
+            Control a Mysorean rocket, destroy
+            incoming targets and collect historical
+            knowledge.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="emoji">🔥</div>
+        <h3>FINAL FURY</h3>
+        <p>
+            Combine both worlds in the final
+            arcade challenge.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="notice">
+
+    🏫 <div></diV>DEMONSTRATION MODE
+    <br><br>
+
+    After completing a digital mission,
+    use the matching physical model at the
+    exhibition to understand what you will have to play.
+
+</div>
+
+<footer>
+    FIRE & FURY • A Demonstration of the Power of Volcanoes and The Strength of The Ingenious Mysorean Rockets of Tippu Sultan
+</footer>
+
+</div>
+
+</section>
+
+
+<!-- MISSIONS -->
+
+<section id="missions" class="screen">
+
+<div class="wrap">
+
+<h2 class="section-title">🎮 SELECT YOUR MISSION</h2>
+
+<p class="subtitle" style="text-align:center">
+    Choose a game. Survive it. Learn something.
+    This team has groundbreakingly made History entertaining.
+</p>
+
+
+<div class="grid">
+
+<div class="card">
+
+    <div class="emoji">🌋</div>
+
+    <h3>VOLCANO RUSH</h3>
+
+    <p>
+        Move across the volcanic field.
+        Collect eruption materials and
+        avoid dangerous rocks.
+    </p>
+
+    <p>
+        <b>Goal:</b> Reach 2,000 points.
+    </p>
+
+    <button class="btn gold"
+            onclick="startGame('volcano')">
+        PLAY 🌋
+    </button>
+
+</div>
+
+
+<div class="card">
+
+    <div class="emoji">🚀</div>
+
+    <h3>ROCKET BATTLE</h3>
+
+    <p>
+        Pilot your Mysorean rocket.
+        Destroy targets and collect
+        historical scrolls.
+    </p>
+
+    <p>
+        <b>Goal:</b> Survive the wave.
+    </p>
+
+    <button class="btn gold"
+            onclick="startGame('rocket')">
+        PLAY 🚀
+    </button>
+
+</div>
+
+
+<div class="card">
+
+    <div class="emoji">🔥</div>
+
+    <h3>FINAL FURY</h3>
+
+    <p>
+        The volcanoes and rockets have
+        decided to cooperate. Unfortunately
+        for you.
+    </p>
+
+    <p>
+        <b>Goal:</b> Survive 60 seconds.
+    </p>
+
+    <button class="btn gold"
+            onclick="startGame('final')">
+        PLAY 🔥
+    </button>
+
+</div>
+
+</div>
+
+
+<div style="text-align:center;margin-top:25px">
+
+    <button class="btn"
+            onclick="show('home')">
+        ← HOME
+    </button>
+
+    <button class="btn"
+            onclick="show('history')">
+        📜 HISTORY
+    </button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GAME -->
+
+<section id="game" class="screen">
+
+<div class="game-wrap">
+
+<div class="game-head">
+
+    <div class="game-stat">
+        🎮 <span id="gameName">GAME</span>
+    </div>
+
+    <div class="game-stat">
+        ⭐ <span id="gameScore">0</span>
+    </div>
+
+    <div class="game-stat">
+        ❤️ <span id="gameLives">3</span>
+    </div>
+
+    <div class="game-stat">
+        🔥 COMBO <span id="gameCombo">0</span>
+    </div>
+
+    <div class="game-stat">
+        ⏱️ <span id="gameTime">60</span>
+    </div>
+
+</div>
+
+
+<canvas id="gameCanvas"
+        width="960"
+        height="600">
+</canvas>
+
+
+<div class="controls">
+
+    <button class="control-btn"
+            id="leftBtn">
+        ◀
+    </button>
+
+    <button class="control-btn"
+            id="fireBtn">
+        🔥
+    </button>
+
+    <button class="control-btn"
+            id="rightBtn">
+        ▶
+    </button>
+
+</div>
+
+
+<div class="game-message"
+     id="gameMessage">
+    Loading mission...
+</div>
+
+
+<div style="text-align:center">
+
+    <button class="btn"
+            onclick="quitGame()">
+        ✕ QUIT
+    </button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HISTORY -->
+
+<section id="history" class="screen">
+
+<div class="wrap">
+
+<h2 class="section-title">
+    📜 HISTORICAL ARCHIVE
+</h2>
+
+
+<div class="card">
+
+<h3>🌋 FOUR ERUPTION STYLES</h3>
+
+<div class="timeline">
+
+<div class="event">
+
+<strong>HAWAIIAN</strong>
+
+<br>
+
+Generally associated with highly fluid
+lava and relatively gentle, steady flows.
+
+</div>
+
+
+<div class="event">
+
+<strong>STROMBOLIAN</strong>
+
+<br>
+
+Known for intermittent bursts caused
+by gas bubbles breaking through magma.
+
+</div>
+
+
+<div class="event">
+
+<strong>VULCANIAN</strong>
+
+<br>
+
+Short explosive eruptions can produce
+ash-rich clouds when viscous magma or
+a plug is disrupted.
+
+</div>
+
+
+<div class="event">
+
+<strong>PLINIAN</strong>
+
+<br>
+
+Powerful sustained eruption columns can
+rise many kilometres into the atmosphere.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:18px">
+
+<h3>🚀 MYSOREAN ROCKETS</h3>
+
+<div class="timeline">
+
+<div class="event">
+
+<strong>18TH CENTURY</strong>
+
+<br>
+
+Mysorean forces developed and used
+iron-cased war rockets associated with
+the armies of Hyder Ali and Tipu Sultan.
+
+</div>
+
+
+<div class="event">
+
+<strong>ANGLO-MYSORE WARS</strong>
+
+<br>
+
+British forces encountered Mysorean
+rockets during conflicts with Mysore.
+
+</div>
+
+
+<div class="event">
+
+<strong>CONGREVE ROCKETS</strong>
+
+<br>
+
+British officers studied Mysorean rocket
+technology. William Congreve later
+developed a British military rocket system.
+
+</div>
+
+
+<div class="event">
+
+<strong>HISTORICAL SIGNIFICANCE</strong>
+
+<br>
+
+Mysorean rockets form an important
+chapter in military rocketry. Modern
+space rockets have a much broader
+and later technological history.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="notice">
+
+⚠️ Physical demonstrations should be
+performed under appropriate adult/teacher
+supervision.
+
+<br><br>
+
+The website is the interactive game layer.
+Your real models are the exhibition layer.
+
+</div>
+
+
+<div style="text-align:center">
+
+<button class="btn"
+        onclick="show('missions')">
+    ← MISSIONS
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section id="results" class="screen">
+
+<div class="wrap">
+
+<div class="result">
+
+<div class="fire">🏆</div>
+
+<h2 class="section-title">
+    MISSION COMPLETE
+</h2>
+
+<div class="bigscore"
+     id="resultScore">
+    0
+</div>
+
+<p class="subtitle"
+   id="resultTitle">
+</p>
+
+
+<div class="statgrid">
+
+<div class="stat">
+    SCORE
+    <b id="resultPoints">0</b>
+</div>
+
+<div class="stat">
+    BEST
+    <b id="resultBest">0</b>
+</div>
+
+<div class="stat">
+    COMBO
+    <b id="resultCombo">0</b>
+</div>
+
+</div>
+
+
+<div class="notice"
+     id="resultNotice">
+</div>
+
+
+<button class="btn gold"
+        onclick="show('missions')">
+    🎮 PLAY AGAIN
+</button>
+
+<button class="btn"
+        onclick="show('history')">
+    📜 HISTORY
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="game-overlay"
+     id="overlay">
+
+<div class="overlay-box">
+
+<h2 id="overlayTitle">
+    GAME OVER
+</h2>
+
+<div class="overlay-score"
+     id="overlayScore">
+    0
+</div>
+
+<p id="overlayText">
+</p>
+
+<button class="btn gold"
+        onclick="closeOverlayToMissions()">
+    CONTINUE
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   FIRE & FURY ARCADE ENGINE
+===================================================== */
+
+const canvas =
+    document.getElementById("gameCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+
+let animationID = null;
+
+let gameRunning = false;
+
+let gameType = "";
+
+let score = 0;
+
+let lives = 3;
+
+let combo = 0;
+
+let bestCombo = 0;
+
+let timeLeft = 60;
+
+let lastTime = 0;
+
+let spawnTimer = 0;
+
+let fireCooldown = 0;
+
+let keys = {
+    left:false,
+    right:false,
+    fire:false
+};
+
+let player;
+
+let objects = [];
+
+let particles = [];
+
+let floatingTexts = [];
+
+
+/* =====================================================
+   SCREEN CONTROL
+===================================================== */
+
+function show(id){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(s =>
+            s.classList.remove("active")
+        );
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+function updateHeader(){
+
+    document.getElementById("headerScore")
+        .textContent = score;
+
+}
+
+
+/* =====================================================
+   START GAME
+===================================================== */
+
+function startGame(type){
+
+    gameType = type;
+
+    score = 0;
+    lives = 3;
+    combo = 0;
+    bestCombo = 0;
+
+    timeLeft =
+        type === "final"
+            ? 60
+            : 45;
+
+    objects = [];
+    particles = [];
+    floatingTexts = [];
+
+    spawnTimer = 0;
+    fireCooldown = 0;
+
+    player = {
+
+        x:canvas.width / 2,
+
+        y:canvas.height - 70,
+
+        width:48,
+
+        height:48,
+
+        speed:420
+
+    };
+
+
+    document.getElementById("gameName")
+        .textContent =
+        type === "volcano"
+            ? "🌋 VOLCANO RUSH"
+            : type === "rocket"
+                ? "🚀 ROCKET BATTLE"
+                : "🔥 FINAL FURY";
+
+
+    document.getElementById("gameMessage")
+        .textContent =
+        type === "volcano"
+            ? "Catch useful eruption materials. Avoid falling rocks!"
+            : type === "rocket"
+                ? "Destroy targets and collect history scrolls!"
+                : "Survive the combined FIRE & FURY assault!";
+
+
+    updateGameUI();
+
+    show("game");
+
+    gameRunning = true;
+
+    lastTime = performance.now();
+
+    animationID =
+        requestAnimationFrame(gameLoop);
+
+}
+
+
+/* =====================================================
+   GAME LOOP
+===================================================== */
+
+function gameLoop(now){
+
+    if(!gameRunning)
+        return;
+
+    const dt =
+        Math.min((now-lastTime)/1000,.035);
+
+    lastTime = now;
+
+    update(dt);
+
+    draw();
+
+    animationID =
+        requestAnimationFrame(gameLoop);
+
+}
+
+
+/* =====================================================
+   UPDATE
+===================================================== */
+
+function update(dt){
+
+    timeLeft -= dt;
+
+    if(timeLeft <= 0){
+
+        timeLeft = 0;
+
+        endGame("TIME");
+
+        return;
+
+    }
+
+
+    /* PLAYER */
+
+    if(keys.left)
+        player.x -= player.speed * dt;
+
+    if(keys.right)
+        player.x += player.speed * dt;
+
+
+    player.x =
+        Math.max(
+            30,
+            Math.min(
+                canvas.width-30,
+                player.x
+            )
+        );
+
+
+    /* FIRE */
+
+    fireCooldown -= dt;
+
+    if(
+        keys.fire &&
+        fireCooldown <= 0
+    ){
+
+        fire();
+
+        fireCooldown =
+            gameType === "rocket"
+                ? .22
+                : .30;
+
+    }
+
+
+    /* SPAWN */
+
+    spawnTimer -= dt;
+
+    if(spawnTimer <= 0){
+
+        spawnObject();
+
+        spawnTimer =
+            gameType === "final"
+                ? .38
+                : .55;
+
+    }
+
+
+    /* OBJECTS */
+
+    for(let i=objects.length-1;i>=0;i--){
+
+        const o = objects[i];
+
+        o.y += o.speed * dt;
+
+        if(o.type === "enemy" ||
+           o.type === "rock" ||
+           o.type === "hazard"){
+
+            o.rotation +=
+                o.spin * dt;
+
+        }
+
+
+        if(
+            collision(
+                player,
+                {
+                    x:o.x,
+                    y:o.y,
+                    width:o.size,
+                    height:o.size
+                }
+            )
+        ){
+
+            playerHit();
+
+            objects.splice(i,1);
+
+            continue;
+
+        }
+
+
+        if(
+            o.y > canvas.height+70
+        ){
+
+            if(
+                o.good &&
+                gameType === "volcano"
+            ){
+
+                combo = 0;
+
+            }
+
+            objects.splice(i,1);
+
+        }
+
+    }
+
+
+        /* PROJECTILES */
+
+    for(let i=objects.length-1;i>=0;i--){
+
+        const o=objects[i];
+
+        if(o.type !== "bullet")
+            continue;
+
+        o.y -= o.speed * dt;
+
+        for(
+            let j=objects.length-1;
+            j>=0;
+            j--
+        ){
+
+            const target=objects[j];
+
+            if(
+                target.type === "target" ||
+                target.type === "enemy"
+            ){
+
+                if(
+                    collision(
+                        {
+                            x:o.x,
+                            y:o.y,
+                            width:8,
+                            height:18
+                        },
+                        {
+                            x:target.x,
+                            y:target.y,
+                            width:target.size,
+                            height:target.size
+                        }
+                    )
+                ){
+
+                    destroyTarget(target);
+
+                    objects.splice(j,1);
+
+                    objects.splice(i,1);
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+        if(o.y < -30)
+            objects.splice(i,1);
+
+    }
+
+
+    updateParticles(dt);
+
+    updateFloatingTexts(dt);
+
+    updateGameUI();
+
+}
+
+
+/* =====================================================
+   SPAWN OBJECTS
+===================================================== */
+
+function spawnObject(){
+
+    let o = {
+
+        x:30+Math.random()*(canvas.width-60),
+
+        y:-50,
+
+        size:38,
+
+        speed:100+Math.random()*130,
+
+        rotation:0,
+
+        spin:(Math.random()-.5)*5,
+
+        type:"",
+
+        good:false,
+
+        value:0
+
+    };
+
+
+    if(gameType === "volcano"){
+
+        const r=Math.random();
+
+        if(r < .23){
+
+            o.type="water";
+            o.good=true;
+            o.value=100;
+
+        }else if(r < .46){
+
+            o.type="lava";
+            o.good=true;
+            o.value=150;
+
+        }else if(r < .65){
+
+            o.type="gas";
+            o.good=true;
+            o.value=200;
+
+        }else if(r < .80){
+
+            o.type="ash";
+            o.good=true;
+            o.value=250;
+
+        }else{
+
+            o.type="rock";
+            o.good=false;
+
+        }
+
+    }
+
+
+    else if(gameType === "rocket"){
+
+        const r=Math.random();
+
+        if(r < .72){
+
+            o.type="target";
+            o.value=200;
+
+        }else{
+
+            o.type="scroll";
+            o.good=true;
+            o.value=500;
+
+        }
+
+    }
+
+
+    else{
+
+        const r=Math.random();
+
+        if(r < .38){
+
+            o.type="enemy";
+            o.value=250;
+
+        }else if(r < .60){
+
+            o.type="scroll";
+            o.good=true;
+            o.value=500;
+
+        }else if(r < .78){
+
+            o.type="lava";
+            o.good=true;
+            o.value=150;
+
+        }else{
+
+            o.type="rock";
+            o.good=false;
+
+        }
+
+    }
+
+
+    objects.push(o);
+
+}
+
+
+/* =====================================================
+   FIRE
+===================================================== */
+
+function fire() {
+
+    objects.push({
+
+        type: "bullet",
+
+        x: player.x,
+
+        y: player.y - 30,
+
+        speed: 650,
+
+        size: 8
+
+    });
+
+    createParticles(
+        player.x,
+        player.y - 25,
+        4,
+        "#ffb52e"
+    );
+
+}
+
+
+/* =====================================================
+   DESTROY TARGET
+===================================================== */
+
+function destroyTarget(o) {
+
+    score += o.value || 200;
+
+    combo++;
+
+    bestCombo =
+        Math.max(bestCombo, combo);
+
+    if (combo >= 3) {
+
+        score +=
+            combo * 25;
+
+    }
+
+    floatingText(
+        o.x,
+        o.y,
+        "+" + (o.value || 200)
+    );
+
+    createParticles(
+        o.x,
+        o.y,
+        15,
+        "#ff7a22"
+    );
+
+}
+
+
+/* =====================================================
+   PLAYER HIT
+===================================================== */
+
+function playerHit() {
+
+    lives--;
+
+    combo = 0;
+
+    createParticles(
+        player.x,
+        player.y,
+        25,
+        "#ff351d"
+    );
+
+    floatingText(
+        player.x,
+        player.y,
+        "-1 ❤️"
+    );
+
+
+    if (lives <= 0) {
+
+        lives = 0;
+
+        endGame("LIVES");
+
+    }
+
+}
+
+
+/* =====================================================
+   COLLISION
+===================================================== */
+
+function collision(a, b) {
+
+    return (
+
+        a.x - a.width / 2 <
+        b.x + b.width / 2 &&
+
+        a.x + a.width / 2 >
+        b.x - b.width / 2 &&
+
+        a.y - a.height / 2 <
+        b.y + b.height / 2 &&
+
+        a.y + a.height / 2 >
+        b.y - b.height / 2
+
+    );
+
+}
+
+
+/* =====================================================
+   DRAW
+===================================================== */
+
+function draw() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    drawBackground();
+
+    drawObjects();
+
+    drawPlayer();
+
+    drawParticles();
+
+    drawFloatingTexts();
+
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+function drawBackground() {
+
+    const g =
+        ctx.createLinearGradient(
+            0,
+            0,
+            0,
+            canvas.height
+        );
+
+
+    if (gameType === "volcano") {
+
+        g.addColorStop(0, "#261006");
+        g.addColorStop(.55, "#160807");
+        g.addColorStop(1, "#080303");
+
+    }
+
+    else if (gameType === "rocket") {
+
+        g.addColorStop(0, "#080d25");
+        g.addColorStop(.55, "#100a20");
+        g.addColorStop(1, "#050306");
+
+    }
+
+    else {
+
+        g.addColorStop(0, "#281006");
+        g.addColorStop(.5, "#110817");
+        g.addColorStop(1, "#050303");
+
+    }
+
+
+    ctx.fillStyle = g;
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    /* STARS */
+
+    ctx.fillStyle = "#ffffff55";
+
+    for (let i = 0; i < 55; i++) {
+
+        const x =
+            (i * 173) % canvas.width;
+
+        const y =
+            (i * 83) % canvas.height;
+
+        ctx.fillRect(
+            x,
+            y,
+            2,
+            2
+        );
+
+    }
+
+
+    if (gameType === "volcano") {
+
+        ctx.fillStyle = "#ff5a1530";
+
+        ctx.beginPath();
+
+        ctx.moveTo(0, canvas.height);
+
+        ctx.lineTo(180, 430);
+
+        ctx.lineTo(310, canvas.height);
+
+        ctx.fill();
+
+
+        ctx.fillStyle = "#ff781d22";
+
+        ctx.beginPath();
+
+        ctx.moveTo(580, canvas.height);
+
+        ctx.lineTo(720, 400);
+
+        ctx.lineTo(960, canvas.height);
+
+        ctx.fill();
+
+    }
+
+}
+
+
+/* =====================================================
+   DRAW PLAYER
+===================================================== */
+
+function drawPlayer() {
+
+    ctx.save();
+
+    ctx.translate(
+        player.x,
+        player.y
+    );
+
+
+    if (gameType === "rocket") {
+
+        ctx.fillStyle = "#d4d4d4";
+
+        ctx.beginPath();
+
+        ctx.moveTo(0, -30);
+
+        ctx.lineTo(18, 20);
+
+        ctx.lineTo(0, 12);
+
+        ctx.lineTo(-18, 20);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+
+        ctx.fillStyle = "#b43b18";
+
+        ctx.fillRect(
+            -12,
+            8,
+            24,
+            17
+        );
+
+
+        ctx.fillStyle = "#ffbd35";
+
+        ctx.beginPath();
+
+        ctx.moveTo(-9, 24);
+
+        ctx.lineTo(0, 48);
+
+        ctx.lineTo(9, 24);
+
+        ctx.fill();
+
+    }
+
+    else {
+
+        ctx.font = "45px serif";
+
+        ctx.textAlign = "center";
+
+        ctx.textBaseline = "middle";
+
+        ctx.fillText(
+            "🌋",
+            0,
+            0
+        );
+
+    }
+
+    ctx.restore();
+
+}
+
+
+/* =====================================================
+   DRAW OBJECTS
+===================================================== */
+
+function drawObjects() {
+
+    objects.forEach(o => {
+
+        ctx.save();
+
+        ctx.translate(
+            o.x,
+            o.y
+        );
+
+        ctx.rotate(o.rotation);
+
+
+        if (o.type === "water") {
+
+            ctx.font = "34px serif";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "💧",
+                0,
+                10
+            );
+
+        }
+
+        else if (o.type === "lava") {
+
+            ctx.font = "34px serif";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "🔥",
+                0,
+                10
+            );
+
+        }
+
+        else if (o.type === "gas") {
+
+            ctx.font = "34px serif";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "💨",
+                0,
+                10
+            );
+
+        }
+
+        else if (o.type === "ash") {
+
+            ctx.font = "34px serif";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "☁️",
+                0,
+                10
+            );
+
+        }
+
+        else if (o.type === "rock") {
+
+            ctx.font = "35px serif";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "🪨",
+                0,
+                10
+            );
+
+        }
+
+        else if (o.type === "target") {
+
+            ctx.font = "38px serif";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "🎯",
+                0,
+                10
+            );
+
+        }
+
+        else if (o.type === "scroll") {
+
+            ctx.font = "34px serif";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "📜",
+                0,
+                10
+            );
+
+        }
+
+        else if (o.type === "enemy") {
+
+            ctx.font = "38px serif";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "💥",
+                0,
+                10
+            );
+
+        }
+
+        else if (o.type === "bullet") {
+
+            ctx.fillStyle = "#ffd04c";
+
+            ctx.shadowColor = "#ff6b18";
+
+            ctx.shadowBlur = 15;
+
+            ctx.fillRect(
+                -4,
+                -10,
+                8,
+                22
+            );
+
+        }
+
+        ctx.restore();
+
+    });
+
+}
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+function createParticles(
+    x,
+    y,
+    count,
+    color
+) {
+
+    for (let i = 0; i < count; i++) {
+
+        particles.push({
+
+            x: x,
+
+            y: y,
+
+            vx: (Math.random() - .5) * 250,
+
+            vy: (Math.random() - .5) * 250,
+
+            life: .5 + Math.random() * .7,
+
+            max: .5 + Math.random() * .7,
+
+            color: color,
+
+            size: 3 + Math.random() * 5
+
+        });
+
+    }
+
+}
+
+
+function updateParticles(dt) {
+
+    for (
+        let i = particles.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const p = particles[i];
+
+        p.x += p.vx * dt;
+
+        p.y += p.vy * dt;
+
+        p.vy += 180 * dt;
+
+        p.life -= dt;
+
+        if (p.life <= 0) {
+
+            particles.splice(i, 1);
+
+        }
+
+    }
+
+}
+
+
+function drawParticles() {
+
+    particles.forEach(p => {
+
+        ctx.globalAlpha =
+            Math.max(
+                0,
+                p.life / p.max
+            );
+
+        ctx.fillStyle = p.color;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    });
+
+    ctx.globalAlpha = 1;
+
+}
+
+
+/* =====================================================
+   FLOATING TEXT
+===================================================== */
+
+function floatingText(
+    x,
+    y,
+    text
+) {
+
+    floatingTexts.push({
+
+        x: x,
+
+        y: y,
+
+        text: text,
+
+        life: 1
+
+    });
+
+}
+
+
+function updateFloatingTexts(dt) {
+
+    floatingTexts.forEach(
+        t => {
+
+            t.y -= 45 * dt;
+
+            t.life -= dt;
+
+        }
+    );
+
+    floatingTexts =
+        floatingTexts.filter(
+            t => t.life > 0
+        );
+
+}
+
+
+function drawFloatingTexts() {
+
+    floatingTexts.forEach(t => {
+
+        ctx.globalAlpha = t.life;
+
+        ctx.fillStyle = "#ffd35c";
+
+        ctx.font =
+            "bold 22px Georgia";
+
+        ctx.textAlign = "center";
+
+        ctx.fillText(
+            t.text,
+            t.x,
+            t.y
+        );
+
+    });
+
+    ctx.globalAlpha = 1;
+
+}
+
+
+/* =====================================================
+   UI
+===================================================== */
+
+function updateGameUI() {
+
+    document.getElementById("gameScore")
+        .textContent = score;
+
+    document.getElementById("gameLives")
+        .textContent = lives;
+
+    document.getElementById("gameCombo")
+        .textContent = combo;
+
+    document.getElementById("gameTime")
+        .textContent =
+        Math.ceil(timeLeft);
+
+    updateHeader();
+
+}
+
+
+/* =====================================================
+   END GAME
+===================================================== */
+
+function endGame(reason) {
+
+    if (!gameRunning)
+        return;
+
+    gameRunning = false;
+
+    cancelAnimationFrame(
+        animationID
+    );
+
+
+    const key =
+        "fireFury_" + gameType;
+
+
+    const old =
+        Number(
+            localStorage.getItem(key) || 0
+        );
+
+
+    const best =
+        Math.max(
+            old,
+            score
+        );
+
+
+    localStorage.setItem(
+        key,
+        best
+    );
+
+
+    document.getElementById("resultScore")
+        .textContent = score;
+
+    document.getElementById("resultPoints")
+        .textContent = score;
+
+    document.getElementById("resultBest")
+        .textContent = best;
+
+    document.getElementById("resultCombo")
+        .textContent = bestCombo;
+
+
+    let title = "";
+
+
+    if (score >= 5000) {
+
+        title = "🔥 LEGENDARY RUN!";
+
+    }
+
+    else if (score >= 3000) {
+
+        title = "⚡ FANTASTIC RUN!";
+
+    }
+
+    else if (score >= 1500) {
+
+        title = "🚀 STRONG RUN!";
+
+    }
+
+    else {
+
+        title = "📚 KEEP TRAINING!";
+
+    }
+
+
+    document.getElementById("resultTitle")
+        .textContent = title;
+
+
+    document.getElementById("resultNotice")
+        .innerHTML =
+
+        gameType === "volcano"
+
+        ? "🌋 Now connect what you played to your physical volcano models. Explain Hawaiian, Strombolian, Vulcanian and Plinian eruptions to your visitor."
+
+        : gameType === "rocket"
+
+        ? "🚀 Now show your Mysorean Rocket model and explain why iron casing was historically important."
+
+        : "🔥 You completed the combined FIRE & FURY challenge. Now challenge your visitor to explain both halves of the exhibition.";
+
+
+    show("results");
+
+}
+
+
+/* =====================================================
+   QUIT
+===================================================== */
+
+function quitGame() {
+
+    gameRunning = false;
+
+    cancelAnimationFrame(
+        animationID
+    );
+
+    show("missions");
+
+}
+
+
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    e => {
+
+        if (
+            e.key === "ArrowLeft" ||
+            e.key.toLowerCase() === "a"
+        ) {
+
+            keys.left = true;
+
+        }
+
+
+        if (
+            e.key === "ArrowRight" ||
+            e.key.toLowerCase() === "d"
+        ) {
+
+            keys.right = true;
+
+        }
+
+
+        if (e.code === "Space") {
+
+            keys.fire = true;
+
+            e.preventDefault();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keyup",
+    e => {
+
+        if (
+            e.key === "ArrowLeft" ||
+            e.key.toLowerCase() === "a"
+        ) {
+
+            keys.left = false;
+
+        }
+
+
+        if (
+            e.key === "ArrowRight" ||
+            e.key.toLowerCase() === "d"
+        ) {
+
+            keys.right = false;
+
+        }
+
+
+        if (e.code === "Space") {
+
+            keys.fire = false;
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   MOBILE CONTROLS
+===================================================== */
+
+function holdButton(
+    element,
+    property
+) {
+
+    element.addEventListener(
+        "pointerdown",
+        e => {
+
+            e.preventDefault();
+
+            keys[property] = true;
+
+        }
+    );
+
+
+    element.addEventListener(
+        "pointerup",
+        e => {
+
+            e.preventDefault();
+
+            keys[property] = false;
+
+        }
+    );
+
+
+    element.addEventListener(
+        "pointercancel",
+        () => {
+
+            keys[property] = false;
+
+        }
+    );
+
+
+    element.addEventListener(
+        "pointerleave",
+        () => {
+
+            keys[property] = false;
+
+        }
+    );
+
+}
+
+
+holdButton(
+    document.getElementById("leftBtn"),
+    "left"
+);
+
+
+holdButton(
+    document.getElementById("rightBtn"),
+    "right"
+);
+
+
+holdButton(
+    document.getElementById("fireBtn"),
+    "fire"
+);
+
+
+/* =====================================================
+   RESET BUTTON STATES
+===================================================== */
+
+window.addEventListener(
+    "blur",
+    () => {
+
+        keys.left = false;
+
+        keys.right = false;
+
+        keys.fire = false;
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+updateHeader();
+
+</script>
+
+</body>
+</html>
