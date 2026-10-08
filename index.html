@@ -838,10 +838,10 @@ body{overflow-y:auto!important;}
         <p class="start-sub">History & Geography enter Arcade Mode</p>
         <p class="start-desc">🌋 Volcanoes • 🚀 Mysorean Rockets</p>
         <button class="play-button" onclick="openAuthGate()">
-            🔐 LOGIN / SIGN UP
+            🎮 ENTER ARCADE
         </button>
         <p style="margin-top:18px;color:#c9a88a;font-size:14px;">
-            Create a FIRE &amp; FURY account or log in to start missions
+            Create a FIRE &amp; FURY account or log in to enter the arcade after the demonstration.
         </p>
     </div>
 </div>
@@ -1008,9 +1008,9 @@ body{overflow-y:auto!important;}
 
     <br><br>
 
-    After completing a digital mission,
-    use the matching physical model at the
-    exhibition to understand what you will have to play.
+    The FIRE &amp; FURY game is presented as part of our
+    demonstration. The playable game will be made
+    available to participants after the demonstration.
 
 </div>
 
@@ -4924,11 +4924,8 @@ function installAuthListener(){
         return;
       }
       await syncAuthenticatedProfile(ffUser);
-      // IMPORTANT: keep the opening START SCREEN visible on every fresh page load.
-      // A persisted Supabase session may exist, but it must not silently remove
-      // the first page. The start screen is hidden only after the user explicitly
-      // chooses Login / Sign Up through finishAuthenticatedEntry().
-      show("home");
+      // Keep the ENTER ARCADE screen visible on startup.
+      // The player must press ENTER ARCADE to open the Login / Sign Up popup.
       subscribeMultiplayerRequests();
     }
   }catch(e){ console.warn("FIRE & FURY account startup",e); }
