@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>FIRE & FURY | Arcade Exhibition</title>
+<title>FIRE AND FURY UNLEASHED | Arcade Exhibition</title>
 
 <meta name="theme-color" content="#160b08">
 
@@ -89,23 +89,16 @@ html,body{
     margin:0;
     min-height:100%;
     font-family:Georgia,"Times New Roman",serif;
-    background:#080303;
-    color:white;
+    background:#f4eadb;
+    color:#24150d;
     overflow-x:hidden;
 }
 
 body{
     background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(255,90,20,.25),
-            transparent 38%
-        ),
-        linear-gradient(
-            180deg,
-            #24100a,
-            #090404 70%
-        );
+        radial-gradient(circle at 50% 0%, rgba(255,190,90,.34), transparent 42%),
+        linear-gradient(180deg,#fff8e8 0%,#f6dfbc 52%,#efd0a3 100%);
+    color:#24150d;
 }
 
 button{
@@ -181,7 +174,7 @@ header{
 
     padding:13px 20px;
 
-    background:rgba(10,4,3,.94);
+    background:rgba(255,248,232,.94);
     border-bottom:1px solid #743717;
 
     backdrop-filter:blur(10px);
@@ -290,11 +283,12 @@ header{
 }
 
 .game-stat{
-    background:#21100b;
-    border:1px solid #713b1b;
+    background:rgba(255,249,235,.92);
+    border:1px solid #c27a32;
     border-radius:10px;
     padding:8px 12px;
-    color:#ffd16b;
+    color:#7a350f;
+    box-shadow:0 3px 12px rgba(86,45,15,.16);
 }
 
 #gameCanvas{
@@ -307,7 +301,7 @@ header{
     border:2px solid #8e481d;
     border-radius:16px;
 
-    background:#3d2010;
+    background:#fff1d0;
 
     box-shadow:0 0 24px #ff5b1830, 0 0 35px #000;
     animation:lavaFrame 4s ease-in-out infinite;
@@ -315,8 +309,8 @@ header{
 }
 
 @keyframes lavaFrame{
-    0%,100%{box-shadow:0 0 20px #ff5b1825,0 0 35px #000;}
-    50%{box-shadow:0 0 32px #ff762b70,0 0 42px #000;}
+    0%,100%{box-shadow:0 0 20px rgba(255,150,45,.28),0 0 25px rgba(70,35,10,.18);}
+    50%{box-shadow:0 0 34px rgba(255,150,45,.48),0 0 32px rgba(70,35,10,.22);}
 }
 @media(prefers-reduced-motion:reduce){
     #gameCanvas{animation:none;}
@@ -761,25 +755,6 @@ button,input,select{max-width:100%}
 .ff-modal{position:fixed;inset:0;z-index:5000;display:none;align-items:center;justify-content:center;padding:12px;background:rgba(0,0,0,.78)}
 .ff-modal.show{display:flex}
 .ff-modal-card{width:min(640px,96vw);max-height:92dvh;overflow:auto;padding:16px;border:2px solid #a84d1b;border-radius:18px;background:linear-gradient(180deg,#25100a,#0b0403);box-shadow:0 0 60px #000,0 0 30px #ff5a1828}
-.ff-modal-open{overflow:hidden;touch-action:none}
-.ff-modal-card{position:relative;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-.ff-modal-close{position:absolute;top:10px;right:10px;width:44px;height:44px;border:1px solid #a84d1b;border-radius:50%;background:#180805;color:#ffd98b;font-size:20px;line-height:1;z-index:2;touch-action:manipulation}
-.ff-modal-close:active{transform:scale(.94);background:#4a170b}
-.ff-modal-card h2{padding-right:52px}
-@media(max-width:600px){
-  .ff-modal{align-items:flex-start;padding:max(10px,env(safe-area-inset-top)) 8px max(10px,env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain}
-  .ff-modal-card{width:100%;max-width:100%;max-height:calc(100dvh - max(20px,env(safe-area-inset-top)) - max(20px,env(safe-area-inset-bottom)));padding:16px 12px 14px;border-radius:16px;margin:auto}
-  .ff-modal-card input{font-size:16px;min-height:44px}
-  .ff-modal-card .btn{min-height:44px;margin:4px 2px}
-  .ff-row{width:100%;gap:6px}
-  .ff-row .btn{flex:1 1 150px}
-  #mpMissionPicker .ff-row .btn{flex:1 1 130px}
-}
-
-.home-tools .btn{min-height:44px}
-#leaderboardPanel,#achievementsPanel,#profilePanel{max-height:min(62dvh,520px);overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-@media(max-width:600px){#leaderboardPanel,#achievementsPanel,#profilePanel{max-height:58dvh;margin:8px 0;padding:12px;border-radius:14px}.home-tools{gap:6px!important}.home-tools .btn{flex:1 1 140px;margin:2px;padding:10px 8px}}
-
 .ff-modal-card h2{margin:0 0 8px;color:#ffd16b}
 .ff-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
 .ff-row input{flex:1;min-width:180px;padding:12px;border-radius:10px;border:1px solid #7d3c1d;background:#120806;color:#fff}
@@ -801,6 +776,152 @@ button,input,select{max-width:100%}
 @media(min-width:901px){.hud-fire,.hud-joystick{opacity:.72}}
 @media(max-width:600px){.game-wrap{width:100%;}.gameCanvas{max-width:none;}header{gap:6px;flex-wrap:wrap;padding:8px}.score-pill{max-width:100%;font-size:.82rem}.hero-art{width:100%}.card{padding:12px}.section-title{font-size:clamp(26px,7vw,38px)}.game-wrap{padding-top:4px}.game-head{justify-content:center}.controls{bottom:34px;padding:0 8px}.game-message{font-size:.82rem;margin-top:3px}.wrap{padding-left:8px;padding-right:8px}}
 @media(max-height:700px){#home .hero-art{max-height:16dvh}#home .main-logo img{max-height:9dvh}#home .notice{font-size:.82em;padding:7px}.play-button{padding:11px 22px;font-size:clamp(20px,4vw,30px)}}
+
+/* ===== UNLEASHED BRIGHT VISUAL PASS ===== */
+.game-wrap{background:linear-gradient(180deg,rgba(255,250,238,.74),rgba(255,235,197,.55));border-radius:20px;padding:10px 10px 18px;box-shadow:0 12px 32px rgba(74,42,14,.12)}
+#gameCanvas{background:#fff1d0;border-color:#d78936;box-shadow:0 0 28px rgba(255,151,44,.28),0 10px 28px rgba(74,42,14,.16)}
+.game-message{color:#6b3819;font-weight:700}
+
+
+/* ===== FINAL FIT-TO-SCREEN GAME LAYOUT ===== */
+html,body{
+  margin:0;
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+#game.screen.active{
+  height:calc(100dvh - 96px);
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+#game .game-wrap{
+  width:min(1100px,100%);
+  height:100%;
+  min-height:0;
+  margin:0 auto;
+  padding:6px 10px 8px;
+  display:flex;
+  flex-direction:column;
+}
+
+#game .game-head{
+  flex:0 0 auto;
+  margin-bottom:5px;
+  justify-content:center;
+}
+
+#game .game-stat{
+  padding:5px 9px;
+  line-height:1.15;
+}
+
+#game #mpBattleBar{
+  flex:0 0 auto;
+  max-height:34px;
+  overflow:hidden;
+}
+
+#game #comboBanner,
+#game #furyModePanel{
+  flex:0 0 auto;
+  margin-top:2px;
+  margin-bottom:4px;
+}
+
+#game #gameCanvas{
+  flex:1 1 auto;
+  min-width:0;
+  min-height:0;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:100%;
+  aspect-ratio:16 / 10;
+  object-fit:contain;
+  margin:0 auto;
+}
+
+#game .controls{
+  position:absolute;
+  left:10px;
+  right:10px;
+  top:52px;
+  bottom:8px;
+  pointer-events:none;
+}
+
+#game .game-message{
+  flex:0 0 auto;
+  min-height:18px;
+  margin:3px 0 0;
+  font-size:.9rem;
+}
+
+@media(max-width:700px){
+  #game.screen.active{
+    height:calc(100dvh - 82px);
+  }
+  #game .game-wrap{
+    padding:3px 5px 5px;
+  }
+  #game .game-head{
+    gap:3px;
+  }
+  #game .game-stat{
+    padding:4px 6px;
+    font-size:clamp(10px,2.6vw,13px);
+  }
+  #game #mpBattleBar{
+    font-size:.78rem;
+  }
+  #game .controls{
+    left:5px;
+    right:5px;
+    top:48px;
+    bottom:5px;
+  }
+  #game .hud-fire{
+    left:7px;
+    bottom:7px;
+    width:clamp(66px,17vw,100px);
+    height:clamp(66px,17vw,100px);
+  }
+  #game .hud-joystick{
+    right:7px;
+    bottom:7px;
+    width:clamp(96px,25vw,135px);
+    height:clamp(66px,17vw,92px);
+  }
+}
+
+@media(max-height:600px){
+  #game .game-head{
+    margin-bottom:2px;
+  }
+  #game .game-stat{
+    padding:3px 6px;
+    font-size:11px;
+  }
+  #game #comboBanner,
+  #game #furyModePanel{
+    display:none !important;
+  }
+  #game .game-message{
+    display:none;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #game #gameCanvas{
+    animation:none !important;
+  }
+}
+
 </style>
 </head>
 
@@ -809,14 +930,14 @@ button,input,select{max-width:100%}
 <!-- START SCREEN -->
 <div id="startScreen" class="start-screen">
     <div class="start-card">
-        <div class="start-title">FIRE & FURY</div>
-        <p class="start-sub">History &amp; Geography enter Arcade Mode</p>
+        <div class="start-title">FIRE AND FURY UNLEASHED</div>
+        <p class="start-sub">History & Geography enter Arcade Mode</p>
         <p class="start-desc">🌋 Volcanoes • 🚀 Mysorean Rockets</p>
         <button class="play-button" onclick="openAuthGate()">
-            🎮 ENTER ARCADE
+            🔐 LOGIN / SIGN UP
         </button>
         <p style="margin-top:18px;color:#c9a88a;font-size:14px;">
-            Login or create your FIRE &amp; FURY account in the next step.
+            Explore the exhibition freely. A registered FIRE AND FURY UNLEASHED account is required to play missions.
         </p>
     </div>
 </div>
@@ -824,7 +945,7 @@ button,input,select{max-width:100%}
 <header>
 
     <div class="logo">
-        <img src="logo.png" alt="FIRE & FURY Logo">
+        <img src="logo.png" alt="FIRE AND FURY UNLEASHED Logo">
     </div>
 
     <div class="score-pill">
@@ -848,10 +969,10 @@ button,input,select{max-width:100%}
 
 <div class="main-logo">
 
-    <img src="logo.png" alt="FIRE & FURY">
+    <img src="logo.png" alt="FIRE AND FURY UNLEASHED">
 
     <div class="main-logo-text">
-        FIRE AND FURY
+        FIRE AND FURY UNLEASHED
     </div>
 
 </div>
@@ -874,7 +995,7 @@ button,input,select{max-width:100%}
 
 <p class="subtitle">
 
-    HISTORY AND GEOGRAPHY HAS ENTERED ARCADE MODE.
+    HISTORY AND GEOGRAPHY HAS ENTERED ARCADE MODE — THE CHALLENGE COMES FIRST.
 
     <br>
 
@@ -893,7 +1014,7 @@ button,input,select{max-width:100%}
     </button>
 
     <p>
-        Enter the FIRE & FURY arcade
+        Play the interactive challenge first. The full game experience follows the live demonstration.
     </p>
 
     <div class="home-tools" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px"><button class="btn" id="leaderboardToggle" type="button" aria-expanded="false" onclick="toggleLeaderboard()">🏆 View Hall of Fame</button><button class="btn" id="achievementsToggle" type="button" aria-expanded="false" onclick="toggleAchievements()">🎖️ My Achievements</button><button class="btn" id="profileToggle" type="button" aria-expanded="false" onclick="toggleProfile()">👤 My Profile</button><button class="btn" type="button" onclick="openMultiplayer()">👥 Multiplayer</button></div>
@@ -915,10 +1036,10 @@ button,input,select{max-width:100%}
 
     <br><br>
 
-    Play the arcade missions, earn points,
-    unlock history and geography facts and then connect
-    what you discover to the team's real
-    physical exhibition models.
+    Play the interactive game before the live demonstration.
+    Earn points, discover the history and geography behind the missions,
+    then watch the physical demonstration. The full game experience is
+    provided after the demonstration.
 
 </div>
 
@@ -934,9 +1055,8 @@ button,input,select{max-width:100%}
         </h3>
 
         <p>
-            Control the eruption zone, collect
-            the correct materials and survive
-            volcanic hazards.
+            Play through the eruption zone, collect the correct materials
+            and survive volcanic hazards before the live demonstration.
         </p>
 
     </div>
@@ -979,13 +1099,13 @@ button,input,select{max-width:100%}
 
 <div class="notice">
 
-    🏫 EXHIBITION DEMONSTRATION
+    🏫 DEMONSTRATION SEQUENCE
 
     <br><br>
 
-    This presentation demonstrates the FIRE &amp; FURY project,
-    its historical inspiration, and its geography themes.
-    The playable game is provided after the demonstration.
+    1️⃣ Play the interactive challenge first.<br>
+    2️⃣ Watch the live physical demonstration.<br>
+    3️⃣ After the demonstration, the full game experience is provided.
 
 </div>
 
@@ -995,7 +1115,7 @@ button,input,select{max-width:100%}
 
 <footer>
 
-    FIRE & FURY • A Demonstration of the Power of Volcanoes
+    FIRE AND FURY UNLEASHED • A Demonstration of the Power of Volcanoes
     and The Strength of The Ingenious Mysorean Rockets of Tippu Sultan
 
 </footer>
@@ -1019,8 +1139,8 @@ button,input,select{max-width:100%}
     class="subtitle"
     style="text-align:center">
 
-    Choose a game. Survive it. Learn something.
-    This team has groundbreakingly made History entertaining.
+    Play the challenge before the live demonstration, learn the story behind it,
+    then continue with the full game experience after the demonstration.
 
 </p>
 
@@ -1613,18 +1733,11 @@ const AUDIO_ASSETS = {
   victory: 'sounds/victory.mp3',
   defeat: 'sounds/defeat.mp3'
 };
-// BGM stays local to SPCK. SFX are intentionally loaded online so the
-// game does not depend on the local sounds/ folder for one-shot effects.
-// The remote SFX below are free preview assets from Mixkit/Pixabay-hosted
-// sources used as gameplay effects; the BGM files remain exactly as before.
-const ONLINE_SFX = {
-  launch: 'https://cdn.pixabay.com/audio/2024/10/22/audio_4ea8695cbf.mp3',
-  explosion: 'https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-784.mp3',
-  rock: 'https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-784.mp3',
-  victory: 'https://cdn.pixabay.com/audio/2023/10/18/audio_29c8b4314c.mp3',
-  defeat: 'https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-game-over-470.mp3',
-  combo: 'https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-784.mp3',
-  fury: 'https://cdn.pixabay.com/audio/2024/10/05/audio_1e824452a9.mp3'
+// Improved build: keep ALL game audio local to the SPCK sounds/ folder.
+// This avoids a network dependency for combo/power sounds.
+const LOCAL_SFX = {
+  combo: AUDIO_ASSETS.explosion,
+  fury: AUDIO_ASSETS.launch
 };
 const audioBank = {};
 let soundEnabled = true;
@@ -1633,72 +1746,45 @@ let currentBgm = null;
 let audioUnlocked = false;
 
 function makeAudio(src, loop=false){
-  const a = new Audio(src);
-  a.preload='auto';
-  a.loop=loop;
-  a.volume=masterVolume;
-  return a;
+  const a = new Audio(src); a.preload='auto'; a.loop=loop; a.volume=masterVolume; return a;
 }
 function initAudio(){
   if(audioUnlocked) return;
   audioUnlocked=true;
-  // KEEP THE EXISTING LOCAL BGM FILES.
   audioBank.menu=makeAudio(AUDIO_ASSETS.menu,true);
   audioBank.battle=makeAudio(AUDIO_ASSETS.battle,true);
   audioBank.fury=makeAudio(AUDIO_ASSETS.fury,true);
-  // ONLINE ONE-SHOT SFX.
-  Object.keys(ONLINE_SFX).forEach(name=>{ audioBank[name]=makeAudio(ONLINE_SFX[name]); });
+  audioBank.launch=makeAudio(AUDIO_ASSETS.launch);
+  audioBank.explosion=makeAudio(AUDIO_ASSETS.explosion);
+  audioBank.rock=makeAudio(AUDIO_ASSETS.rock);
+  audioBank.victory=makeAudio(AUDIO_ASSETS.victory);
+  audioBank.defeat=makeAudio(AUDIO_ASSETS.defeat);
+  audioBank.combo=makeAudio(LOCAL_SFX.combo);
+  audioBank.furySfx=makeAudio(LOCAL_SFX.fury);
 }
 function playSfx(name){
   if(!soundEnabled) return;
-  initAudio();
-  const base=audioBank[name];
-  if(!base) return;
-  try{
-    // Clone the remote clip so rapid rocket/explosion/combo hits can overlap.
-    const a=base.cloneNode(true);
-    a.volume=masterVolume;
-    a.currentTime=0;
-    const p=a.play();
-    if(p&&p.catch)p.catch(()=>{});
-    a.addEventListener('ended',()=>a.remove(),{once:true});
-  }catch(e){}
+  initAudio(); const a=audioBank[name]; if(!a) return;
+  try{a.pause(); a.currentTime=0; a.volume=masterVolume; const p=a.play(); if(p&&p.catch)p.catch(()=>{});}catch(e){}
 }
 function playBgm(kind){
-  if(!soundEnabled) return;
-  initAudio();
+  if(!soundEnabled) return; initAudio();
   const a=audioBank[kind]||audioBank.menu;
   if(currentBgm===a && !a.paused) return;
   if(currentBgm){try{currentBgm.pause(); currentBgm.currentTime=0;}catch(e){}}
-  currentBgm=a;
-  a.volume=masterVolume;
-  const p=a.play();
-  if(p&&p.catch)p.catch(()=>{});
+  currentBgm=a; a.volume=masterVolume;
+  const p=a.play(); if(p&&p.catch)p.catch(()=>{});
 }
 function stopBgm(){if(currentBgm){try{currentBgm.pause(); currentBgm.currentTime=0;}catch(e){}} currentBgm=null;}
 function toggleSound(){
   soundEnabled=!soundEnabled;
-  const b=document.getElementById('soundToggle');
-  if(b)b.textContent=soundEnabled?'🔊 SOUND ON':'🔇 SOUND OFF';
-  if(soundEnabled){
-    initAudio();
-    const screen=document.querySelector('.screen.active')?.id;
-    if(screen==='game') playBgm(gameType==='final'?'fury':'battle');
-    else if(screen==='results'){}
-    else playBgm('menu');
-  }else stopBgm();
+  const b=document.getElementById('soundToggle'); if(b)b.textContent=soundEnabled?'🔊 SOUND ON':'🔇 SOUND OFF';
+  if(soundEnabled){initAudio(); const screen=document.querySelector('.screen.active')?.id; if(screen==='game') playBgm(gameType==='final'?'fury':'battle'); else if(screen==='results'){} else playBgm('menu');}
+  else stopBgm();
 }
-function setMasterVolume(v){
-  masterVolume=Math.max(0,Math.min(1,Number(v)||0));
-  Object.values(audioBank).forEach(a=>{try{a.volume=masterVolume;}catch(e){}});
-}
-// First user gesture unlocks both local BGM and online SFX without forcing
-// audio on before the browser allows playback.
-document.addEventListener('pointerdown',()=>{
-  initAudio();
-  if(soundEnabled && !currentBgm) playBgm('menu');
-},{once:true,passive:true});
-document.addEventListener('keydown',()=>{initAudio();},{once:true,passive:true});
+function setMasterVolume(v){masterVolume=Number(v); Object.values(audioBank).forEach(a=>a.volume=masterVolume);}
+document.addEventListener('pointerdown',()=>{initAudio(); if(soundEnabled && !currentBgm) playBgm('menu');},{once:true});
+document.addEventListener('keydown',()=>{initAudio();},{once:true});
 
 /* =====================================================
    GAME STATE
@@ -1786,11 +1872,13 @@ function show(id){
 }
 
 
-let activePlayer = "Guest";
+let activePlayer = "Player";
 let finalAvatar = "🌋";
 let finalAvatarImage = null;
 const FINAL_AVATARS = new Set(["🌋","🚀","🦊","🐉","🦁","🤖","👩‍🚀","🛡️","🐯","⭐"]);
 const PLAYER_STORE_KEY = "fireFury_playerProfiles_v1";
+const FF_GUEST_TTL_MS = 13 * 60 * 60 * 1000;
+const FF_GUEST_CREATED_KEY = "fireFury_guestCreatedAt_v1";
 const FURY_AVATAR_PRESETS = [
   {value:"🌋",name:"Volcano Guardian"},{value:"🚀",name:"Rocket Ace"},{value:"🐉",name:"Dragon"},
   {value:"🦁",name:"Lion"},{value:"🐯",name:"Tiger"},{value:"🦊",name:"Fox"},{value:"🤖",name:"Robot"},
@@ -1911,61 +1999,42 @@ function safeWriteProfiles(profiles){
     catch (error) { return false; }
 }
 
-function closeHomePanels(exceptId){
-  const defs=[
-    ["leaderboardPanel","leaderboardToggle","🏆 View Hall of Fame"],
-    ["achievementsPanel","achievementsToggle","🎖️ My Achievements"],
-    ["profilePanel","profileToggle","👤 My Profile"]
-  ];
-  defs.forEach(([panelId,buttonId,label])=>{
-    if(panelId===exceptId) return;
-    const panel=document.getElementById(panelId);
-    const button=document.getElementById(buttonId);
-    if(panel){panel.hidden=true;panel.style.display="none";}
-    if(button){button.setAttribute("aria-expanded","false");button.textContent=label;}
-  });
-}
-
-function setHomePanel(panelId,buttonId,open,renderFn,labelOpen,labelClosed){
-  const panel=document.getElementById(panelId), button=document.getElementById(buttonId);
-  if(!panel||!button) return;
-  if(open){
-    closeHomePanels(panelId);
-    if(typeof renderFn==='function') renderFn();
-    panel.hidden=false; panel.style.display="block";
-  }else{
-    panel.hidden=true; panel.style.display="none";
-  }
-  button.setAttribute("aria-expanded",String(open));
-  button.textContent=open?labelOpen:labelClosed;
-}
-
 function toggleLeaderboard(){
-  const panel=document.getElementById("leaderboardPanel");
-  if(!panel) return;
-  setHomePanel("leaderboardPanel","leaderboardToggle",panel.hidden,renderLeaderboard,"🏆 Hide Hall of Fame","🏆 View Hall of Fame");
+    const panel = document.getElementById("leaderboardPanel");
+    const button = document.getElementById("leaderboardToggle");
+    if (!panel || !button) return;
+    const opening = panel.hidden;
+    if (opening) renderLeaderboard();
+    panel.hidden = !opening;
+    panel.style.display = opening ? "block" : "none";
+    button.setAttribute("aria-expanded", String(opening));
+    button.textContent = opening ? "🏆 Hide Hall of Fame" : "🏆 View Hall of Fame";
 }
 
 function toggleAchievements(){
-  const panel=document.getElementById("achievementsPanel");
-  if(!panel) return;
-  setHomePanel("achievementsPanel","achievementsToggle",panel.hidden,renderAchievements,"🎖️ Hide Achievements","🎖️ My Achievements");
+    const panel = document.getElementById("achievementsPanel");
+    const button = document.getElementById("achievementsToggle");
+    if (!panel || !button) return;
+    const opening = panel.hidden;
+    if (opening) renderAchievements();
+    panel.hidden = !opening;
+    panel.style.display = opening ? "block" : "none";
+    button.setAttribute("aria-expanded", String(opening));
+    button.textContent = opening ? "🎖️ Hide Achievements" : "🎖️ My Achievements";
 }
 
 function showLocalDuelInfo(){ openMultiplayer(); }
 
 function toggleProfile(){
-  const panel=document.getElementById("profilePanel");
-  if(!panel) return;
-  setHomePanel("profilePanel","profileToggle",panel.hidden,renderProfile,"👤 Hide Profile","👤 My Profile");
-}
-
-function closeHomePanel(panelId){
-  closeHomePanels(panelId==='leaderboardPanel'?null:null);
-  const panel=document.getElementById(panelId);
-  if(panel){panel.hidden=true;panel.style.display="none";}
-  const map={leaderboardPanel:["leaderboardToggle","🏆 View Hall of Fame"],achievementsPanel:["achievementsToggle","🎖️ My Achievements"],profilePanel:["profileToggle","👤 My Profile"]};
-  const d=map[panelId]; if(d){const b=document.getElementById(d[0]);if(b){b.setAttribute('aria-expanded','false');b.textContent=d[1];}}
+    const panel = document.getElementById("profilePanel");
+    const button = document.getElementById("profileToggle");
+    if (!panel || !button) return;
+    const opening = panel.hidden;
+    if (opening) renderProfile();
+    panel.hidden = !opening;
+    panel.style.display = opening ? "block" : "none";
+    button.setAttribute("aria-expanded", String(opening));
+    button.textContent = opening ? "👤 Hide Profile" : "👤 My Profile";
 }
 
 function renderProfile(){
@@ -1978,7 +2047,7 @@ function renderProfile(){
     const bestScore = runs.reduce((best, run) => Math.max(best, Number(run.score) || 0), 0);
     const bestCombo = runs.reduce((best, run) => Math.max(best, Number(run.bestCombo) || 0), 0);
     const avatar=profile.avatar||"🌋";
-    host.innerHTML = `<h3>👤 ${escapeHistoryText(activePlayer)}’s Player Profile</h3><p>Your username and avatar are saved with your FIRE &amp; FURY account.</p><div class="ff-profile-identity"><div class="ff-profile-avatar">${avatarMarkup(avatar,96)}</div><div><div class="ff-profile-username">${escapeHistoryText(activePlayer)}</div><div class="ff-profile-sub">${ffUser?.is_anonymous ? "Guest account · temporary 13-hour session" : "Permanent FIRE & FURY account"}</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px"><div class="notice"><strong>🎮 Games</strong><br><span style="font-size:1.5em">${runs.length}</span></div><div class="notice"><strong>🏆 Best score</strong><br><span style="font-size:1.5em">${bestScore}</span></div><div class="notice"><strong>⭐ Total points</strong><br><span style="font-size:1.5em">${totalPoints}</span></div><div class="notice"><strong>🔥 Best combo</strong><br><span style="font-size:1.5em">${bestCombo}</span></div></div><p>Your username and custom avatar sync through Supabase.</p><div class="ff-avatar-box"><h4 style="margin:8px 0">🖼️ Your Custom Image Avatar</h4><p style="margin:5px 0 10px">Upload a square or portrait photo. FIRE &amp; FURY automatically resizes it for the profile, Hall of Fame, multiplayer and Final Fury.</p><input id="accountAvatarFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" onchange="uploadCustomAvatar(this)" style="display:none"><button class="btn" type="button" onclick="document.getElementById('accountAvatarFile')?.click()" ${ffUser?.is_anonymous ? 'disabled title="Create a permanent account to change your avatar"' : ''}>🖼️ Change Avatar</button><p id="avatarUploadStatus" style="margin:8px 0;font-size:.9em">${ffUser?.is_anonymous ? "Log in or create a permanent account to change your avatar." : "Choose a new PNG, JPG, WEBP or GIF image. Your new avatar replaces the current one everywhere."}</p><p id="accountAvatarStatus" style="margin:10px 0;font-size:.9em">Current avatar: ${isAvatarImage(finalAvatar)?avatarMarkup(finalAvatar,44):'<span style="font-size:1.5em">'+escapeHistoryText(finalAvatar)+'</span>'}</p></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn" type="button" onclick="switchPlayer()">Switch player</button><button class="btn" type="button" style="border-color:#d9534f;color:#ffb5ad" onclick="deleteFuryAccount()">🗑️ Delete my account</button>${ffUser ? '<button class="btn" type="button" onclick="logoutFuryAccount()">🚪 Log out</button>' : ''}</div><p style="font-size:.88em;color:#e8c9b5">🚪 Log out only ends the current session. 🗑️ Delete my account permanently removes the FIRE &amp; FURY account, online profile, scores, match data and avatar.</p>`;
+    host.innerHTML = `<h3>👤 ${escapeHistoryText(activePlayer)}’s Player Profile</h3><p>Your username and avatar are saved with your FIRE &amp; FURY account.</p><div class="ff-profile-identity"><div class="ff-profile-avatar">${avatarMarkup(avatar,96)}</div><div><div class="ff-profile-username">${escapeHistoryText(activePlayer)}</div><div class="ff-profile-sub">${ffUser?.is_anonymous ? "Permanent account" : "Permanent FIRE & FURY account"}</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px"><div class="notice"><strong>🎮 Games</strong><br><span style="font-size:1.5em">${runs.length}</span></div><div class="notice"><strong>🏆 Best score</strong><br><span style="font-size:1.5em">${bestScore}</span></div><div class="notice"><strong>⭐ Total points</strong><br><span style="font-size:1.5em">${totalPoints}</span></div><div class="notice"><strong>🔥 Best combo</strong><br><span style="font-size:1.5em">${bestCombo}</span></div></div><p>${ffUser?.is_anonymous ? "👤 Permanent account: <b>"+guestTimeLeftText()+"</b>. Custom image avatars are available on your account." : "Your username and custom avatar sync through Supabase."}</p><div class="ff-avatar-box"><h4 style="margin:8px 0">🖼️ Your Custom Image Avatar</h4><p style="margin:5px 0 10px">Upload a square or portrait photo. FIRE &amp; FURY automatically resizes it for the profile, Hall of Fame, multiplayer and Final Fury.</p><input id="accountAvatarFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" onchange="uploadCustomAvatar(this)" style="display:none"><button class="btn" type="button" onclick="document.getElementById('accountAvatarFile')?.click()" ${ffUser?.is_anonymous ? 'disabled title="Create a permanent account to change your avatar"' : ''}>🖼️ Change Avatar</button><p id="avatarUploadStatus" style="margin:8px 0;font-size:.9em">${ffUser?.is_anonymous ? "Log in or create a permanent account to change your avatar." : "Choose a new PNG, JPG, WEBP or GIF image. Your new avatar replaces the current one everywhere."}</p><p id="accountAvatarStatus" style="margin:10px 0;font-size:.9em">Current avatar: ${isAvatarImage(finalAvatar)?avatarMarkup(finalAvatar,44):'<span style="font-size:1.5em">'+escapeHistoryText(finalAvatar)+'</span>'}</p></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn" type="button" onclick="switchPlayer()">Switch player</button>${ffUser ? '<button class="btn" type="button" onclick="logoutFuryAccount()">🚪 Log out</button>' : ''}</div><p style="font-size:.88em;color:#e8c9b5">🚪 Log out only ends the current session.</p>`;
 }
 
 const FURY_ACHIEVEMENT_CATALOG = [
@@ -2092,7 +2161,7 @@ async function deleteFuryAccount(){
       if(ffRequestChannel){try{await ffSupabase.removeChannel(ffRequestChannel);}catch(_){} ffRequestChannel=null;}
       try{ await ffSupabase.auth.signOut(); }catch(_){}
       ffUser=null;
-      activePlayer="Player";
+      activePlayer="Guest";
       finalAvatar="🌋";
       document.getElementById("authLoginPassword")?.value && (document.getElementById("authLoginPassword").value="");
       document.getElementById("authModal")?.classList.remove("show");
@@ -2143,7 +2212,7 @@ function saveCompletedRun(reason){
 function openGameArea(){
   if(!ffUser || ffUser.is_anonymous){
     openAuthGate();
-    setAuthStatus("🔐 Please log in or create a FIRE & FURY account to play.");
+    setAuthStatus("🔐 Please Login or Sign Up to enter the missions.");
     return;
   }
   show("missions");
@@ -2218,7 +2287,7 @@ function startGame(type, multiplayer=false){
 
     if(!canPlayFuryGame()){
         openAuthGate();
-        setAuthStatus("🔐 Please log in or create a FIRE & FURY account to play.");
+        setAuthStatus("🔐 Please Login or Sign Up to play FIRE AND FURY UNLEASHED.");
         return;
     }
 
@@ -3701,18 +3770,68 @@ function drawObjects(){
 
         else if(o.type === "rock"){
 
-            ctx.font =
-                "35px serif";
+            /* REAL ROCK: irregular faceted boulder, not an empty rectangle/box */
+            const r = Math.max(16, Number(o.size) || 28);
+            const pulse = 1 + Math.sin(performance.now() * .008 + o.x) * .025;
 
-            ctx.textAlign =
-                "center";
+            ctx.scale(pulse,pulse);
 
+            ctx.shadowColor = "rgba(55,35,20,.35)";
+            ctx.shadowBlur = 12;
+            ctx.shadowOffsetY = 5;
 
-            ctx.fillText(
-                "🪨",
-                0,
-                10
-            );
+            ctx.beginPath();
+            ctx.moveTo(-r*.95, r*.18);
+            ctx.lineTo(-r*.72, -r*.62);
+            ctx.lineTo(-r*.12, -r*.96);
+            ctx.lineTo(r*.58, -r*.72);
+            ctx.lineTo(r*.98, -.08*r);
+            ctx.lineTo(r*.62, r*.72);
+            ctx.lineTo(-r*.12, r*.92);
+            ctx.lineTo(-r*.78, r*.68);
+            ctx.closePath();
+
+            const rockGrad = ctx.createLinearGradient(-r,-r,r,r);
+            rockGrad.addColorStop(0,"#b9aa96");
+            rockGrad.addColorStop(.38,"#887b6a");
+            rockGrad.addColorStop(.72,"#655b50");
+            rockGrad.addColorStop(1,"#403a34");
+            ctx.fillStyle = rockGrad;
+            ctx.fill();
+
+            ctx.shadowColor = "transparent";
+            ctx.shadowBlur = 0;
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#302c27";
+            ctx.stroke();
+
+            /* stone facets */
+            ctx.beginPath();
+            ctx.moveTo(-r*.72,-r*.62);
+            ctx.lineTo(-r*.12,-r*.96);
+            ctx.lineTo(-r*.05,-r*.18);
+            ctx.lineTo(-r*.52,r*.02);
+            ctx.closePath();
+            ctx.fillStyle = "rgba(235,224,207,.34)";
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(-r*.05,-r*.18);
+            ctx.lineTo(r*.58,-r*.72);
+            ctx.lineTo(r*.98,-.08*r);
+            ctx.lineTo(r*.32,r*.22);
+            ctx.closePath();
+            ctx.fillStyle = "rgba(255,244,220,.16)";
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(-r*.52,r*.02);
+            ctx.lineTo(r*.32,r*.22);
+            ctx.lineTo(r*.62,r*.72);
+            ctx.lineTo(-r*.12,r*.92);
+            ctx.closePath();
+            ctx.fillStyle = "rgba(35,31,28,.22)";
+            ctx.fill();
 
         }
 
@@ -4256,13 +4375,13 @@ function endGame(reason){
         (
             gameType === "volcano"
 
-            ? "🌋 The demonstration connects this mission to the physical volcano models and the exhibition's geography themes."
+            ? "🌋 Now connect what you played to your physical volcano models. Explain Hawaiian, Strombolian, Vulcanian and Plinian eruptions to your visitor."
 
             : gameType === "rocket"
 
-            ? "🚀 The demonstration connects this mission to Mysorean rockets and their historical importance."
+            ? "🚀 Now show your Mysorean Rocket model and explain why iron casing was historically important."
 
-            : "🔥 The demonstration combines the volcano and Mysorean rocket themes into one FIRE & FURY challenge."
+            : "🔥 You completed the combined FIRE & FURY challenge. Now challenge your visitor to explain both halves of the exhibition."
         );
 
 
@@ -4508,9 +4627,8 @@ updateHeader();
 </script>
 
 
-<div id="authModal" class="ff-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-hidden="true">
+<div id="authModal" class="ff-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
   <div class="ff-modal-card" style="max-width:520px">
-    <button class="ff-modal-close" type="button" aria-label="Close account dialog" onclick="closeAuthGate()">✕</button>
     <h2 id="authTitle">🔥 FIRE &amp; FURY ACCOUNT</h2>
     <p id="authSubtitle">Create a real player account to save your identity, scores and multiplayer profile online.</p>
     <div id="authLoginForm">
@@ -4537,13 +4655,13 @@ updateHeader();
         <button class="btn gold" type="button" onclick="createFuryAccount()">🚀 CREATE ACCOUNT</button>
         <button class="btn" type="button" onclick="showAuthLogin()">BACK TO LOGIN</button>
       </div>
-    </div><div id="authStatus" class="ff-status" style="margin-top:10px">Your account will be used for online multiplayer and global scores.</div>
+    </div>
+    <div id="authStatus" class="ff-status" style="margin-top:10px">Your account will be used for online multiplayer and global scores.</div>
   </div>
 </div>
 
-<div id="multiplayerModal" class="ff-modal" role="dialog" aria-modal="true" aria-labelledby="mpTitle" aria-hidden="true">
+<div id="multiplayerModal" class="ff-modal" role="dialog" aria-modal="true" aria-labelledby="mpTitle">
   <div class="ff-modal-card">
-    <button class="ff-modal-close" type="button" aria-label="Close multiplayer dialog" onclick="closeMultiplayer()">✕</button>
     <h2 id="mpTitle">👥 ONLINE MULTIPLAYER</h2>
     <p>Challenge another FIRE &amp; FURY player on a different device.</p>
     <div class="ff-row"><input id="mpOpponent" maxlength="24" placeholder="Opponent username" autocomplete="off"><button class="btn" type="button" onclick="sendMultiplayerRequest()">⚔️ Send Request</button></div>
@@ -4587,6 +4705,7 @@ function setAuthStatus(t){ const el=document.getElementById("authStatus"); if(el
 function showAuthLogin(){
   document.getElementById("authLoginForm")?.removeAttribute("hidden");
   document.getElementById("authSignupForm")?.setAttribute("hidden","");
+  document.getElementById("authGuestForm")?.setAttribute("hidden","");
   const t=document.getElementById("authTitle"); if(t) t.textContent="🔥 FIRE & FURY LOGIN";
   const sub=document.getElementById("authSubtitle"); if(sub) sub.textContent="Log in to continue to your FIRE & FURY player account.";
   setAuthStatus("Enter your email and password.");
@@ -4594,60 +4713,34 @@ function showAuthLogin(){
 function showAuthSignup(){
   document.getElementById("authLoginForm")?.setAttribute("hidden","");
   document.getElementById("authSignupForm")?.removeAttribute("hidden");
+  document.getElementById("authGuestForm")?.setAttribute("hidden","");
   const t=document.getElementById("authTitle"); if(t) t.textContent="🔥 CREATE FIRE & FURY ACCOUNT";
   const sub=document.getElementById("authSubtitle"); if(sub) sub.textContent="Your account keeps your player identity ready for multiplayer and online scores.";
   setAuthStatus("Use a real email address you can access if email confirmation is enabled.");
 }
 function openAuthGate(){
-  const modal=document.getElementById("authModal");
-  if(!modal) return;
-  modal.classList.add("show");
-  modal.setAttribute("aria-hidden","false");
-  document.body.classList.add("ff-modal-open");
+  document.getElementById("authModal")?.classList.add("show");
   showAuthLogin();
-  setTimeout(()=>document.getElementById("authLoginEmail")?.focus(),40);
 }
-function closeAuthGate(){
-  const modal=document.getElementById("authModal");
-  if(!modal) return;
-  modal.classList.remove("show");
-  modal.setAttribute("aria-hidden","true");
-  if(!document.querySelector(".ff-modal.show")) document.body.classList.remove("ff-modal-open");
-}
+function closeAuthGate(){ document.getElementById("authModal")?.classList.remove("show"); }
 
-// Mobile-safe modal behavior: backdrop tap, Escape, and body scroll lock.
+// Close the login/signup/guest popup when the user taps the backdrop.
+// Taps/clicks inside the popup itself are left untouched.
 function installAuthOutsideClose(){
   const modal=document.getElementById("authModal");
   const card=modal?.querySelector(".ff-modal-card");
-  if(!modal||!card||modal.dataset.outsideCloseInstalled==="1") return;
+  if(!modal || !card || modal.dataset.outsideCloseInstalled==="1") return;
   modal.dataset.outsideCloseInstalled="1";
-  modal.addEventListener("pointerdown",event=>{ if(event.target===modal) closeAuthGate(); });
+  const closeIfOutside=(event)=>{
+    if(!modal.classList.contains("show")) return;
+    if(!card.contains(event.target)) closeAuthGate();
+  };
+  modal.addEventListener("pointerdown",closeIfOutside);
+  modal.addEventListener("click",closeIfOutside);
 }
-function installMultiplayerOutsideClose(){
-  const modal=document.getElementById("multiplayerModal");
-  if(!modal||modal.dataset.outsideCloseInstalled==="1") return;
-  modal.dataset.outsideCloseInstalled="1";
-  modal.addEventListener("pointerdown",event=>{ if(event.target===modal) closeMultiplayer(); });
-}
-function installHomePanelDismiss(){
-  document.addEventListener("pointerdown",event=>{
-    if(!document.getElementById("home")?.classList.contains("active")) return;
-    const targets=["leaderboardPanel","achievementsPanel","profilePanel"];
-    const clickedPanel=targets.some(id=>document.getElementById(id)?.contains(event.target));
-    const clickedToggle=event.target.closest?.("#leaderboardToggle,#achievementsToggle,#profileToggle");
-    if(clickedPanel||clickedToggle) return;
-    targets.forEach(id=>{const p=document.getElementById(id);if(p&&!p.hidden)closeHomePanel(id);});
-  },{passive:true});
-}
-function installModalKeyboardClose(){
-  document.addEventListener("keydown",event=>{
-    if(event.key!=="Escape") return;
-    if(document.getElementById("authModal")?.classList.contains("show")) closeAuthGate();
-    if(document.getElementById("multiplayerModal")?.classList.contains("show")) closeMultiplayer();
-  });
-}
-if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>{installAuthOutsideClose();installMultiplayerOutsideClose();installHomePanelDismiss();installModalKeyboardClose();});
-else{installAuthOutsideClose();installMultiplayerOutsideClose();installHomePanelDismiss();installModalKeyboardClose();}
+
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",installAuthOutsideClose);
+else installAuthOutsideClose();
 
 async function syncAuthenticatedProfile(user, preferredUsername){
   const metadataName=String(user?.user_metadata?.username||preferredUsername||"Player").trim();
@@ -4711,9 +4804,64 @@ async function initMultiplayerBackend(){
 }
 
 
-function canPlayFuryGame(){
-  if(!ffUser?.id || ffUser.is_anonymous) return false;
+function guestExpiresAt(){
+  if(!ffUser?.is_anonymous) return null;
+  const fromMeta=Number(ffUser?.user_metadata?.guest_created_at||0);
+  const fromStorage=Number(localStorage.getItem(FF_GUEST_CREATED_KEY)||0);
+  const created=fromMeta||fromStorage||Date.parse(ffUser.created_at||"")||Date.now();
+  return created + FF_GUEST_TTL_MS;
+}
+
+function guestIsExpired(){
+  const expiry=guestExpiresAt();
+  return !!expiry && Date.now()>=expiry;
+}
+
+function guestTimeLeftText(){
+  const expiry=guestExpiresAt();
+  if(!expiry) return "13 hours";
+  const ms=Math.max(0,expiry-Date.now());
+  const h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000);
+  return h+"h "+String(m).padStart(2,"0")+"m";
+}
+
+async function expireGuestIfNeeded(){
+  if(!ffUser?.is_anonymous || !guestIsExpired()) return false;
+  setAuthStatus("⏳ Your 13-hour guest account has expired. Please create a real account or start a new guest session.");
+  try{ await ffSupabase.auth.signOut(); }catch(e){ console.warn("Guest expiry sign-out",e); }
+  ffUser=null; activePlayer="Guest"; finalAvatar="🌋";
+  localStorage.removeItem(FF_GUEST_CREATED_KEY);
   return true;
+}
+
+function canPlayFuryGame(){
+  return !!ffUser?.id && !ffUser.is_anonymous;
+}
+
+function openGuestGate(){
+  openAuthGate();
+  setAuthStatus("🔐 Guest play has been removed. Please Login or Sign Up.");
+}
+
+async function createGuestAccount(){
+  try{
+    await ensureSupabaseClient();
+    const raw=(document.getElementById("authGuestUsername")?.value||"").trim().replace(/\s+/g," ").slice(0,24);
+    const username=raw||("Guest " + Math.floor(1000+Math.random()*9000));
+    setAuthStatus("👤 Creating your temporary guest account…");
+    const createdAt=Date.now();
+    const {data,error}=await ffSupabase.auth.signInAnonymously({options:{data:{username,guest_created_at:createdAt}}});
+    if(error) throw error;
+    if(!data?.user) throw new Error("Guest account could not be created.");
+    localStorage.setItem(FF_GUEST_CREATED_KEY,String(createdAt));
+    await syncAuthenticatedProfile(data.user,username);
+    await finishAuthenticatedEntry();
+    setAuthStatus("👤 Guest mode active. Time remaining: "+guestTimeLeftText()+".");
+    renderProfile();
+  }catch(e){
+    setAuthStatus("❌ "+(e?.message||e));
+    console.warn("FIRE & FURY guest error",e);
+  }
 }
 
 async function loginFuryAccount(){
@@ -4779,13 +4927,13 @@ async function logoutFuryAccount(){
   if(!ffSupabase) return;
   try{ await ffSupabase.auth.signOut(); }catch(e){console.warn(e);}
   ffUser=null;
-  activePlayer="Player";
+  activePlayer="Guest";
   finalAvatar="🌋";
   if(ffRequestChannel){try{await ffSupabase.removeChannel(ffRequestChannel);}catch(_){} ffRequestChannel=null;}
   document.getElementById("authLoginPassword")?.value && (document.getElementById("authLoginPassword").value="");
   document.getElementById("authModal")?.classList.remove("show");
   show("home");
-  setAuthStatus("🚪 Logged out. You are logged out. Log in or create a FIRE & FURY account to start a game.");
+  setAuthStatus("🚪 Logged out. You can explore FIRE & FURY, but a login, signup, or guest session is required to start a game.");
 }
 
 function installAuthListener(){
@@ -4795,7 +4943,22 @@ function installAuthListener(){
   });
 }
 
-// Prepare the real account system as soon as Supabase is available.
+// Keep a guest session honest even if the page stays open past the 13-hour limit.
+setInterval(async()=>{
+  if(ffUser?.is_anonymous){
+    if(await expireGuestIfNeeded()){
+      const ss=document.getElementById("startScreen");
+      if(ss) ss.classList.remove("hidden");
+      show("home");
+      setAuthStatus("⏳ Guest account expired after 13 hours. Login, create an account, or start a new guest session to play.");
+    }else{
+      const profilePanel=document.getElementById("profilePanel");
+      if(profilePanel && !profilePanel.hidden) renderProfile();
+    }
+  }
+},60000);
+
+// Guest mode is intentionally disabled in FIRE AND FURY UNLEASHED.
 (async()=>{
   try{
     await ensureSupabaseClient();
@@ -4804,40 +4967,29 @@ function installAuthListener(){
     if(data?.session?.user){
       ffUser=data.session.user;
       if(ffUser.is_anonymous){
-        // Guest profiles are no longer supported. Clear any old anonymous session.
-        await ffSupabase.auth.signOut();
+        try{ await ffSupabase.auth.signOut(); }catch(e){ console.warn("Anonymous session cleanup",e); }
         ffUser=null;
         activePlayer="Player";
-        finalAvatar="🌋";
+        const ss=document.getElementById("startScreen"); if(ss) ss.classList.remove("hidden");
+        show("home");
         return;
+      }else{
+        await syncAuthenticatedProfile(ffUser);
       }
-      await syncAuthenticatedProfile(ffUser);
-      // IMPORTANT: always leave the opening ENTER ARCADE page visible.
-      // A persisted Supabase session must never silently bypass the arcade entry page.
-      // The account popup opens only when ENTER ARCADE is pressed.
-      // Home is reached only after explicit authentication through finishAuthenticatedEntry().
+      // IMPORTANT: keep the opening START SCREEN visible on every fresh page load.
+      // A persisted Supabase session may exist, but it must not silently remove
+      // the first page. The start screen is hidden only after the user explicitly
+      // chooses Login/Sign Up or Play as Guest through finishAuthenticatedEntry().
+      show("home");
+      subscribeMultiplayerRequests();
     }
   }catch(e){ console.warn("FIRE & FURY account startup",e); }
 })();
 
 function setMpStatus(t){ const el=document.getElementById("mpStatus"); if(el) el.textContent=t; }
 
-function openMultiplayer(){
-  const modal=document.getElementById("multiplayerModal");
-  if(!modal) return;
-  modal.classList.add("show");
-  modal.setAttribute("aria-hidden","false");
-  document.body.classList.add("ff-modal-open");
-  initMultiplayerBackend();
-  setTimeout(()=>document.getElementById("mpOpponent")?.focus(),40);
-}
-function closeMultiplayer(){
-  const modal=document.getElementById("multiplayerModal");
-  if(!modal) return;
-  modal.classList.remove("show");
-  modal.setAttribute("aria-hidden","true");
-  if(!document.querySelector(".ff-modal.show")) document.body.classList.remove("ff-modal-open");
-}
+function openMultiplayer(){ document.getElementById("multiplayerModal")?.classList.add("show"); initMultiplayerBackend(); }
+function closeMultiplayer(){ document.getElementById("multiplayerModal")?.classList.remove("show"); }
 
 async function sendMultiplayerRequest(){
   const opponent=(document.getElementById("mpOpponent")?.value||"").trim().replace(/\s+/g," ").slice(0,24);
