@@ -113,6 +113,54 @@ button{
     cursor:pointer;
 }
 
+/* ===== START SCREEN ===== */
+.start-screen{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    text-align:center;
+    background:
+        radial-gradient(circle at 50% 35%, #6a2a12, #1a0a06 60%, #080303);
+}
+
+.start-card{
+    width:min(520px,94%);
+    padding:42px 28px;
+    border:1px solid #c06a28;
+    border-radius:24px;
+    background:rgba(22,9,6,.92);
+    box-shadow:0 0 80px #000, 0 0 40px #ff5a1830;
+}
+
+.start-title{
+    margin:0 0 8px;
+    color:#ffd16b;
+    font-size:clamp(42px,10vw,68px);
+    font-weight:900;
+    letter-spacing:4px;
+    text-shadow:0 4px 20px #000, 0 0 30px #ff641c;
+}
+
+.start-sub{
+    color:#e8c9a0;
+    font-size:clamp(16px,3.5vw,20px);
+    margin:0 0 6px;
+}
+
+.start-desc{
+    color:#d4a87a;
+    font-size:18px;
+    margin:12px 0 28px;
+}
+
+.start-screen.hidden{
+    display:none !important;
+}
+
 .screen{
     display:none;
     min-height:100vh;
@@ -154,58 +202,6 @@ header{
     vertical-align:middle;
 }
 
-.startup-screen{
-    position:fixed;
-    inset:0;
-    z-index:1000;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:24px;
-    text-align:center;
-
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            #52200e,
-            #130806 65%,
-            #080303
-        );
-}
-
-.startup-card{
-    width:min(560px,100%);
-    padding:38px 24px;
-
-    border:1px solid #a4531e;
-    border-radius:24px;
-
-    background:#160906dd;
-
-    box-shadow:0 0 60px #000;
-}
-
-.startup-logo{
-    display:none;
-    width:min(280px,70vw);
-    max-height:220px;
-    margin:0 auto 16px;
-    object-fit:contain;
-    filter:drop-shadow(0 0 18px #ff5b18);
-}
-
-.startup-title{
-    margin:10px 0;
-    color:#ffd16b;
-    font-size:clamp(38px,9vw,64px);
-    text-shadow:0 5px 25px #000;
-}
-
-.startup-screen[hidden]{
-    display:none;
-}
 
 .score-pill{
     background:#2a120c;
@@ -251,6 +247,8 @@ header{
     color:#d8c1ad;
     line-height:1.5;
 }
+
+[hidden]{display:none !important;}
 
 .notice{
     margin:25px auto;
@@ -309,12 +307,37 @@ header{
     border:2px solid #8e481d;
     border-radius:16px;
 
-    background:#090404;
+    background:#3d2010;
 
-    box-shadow:0 0 35px #000;
-
+    box-shadow:0 0 24px #ff5b1830, 0 0 35px #000;
+    animation:lavaFrame 4s ease-in-out infinite;
     touch-action:none;
 }
+
+@keyframes lavaFrame{
+    0%,100%{box-shadow:0 0 20px #ff5b1825,0 0 35px #000;}
+    50%{box-shadow:0 0 32px #ff762b70,0 0 42px #000;}
+}
+@media(prefers-reduced-motion:reduce){
+    #gameCanvas{animation:none;}
+}
+
+.combo-banner{display:none;text-align:center;margin:8px auto 12px;padding:10px 18px;max-width:520px;border:1px solid #ff9b32;border-radius:14px;background:linear-gradient(90deg,#401309,#8e2b0c,#401309);color:#ffe6a3;font-weight:900;letter-spacing:1.5px;text-shadow:0 0 14px #ff6a00;box-shadow:0 0 22px #ff5b1855;}
+.combo-banner.show{display:block;animation:comboPop 2.25s cubic-bezier(.2,1.5,.4,1) both;}
+.combo-banner.break{border-color:#a8a8a8;background:linear-gradient(90deg,#292929,#555,#292929);color:#eee;text-shadow:none;}
+@keyframes comboPop{0%{opacity:0;transform:translateY(12px) scale(.55)}12%{opacity:1;transform:translateY(-3px) scale(1.12)}22%{transform:translateY(0) scale(1)}78%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-12px) scale(.96)}}
+.combo-banner.break.show{animation:comboBreakHold 1.9s ease-out both;}
+.fury-mode-panel{display:none;max-width:520px;margin:0 auto 10px;padding:9px 14px;border:1px solid #ff6b19;border-radius:12px;background:linear-gradient(90deg,#260a05,#6b1d08);color:#ffe0a0;text-align:center;font-weight:900;letter-spacing:1px;box-shadow:0 0 18px #ff5b1866;}
+.fury-mode-panel.active{display:block;animation:furyPanelPulse 1s ease-in-out infinite alternate;}
+.fury-meter{height:6px;margin-top:7px;background:#452015;border-radius:8px;overflow:hidden;}
+.fury-meter-fill{height:100%;width:100%;background:linear-gradient(90deg,#ffb21c,#ff4c08);transition:width .15s linear;}
+#gameCanvas.fury-aura{filter:drop-shadow(0 0 9px #ff671d);animation:furyCanvasPulse .65s ease-in-out infinite alternate;}
+@keyframes furyPanelPulse{to{box-shadow:0 0 28px #ff7a22aa;}}
+@keyframes furyCanvasPulse{to{filter:drop-shadow(0 0 19px #ff8b24);}}
+@keyframes comboBreakHold{0%{opacity:0;transform:scale(.88)}12%{opacity:1;transform:scale(1.04)}22%,82%{opacity:1;transform:scale(1)}100%{opacity:0;transform:translateY(-8px) scale(.98)}}
+.combo-stat-hot{animation:comboPulse .45s ease-out;}
+@keyframes comboPulse{0%{transform:scale(1);box-shadow:0 0 0 #ff6b00}45%{transform:scale(1.16);box-shadow:0 0 20px #ff6b00}100%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.combo-banner.show,.combo-stat-hot{animation:none;}}
 
 .controls{
     display:flex;
@@ -475,6 +498,24 @@ footer{
     display:none!important;
 }
 
+.ff-avatar-box{margin-top:12px;padding:14px;border:1px solid rgba(255,190,90,.25);border-radius:14px;background:rgba(30,12,7,.65)}
+.ff-avatar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px}
+.ff-avatar-choice{border:1px solid #6d3519;border-radius:12px;background:#1b0b07;color:#f8dfc0;padding:8px 5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.15s}
+.ff-avatar-choice span{font-size:1.8rem;line-height:1}
+.ff-avatar-choice small{font-size:.72rem;opacity:.8}
+.ff-avatar-choice:hover{transform:translateY(-2px);border-color:#ff9a32}
+.ff-avatar-choice.selected{border-color:#ffd36b;box-shadow:0 0 0 2px rgba(255,211,107,.18),0 0 14px rgba(255,112,20,.25)}
+.ff-avatar-img{display:block;width:100%;height:100%;max-width:100%;object-fit:cover;border-radius:50%;border:2px solid rgba(255,211,107,.35);background:#160c08}
+.ff-avatar-fallback{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#160c08;border:2px solid rgba(255,211,107,.35);line-height:1;overflow:hidden}
+.ff-avatar-inline{display:inline-flex;vertical-align:middle;align-items:center}
+.ff-profile-identity{display:flex;align-items:center;gap:16px;padding:14px;margin:10px 0 14px;border:1px solid rgba(255,190,90,.25);border-radius:14px;background:rgba(30,12,7,.65)}
+.ff-profile-avatar{width:96px;height:96px;flex:0 0 96px}.ff-profile-avatar .ff-avatar-img,.ff-profile-avatar .ff-avatar-fallback{width:96px;height:96px}
+.ff-profile-username{font-size:1.55rem;font-weight:800}.ff-profile-sub{opacity:.78;margin-top:4px}
+.ff-upload-avatar{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border:1px dashed #ff9a32;border-radius:12px;background:#1b0b07;color:#fff;cursor:pointer;font-weight:700}
+.ff-upload-avatar input{display:none}
+.hof-avatar{width:52px;height:52px;display:flex;align-items:center;justify-content:center}.hof-avatar .ff-avatar-img,.hof-avatar .ff-avatar-fallback{width:52px;height:52px}
+
+
 /* BUTTONS */
 
 .btn{
@@ -594,10 +635,216 @@ footer{
 
 }
 
+
+
+
+/* ===== BUILT-IN HOME ILLUSTRATION ===== */
+.hero-art{display:block;width:min(760px,96%);height:auto;margin:0 auto 14px;overflow:visible;filter:drop-shadow(0 14px 24px #0009)}
+.hero-art .lava-flow{animation:lavaPulse 2.8s ease-in-out infinite alternate;transform-origin:center}
+.hero-art .rocket-flame{animation:flameFlicker .22s ease-in-out infinite alternate;transform-origin:center top}
+.hero-art .ember{animation:emberDrift 3.5s ease-in-out infinite alternate}
+@keyframes lavaPulse{from{opacity:.72}to{opacity:1}}
+@keyframes flameFlicker{from{transform:scaleY(.82)}to{transform:scaleY(1.15)}}
+@keyframes emberDrift{from{transform:translateY(5px);opacity:.45}to{transform:translateY(-9px);opacity:1}}
+@media(max-width:600px){.hero-art{width:100%;margin-bottom:8px}}
+
+/* ===== POLISH PASS: centered hero, warm glow, accessible controls ===== */
+.wrap{
+    width:min(1100px,94%);
+    margin:0 auto;
+    padding:24px 0 40px;
+}
+
+.hero{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    width:100%;
+}
+
+.hero .main-logo,
+.hero .subtitle,
+.hero .main-play{
+    width:100%;
+}
+
+.hero .subtitle{
+    display:block;
+    max-width:850px;
+    margin:10px auto 18px;
+    padding:0 14px;
+    text-align:center;
+    line-height:1.75;
+    color:#f3d4ad;
+    font-size:clamp(16px,2.5vw,21px);
+    text-wrap:balance;
+}
+
+.main-logo img{
+    filter:drop-shadow(0 8px 20px rgba(0,0,0,.7)) drop-shadow(0 0 16px rgba(255,112,25,.22));
+}
+
+.main-logo-text{
+    animation:titleGlow 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow{
+    from{text-shadow:0 3px 8px #000,0 0 12px #ff641c;}
+    to{text-shadow:0 3px 8px #000,0 0 25px #ff8b2c,0 0 38px #b82d0a;}
+}
+
+.card{
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    border-color:#c87531;
+    box-shadow:0 16px 32px #000a,0 0 18px #ff6a1c20;
+}
+
+button:focus-visible{
+    outline:3px solid #ffe49a;
+    outline-offset:4px;
+}
+
+@media(max-width:600px){
+    .wrap{width:92%;padding-top:16px;}
+    .hero .subtitle{margin:8px auto 14px;line-height:1.6;}
+    .play-button{max-width:100%;padding:16px 24px;}
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+        transition-duration:.01ms!important;
+    }
+}
+
+
+/* Responsive exhibition build: keep content within the viewport while allowing vertical scrolling */
+*,*::before,*::after{box-sizing:border-box}
+img,canvas,svg{max-width:100%}
+.screen{width:100%;min-height:100vh;min-height:100dvh;overflow-x:hidden}
+.wrap{width:min(1100px,100%);margin-inline:auto;padding-inline:clamp(12px,3vw,28px)}
+.start-screen{overflow-y:auto;align-items:flex-start;padding:clamp(12px,3vh,28px)}
+.start-card{width:min(100%,720px);margin:auto;max-height:none}
+button,input,select{max-width:100%}
+.card,.notice{min-width:0;overflow-wrap:anywhere}
+@media(max-width:600px){header{gap:8px;flex-wrap:wrap;padding:10px}.score-pill{max-width:100%;font-size:.88rem}.hero-art{width:100%}.card{padding:14px}.screen{padding-bottom:20px}}
+
+/* ===== FIRE & FURY RELEASE LAYOUT ===== */
+*,*::before,*::after{box-sizing:border-box}
+html,body{min-height:100%;height:auto;overflow-x:hidden;overflow-y:auto}
+img,canvas,svg{max-width:100%}
+.screen{width:100%;min-height:100vh;min-height:100dvh;overflow:visible}
+.wrap{width:min(1100px,100%);margin-inline:auto;padding:clamp(10px,2vw,22px) clamp(10px,3vw,28px) 22px}
+.start-screen{overflow:auto;align-items:flex-start;padding:clamp(12px,3vh,28px)}
+.start-card{width:min(100%,720px);margin:auto;max-height:none}
+button,input,select{max-width:100%}
+.card,.notice{min-width:0;overflow-wrap:anywhere}
+#home .main-logo{margin:4px auto 6px}
+#home .main-logo img{max-height:12dvh;width:min(390px,66vw)}
+#home .main-logo-text{font-size:clamp(24px,5vw,42px)}
+#home .hero-art{max-height:23dvh;width:min(680px,92vw);object-fit:contain;margin-bottom:4px}
+#home .subtitle{margin:4px auto 7px;font-size:clamp(12px,2vw,17px);line-height:1.3}
+#home .main-play{margin:7px auto 9px}
+#home .notice{margin:7px 0;padding:10px;line-height:1.4}
+#home .grid{gap:8px}
+.hof-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px}
+.hof-player{padding:7px;border:1px solid rgba(255,180,90,.35);border-radius:10px;background:rgba(30,10,5,.72);min-width:0;text-align:center}
+.hof-player .hof-name{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hof-player .hof-meta{font-size:.78em;color:#e8c9b5}
+.ff-modal{position:fixed;inset:0;z-index:5000;display:none;align-items:center;justify-content:center;padding:12px;background:rgba(0,0,0,.78)}
+.ff-modal.show{display:flex}
+.ff-modal-card{width:min(640px,96vw);max-height:92dvh;overflow:auto;padding:16px;border:2px solid #a84d1b;border-radius:18px;background:linear-gradient(180deg,#25100a,#0b0403);box-shadow:0 0 60px #000,0 0 30px #ff5a1828}
+.ff-modal-card h2{margin:0 0 8px;color:#ffd16b}
+.ff-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.ff-row input{flex:1;min-width:180px;padding:12px;border-radius:10px;border:1px solid #7d3c1d;background:#120806;color:#fff}
+.ff-status{padding:9px;border-radius:10px;background:rgba(255,255,255,.06);font-size:.9em}
+.game-wrap{position:relative;width:min(900px,92vw);margin:auto;padding:8px 0 18px}
+.game-head{gap:5px;margin-bottom:6px}
+.game-stat{padding:6px 9px;font-size:clamp(12px,2vw,15px)}
+#gameCanvas{width:100%;max-width:900px;height:auto;display:block;aspect-ratio:16/10;margin-left:auto;margin-right:auto}
+.controls{position:absolute;left:0;right:0;top:52px;bottom:20px;z-index:20;pointer-events:none;touch-action:none}
+.hud-fire,.hud-joystick{position:absolute;bottom:12px;pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+.hud-fire{left:14px;width:clamp(82px,14vw,118px);height:clamp(82px,14vw,118px);border-radius:50%;border:2px solid rgba(255,185,95,.65);background:radial-gradient(circle at 35% 30%,rgba(255,155,45,.38),rgba(55,12,5,.40));color:#fff3d0;font-size:clamp(28px,5vw,40px);font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;box-shadow:0 4px 20px rgba(0,0,0,.45),inset 0 0 20px rgba(255,80,20,.16);backdrop-filter:blur(5px)}
+.hud-fire span{font-size:11px;letter-spacing:1.5px;color:#ffd58b}
+.hud-fire:active{transform:scale(.94);background:radial-gradient(circle,rgba(255,125,30,.55),rgba(55,12,5,.48))}
+.hud-joystick{right:14px;width:clamp(112px,21vw,156px);height:clamp(78px,13vw,108px);border-radius:999px;border:2px solid rgba(255,185,95,.42);background:rgba(20,9,7,.34);box-shadow:0 4px 20px rgba(0,0,0,.4),inset 0 0 20px rgba(255,100,30,.08);backdrop-filter:blur(5px);overflow:hidden}
+.hud-joystick-track{position:absolute;inset:8px;border-radius:999px;background:linear-gradient(90deg,rgba(255,120,45,.10),rgba(255,210,120,.16),rgba(255,120,45,.10))}
+.hud-joystick-thumb{position:absolute;left:50%;top:50%;width:clamp(48px,9vw,68px);height:clamp(48px,9vw,68px);transform:translate(-50%,-50%);border-radius:50%;border:2px solid rgba(255,215,150,.68);background:radial-gradient(circle at 35% 30%,rgba(255,220,150,.42),rgba(90,30,10,.58));box-shadow:0 3px 12px rgba(0,0,0,.45);transition:transform .06s linear}
+.hud-joystick .joy-left,.hud-joystick .joy-right{position:absolute;top:50%;transform:translateY(-50%);font-size:15px;color:rgba(255,225,175,.72);pointer-events:none}
+.hud-joystick .joy-left{left:10px}.hud-joystick .joy-right{right:10px}
+@media(min-width:901px){.hud-fire,.hud-joystick{opacity:.72}}
+@media(max-width:600px){.game-wrap{width:100%;}.gameCanvas{max-width:none;}header{gap:6px;flex-wrap:wrap;padding:8px}.score-pill{max-width:100%;font-size:.82rem}.hero-art{width:100%}.card{padding:12px}.section-title{font-size:clamp(26px,7vw,38px)}.game-wrap{padding-top:4px}.game-head{justify-content:center}.controls{bottom:34px;padding:0 8px}.game-message{font-size:.82rem;margin-top:3px}.wrap{padding-left:8px;padding-right:8px}}
+@media(max-height:700px){#home .hero-art{max-height:16dvh}#home .main-logo img{max-height:9dvh}#home .notice{font-size:.82em;padding:7px}.play-button{padding:11px 22px;font-size:clamp(20px,4vw,30px)}}
+
+.mode-battle-hud{display:none;position:absolute;left:50%;top:78px;transform:translateX(-50%);z-index:15;min-width:min(92%,620px);padding:8px 12px;border:1px solid rgba(255,210,90,.28);border-radius:12px;background:rgba(8,8,16,.78);backdrop-filter:blur(8px);text-align:center;font-weight:800;letter-spacing:.3px;box-shadow:0 8px 28px rgba(0,0,0,.28)}
+.mode-battle-hud.show{display:block}
+@media(max-width:600px){.mode-battle-hud{top:54px;font-size:.76rem;padding:6px 8px;min-width:94%}}
+</style>
+
+<style id="ff3d-css">
+/* FIRE & FURY — dedicated 3D game HUD / viewport */
+#ff3dStage{position:relative;width:100%;height:calc(100dvh - 72px);min-height:420px;margin:0;background:#05070a;overflow:hidden;box-sizing:border-box;border:0;border-radius:0;}
+#ff3dCanvas{position:absolute;inset:0;display:block;width:100%;height:100%;background:#05070a;touch-action:none;}
+#ff3dHud{position:absolute;inset:0;pointer-events:none;color:#fff;font-family:system-ui,sans-serif;z-index:5;}
+.ff3d-top{position:absolute;top:14px;left:14px;right:14px;display:grid;grid-template-columns:minmax(170px,1fr) auto minmax(170px,1fr);align-items:start;gap:10px;}
+.ff3d-modebox,.ff3d-centerbox,.ff3d-stats{background:rgba(5,7,11,.72);border:1px solid rgba(255,190,80,.25);backdrop-filter:blur(9px);box-shadow:0 8px 30px rgba(0,0,0,.3);border-radius:14px;}
+.ff3d-modebox{padding:10px 14px;justify-self:start}.ff3d-title{font-size:clamp(16px,2vw,24px);font-weight:1000;letter-spacing:.04em}.ff3d-subtitle{display:block;margin-top:3px;font-size:11px;color:#c9b9ab;text-transform:uppercase;letter-spacing:.12em}
+.ff3d-centerbox{padding:9px 15px;max-width:min(520px,55vw);text-align:center;justify-self:center}.ff3d-objective{font-weight:800;font-size:clamp(12px,1.4vw,16px)}.ff3d-phase{margin-top:3px;font-size:11px;color:#ffd38a}
+.ff3d-stats{display:flex;gap:7px;padding:7px;justify-self:end}.ff3d-stat{min-width:62px;text-align:center;padding:5px 8px;border-radius:9px;background:rgba(255,255,255,.055)}.ff3d-stat b{display:block;font-size:17px}.ff3d-stat span{font-size:10px;color:#bfb6af;text-transform:uppercase}
+.ff3d-cross{position:absolute;left:50%;top:50%;width:26px;height:26px;transform:translate(-50%,-50%);opacity:.9}.ff3d-cross:before,.ff3d-cross:after{content:"";position:absolute;background:#fff;box-shadow:0 0 9px #ff762b}.ff3d-cross:before{width:26px;height:2px;top:12px}.ff3d-cross:after{width:2px;height:26px;left:12px}
+.ff3d-bottom{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:end;justify-content:space-between;gap:14px}.ff3d-panel{background:rgba(5,7,11,.72);border:1px solid rgba(255,190,80,.22);backdrop-filter:blur(9px);border-radius:14px;padding:9px 11px;pointer-events:auto}.ff3d-weapon{min-width:210px}.ff3d-weapon strong{font-size:14px}.ff3d-weapon-list{display:flex;gap:5px;margin-top:7px}.ff3d-weapon-list span{padding:5px 7px;border-radius:7px;background:rgba(255,255,255,.07);font-size:11px}.ff3d-weapon-list .active{background:rgba(255,105,25,.25);border:1px solid rgba(255,150,60,.55)}
+.ff3d-meter{min-width:220px}.ff3d-meter-label{display:flex;justify-content:space-between;font-size:11px;color:#d6c9c0}.ff3d-meter-track{height:8px;margin-top:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}.ff3d-meter-fill{height:100%;width:0%;background:linear-gradient(90deg,#ff6b1a,#ffd05a);border-radius:99px;transition:width .12s linear}
+.ff3d-mobile{display:none;position:absolute;inset:auto 14px 14px 14px;height:132px;pointer-events:none}.ff3d-stick{position:absolute;left:0;bottom:0;width:112px;height:112px;border:2px solid rgba(255,255,255,.2);background:rgba(0,0,0,.3);border-radius:50%;pointer-events:auto;touch-action:none}.ff3d-stick i{position:absolute;left:31px;top:31px;width:46px;height:46px;border-radius:50%;background:rgba(255,120,30,.45);border:2px solid rgba(255,200,100,.55)}.ff3d-fire{position:absolute;right:0;bottom:0;width:112px;height:112px;border-radius:50%;border:2px solid rgba(255,190,80,.6);background:rgba(190,30,10,.52);color:#fff;font-size:1.1rem;font-weight:1000;pointer-events:auto;touch-action:none;box-shadow:0 0 25px rgba(255,70,10,.18)}
+.ff3d-hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:11px;color:#cfc4bb;background:rgba(0,0,0,.5);padding:6px 10px;border-radius:8px}
+@media(max-width:800px){#ff3dStage{height:calc(100dvh - 64px);min-height:320px}.ff3d-top{grid-template-columns:1fr auto;top:8px;left:8px;right:8px}.ff3d-centerbox{grid-column:1/-1;grid-row:2;justify-self:stretch;max-width:none;order:3}.ff3d-stats{justify-self:end}.ff3d-modebox{padding:8px 10px}.ff3d-subtitle{display:none}.ff3d-bottom{bottom:8px;left:8px;right:8px}.ff3d-weapon,.ff3d-meter,.ff3d-hint{display:none}.ff3d-mobile{display:block}}
+@media(max-width:800px) and (orientation:landscape){#ff3dStage{height:calc(100dvh - 54px);min-height:230px}.ff3d-mobile{height:98px}.ff3d-stick,.ff3d-fire{width:88px;height:88px}.ff3d-stick i{left:24px;top:24px;width:36px;height:36px}}
+@media(max-width:420px) and (orientation:portrait){.ff3d-stats{gap:3px}.ff3d-stat{min-width:48px;padding:4px}.ff3d-stat b{font-size:14px}.ff3d-stat span{font-size:8px}.ff3d-title{font-size:14px}}
+@supports(padding:max(0px)){#ff3dStage{height:calc(100dvh - 72px - env(safe-area-inset-top) - env(safe-area-inset-bottom))}@media(max-width:800px){#ff3dStage{height:calc(100dvh - 64px - env(safe-area-inset-top) - env(safe-area-inset-bottom))}}}
+@media(pointer:coarse){.ff3d-mobile{display:block}}
+</style>
+<style id="ff5room-css">
+#ff5Room{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(90,34,8,.28),rgba(3,4,8,.96) 70%);backdrop-filter:blur(8px);padding:18px}
+#ff5Room.show{display:flex}.ff5-card{width:min(720px,96vw);border:1px solid rgba(255,185,65,.35);border-radius:22px;background:linear-gradient(145deg,rgba(18,16,18,.96),rgba(8,10,15,.96));box-shadow:0 30px 100px rgba(0,0,0,.65);padding:24px;color:#fff}.ff5-title{font-size:clamp(26px,5vw,44px);font-weight:1000;letter-spacing:.04em;text-align:center}.ff5-sub{text-align:center;color:#d9c3b1}.ff5-slots{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:18px 0}.ff5-slot{min-height:92px;border:1px solid rgba(255,255,255,.13);border-radius:14px;background:rgba(255,255,255,.035);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px}.ff5-slot.filled{border-color:rgba(255,178,60,.45);background:rgba(255,132,20,.08)}.ff5-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;background:#241b18;display:grid;place-items:center;font-weight:900;margin-bottom:5px}.ff5-avatar img{width:100%;height:100%;object-fit:cover}.ff5-status{text-align:center;min-height:28px;color:#f1d0b4}.ff5-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.ff5-note{text-align:center;font-size:.82rem;color:#9f9289;margin-top:13px}@media(max-width:650px){.ff5-slots{grid-template-columns:repeat(2,1fr)}.ff5-slot:last-child{grid-column:1/-1}}
+#ff5Intro{position:absolute;inset:0;display:none;z-index:20;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 55%,rgba(255,100,15,.16),rgba(0,0,0,.68));pointer-events:none}.ff5-intro-card{text-align:center;padding:20px 28px;background:rgba(5,6,10,.78);border:1px solid rgba(255,190,80,.35);border-radius:18px;box-shadow:0 20px 70px #000}.ff5-intro-card h2{font-size:clamp(30px,6vw,62px);margin:0;color:#ffd18a;text-shadow:0 0 25px rgba(255,80,10,.6)}.ff5-intro-card p{margin:7px 0 0;color:#fff0dd;font-size:1.1rem}.ff5-locked{opacity:.6}
+</style>
+
+<style id="ff-final-scroll-fix">
+html,body{margin:0!important;width:100%!important;min-width:0!important;max-width:100%!important;overflow-x:hidden!important;}
+body{overflow-y:auto!important;}
+.screen{width:100%!important;max-width:100%!important;min-width:0!important;overflow-x:hidden!important;}
+#game.screen.active{overflow:hidden!important;min-height:100dvh!important;}
+#ff3dStage{width:100%!important;max-width:100%!important;height:calc(100dvh - 72px)!important;min-height:0!important;overflow:hidden!important;margin:0!important;}
+#ff3dCanvas{width:100%!important;height:100%!important;max-width:none!important;display:block!important;}
+#home,#missions,#history,#profile,#achievements,#leaderboard{overflow-x:hidden!important;}
+.ff-modal,.game-overlay,#ff5Room{overflow-y:auto!important;overflow-x:hidden!important;}
+.ff-modal-card,.overlay-box,.ff5-card{max-width:calc(100vw - 24px)!important;box-sizing:border-box!important;}
+@media(max-width:800px){#ff3dStage{height:calc(100dvh - 64px)!important;} }
 </style>
 </head>
 
 <body>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="start-screen">
+    <div class="start-card">
+        <div class="start-title">FIRE & FURY</div>
+        <p class="start-sub">History & Geography enter Arcade Mode</p>
+        <p class="start-desc">🌋 Volcanoes • 🚀 Mysorean Rockets</p>
+        <button class="play-button" onclick="openAuthGate()">
+            🔐 LOGIN / SIGN UP
+        </button>
+        <p style="margin-top:18px;color:#c9a88a;font-size:14px;">
+            Create a FIRE &amp; FURY account or log in to start missions
+        </p>
+    </div>
+</div>
 
 <header>
 
@@ -606,11 +853,15 @@ footer{
     </div>
 
     <div class="score-pill">
-        🏆 <span id="headerScore">0</span> pts
+        🏆 <span id="headerScore">0</span> total pts · <span id="headerMatches">0</span> matches
     </div>
 
 </header>
 
+<div id="soundBar" style="position:sticky;top:0;z-index:40;display:flex;justify-content:center;gap:8px;align-items:center;padding:7px 10px;background:rgba(10,7,5,.92);border-bottom:1px solid #5d2b16;backdrop-filter:blur(8px);">
+  <button class="btn" id="soundToggle" type="button" onclick="toggleSound()">🔊 SOUND ON</button>
+  <label style="display:flex;align-items:center;gap:6px;color:#f5d7bd;font-size:.9rem;">VOL <input id="soundVolume" type="range" min="0" max="1" step="0.05" value="0.75" oninput="setMasterVolume(this.value)"></label>
+</div>
 
 <!-- HOME -->
 
@@ -630,6 +881,22 @@ footer{
 
 </div>
 
+
+<svg class="hero-art" viewBox="0 0 760 300" role="img" aria-label="Illustration of a glowing volcano and a Mysorean rocket flying across a night sky" xmlns="http://www.w3.org/2000/svg">
+ <defs><linearGradient id="skyGlow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4a1a12"/><stop offset="1" stop-color="#160806"/></linearGradient><linearGradient id="mountain" x1="0" y1="0" x2="0.7" y2="1"><stop stop-color="#6b3020"/><stop offset="1" stop-color="#1c0b09"/></linearGradient><linearGradient id="magma" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffe27a"/><stop offset=".45" stop-color="#ff7824"/><stop offset="1" stop-color="#b51e0b"/></linearGradient></defs>
+ <ellipse cx="380" cy="265" rx="330" ry="24" fill="#f45a16" opacity=".13"/>
+ <path d="M35 253 Q115 205 185 238 L278 108 Q300 76 321 113 L429 252Z" fill="#2b1110" stroke="#874021" stroke-width="2"/>
+ <path d="M188 238 L278 108 Q300 76 321 113 L395 238 Q341 221 308 238 Q265 218 230 243Z" fill="url(#mountain)"/>
+ <path d="M268 126 Q299 143 329 124 L353 167 Q317 151 295 169 Q280 151 253 165Z" fill="#f5a13a" opacity=".85"/>
+ <path class="lava-flow" d="M285 128 Q300 153 289 179 L272 211 Q290 225 279 249 L260 261 Q248 239 258 218 L272 183 Q277 155 268 137Z" fill="url(#magma)"/>
+ <path d="M0 264 Q90 242 165 260 Q250 244 335 264 Q435 240 520 261 Q650 239 760 261 L760 300 L0 300Z" fill="#120807"/>
+ <path d="M0 274 Q160 254 260 274 T520 273 T760 270" fill="none" stroke="#e34a17" stroke-width="3" opacity=".5"/>
+ <g fill="#ffca69"><circle class="ember" cx="215" cy="93" r="3"/><circle class="ember" cx="367" cy="77" r="2.5"/><circle class="ember" cx="450" cy="128" r="2"/><circle class="ember" cx="150" cy="154" r="2"/><circle class="ember" cx="335" cy="42" r="2"/></g>
+ <g transform="translate(490 75) rotate(-19)"><path d="M-70 0 L-27 -11 L30 -8 L57 0 L30 8 L-27 11Z" fill="#d7dce0" stroke="#fff0c7" stroke-width="2"/><path d="M-18 -10 L-2 -26 L12 -10Z" fill="#9caab4"/><path d="M-18 10 L-2 26 L12 10Z" fill="#9caab4"/><path d="M-70 0 L-91 -7 L-82 0 L-91 7Z" fill="#f5a23b"/><path class="rocket-flame" d="M-70 -5 Q-99 0 -119 0 Q-98 7 -70 5Z" fill="url(#magma)"/><path d="M5 -7 L30 0 L5 7Z" fill="#a83c1d"/><circle cx="25" cy="0" r="3" fill="#ffcf69"/></g>
+ <path d="M435 48 l6 12 13 2 -10 8 2 13 -11 -7 -11 7 2 -13 -10 -8 13 -2Z" fill="#ffd878" opacity=".8"/>
+ <path d="M600 174 l4 8 9 1 -7 6 2 9 -8 -5 -8 5 2 -9 -7 -6 9 -1Z" fill="#ffad49" opacity=".7"/>
+</svg>
+
 <p class="subtitle">
 
     HISTORY AND GEOGRAPHY HAS ENTERED ARCADE MODE.
@@ -644,7 +911,7 @@ footer{
 
     <button
         class="play-button"
-        onclick="show('missions')">
+        onclick="openGameArea()">
 
         🎮 PLAY NOW
 
@@ -654,8 +921,18 @@ footer{
         Enter the FIRE & FURY arcade
     </p>
 
+    <div class="home-tools" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px"><button class="btn" id="leaderboardToggle" type="button" aria-expanded="false" onclick="toggleLeaderboard()">🏆 View Hall of Fame</button><button class="btn" id="achievementsToggle" type="button" aria-expanded="false" onclick="toggleAchievements()">🎖️ My Achievements</button><button class="btn" id="profileToggle" type="button" aria-expanded="false" onclick="toggleProfile()">👤 My Profile</button><button class="btn" type="button" onclick="openMultiplayer()">👥 Multiplayer</button></div>
+<div id="leaderboardPanel" class="notice" aria-live="polite" hidden></div>
+<div id="achievementsPanel" class="notice" aria-live="polite" hidden></div>
+<div id="profilePanel" class="notice" aria-live="polite" hidden></div>
+
 </div>
 
+
+<div class="notice" style="border-color:#b85d22">
+    <b>🔥 IMPROVED ARCADE BUILD</b><br>
+    Local prerecorded audio • persistent profile avatar • online career totals • stronger multiplayer recovery
+</div>
 
 <div class="notice">
 
@@ -738,6 +1015,9 @@ footer{
 </div>
 
 
+<div id="playerHistoryPanel" class="notice" aria-live="polite"></div>
+
+
 <footer>
 
     FIRE & FURY • A Demonstration of the Power of Volcanoes
@@ -782,9 +1062,9 @@ footer{
 
     <p>
 
-        Move across the volcanic field.
-        Collect eruption materials and
-        avoid dangerous rocks.
+        Enter a living volcanic world.
+        Gather rare materials, cross shifting
+        danger zones and survive escalating eruptions.
 
     </p>
 
@@ -816,9 +1096,9 @@ footer{
 
     <p>
 
-        Pilot your Mysorean rocket.
-        Destroy targets and collect
-        historical scrolls.
+        Enter the battlefield. Fight British forces
+        using Mysorean rockets with different
+        powers, tactics and visual skins.
 
     </p>
 
@@ -831,7 +1111,7 @@ footer{
 
     <button
         class="btn gold"
-        onclick="startGame('rocket')">
+        onclick="openFivePlayerRoom()">
 
         PLAY 🚀
 
@@ -850,9 +1130,9 @@ footer{
 
     <p>
 
-        The volcanoes and rockets have
-        decided to cooperate. Unfortunately
-        for you.
+        The battlefield and the volcano become one.
+        Survive a dynamic assault where both
+        worlds attack you at once.
 
     </p>
 
@@ -863,13 +1143,13 @@ footer{
 
     </p>
 
-    <button
-        class="btn gold"
-        onclick="startGame('final')">
-
-        PLAY 🔥
-
-    </button>
+    <div class="ff-avatar-box" style="margin:14px 0;text-align:center">
+        <b>🎭 FINAL FURY PLAYER AVATAR</b>
+        <p style="margin:7px 0;color:#e8c9b5">Final Fury uses your current FIRE &amp; FURY profile avatar.</p>
+        <div id="avatarPreview" aria-live="polite" style="display:flex;justify-content:center;align-items:center;min-height:88px;margin:8px 0">Current avatar: 🌋</div>
+        <button class="btn" type="button" onclick="useCurrentProfileAvatarForFinal()">🔥 USE MY PROFILE AVATAR</button>
+    </div>
+    <button class="btn gold" onclick="startGame('final')">PLAY 🔥</button>
 
 </div>
 
@@ -958,39 +1238,58 @@ footer{
 </div>
 
 
+<div id="mpBattleBar" aria-live="polite"></div>
+
+
+<div id="ff5Room" aria-modal="true" role="dialog">
+  <div class="ff5-card">
+    <div class="ff5-title">⚔️ MYSOREAN WAR ROOM</div>
+    <div class="ff5-sub">Five warriors. One battlefield. One synchronized assault.</div>
+    <div id="ff5Mission" class="ff5-status" style="margin-top:10px">Rocket Battle only: join the 5-player matchmaking queue.</div>
+    <div id="ff5Slots" class="ff5-slots"></div>
+    <div id="ff5Status" class="ff5-status">Waiting for warriors…</div>
+    <div class="ff5-actions"><button id="ff5Start" class="btn gold" type="button" disabled>🔥 START ASSAULT</button><button class="btn" type="button" onclick="leaveFiveRoom()">Leave Room</button></div>
+    <div class="ff5-note">The battle begins at the Mysorean camp. All five players leave the base only after Tipu Sultan gives the order.</div>
+  </div>
+</div>
+
+<div id="ff3dStage" hidden>
+ <canvas id="ff3dCanvas"></canvas>
+ <div id="ff5Intro"><div class="ff5-intro-card"><h2 id="ff5IntroTitle">MYSOREAN CAMP</h2><p id="ff5IntroText">Awaiting Tipu Sultan…</p></div></div>
+ <div id="ff3dHud">
+  <div class="ff3d-top">
+   <div class="ff3d-modebox"><span class="ff3d-title" id="ff3dMode">FIRE &amp; FURY</span><span class="ff3d-subtitle" id="ff3dSubtitle">3D battlefield</span></div>
+   <div class="ff3d-centerbox"><div class="ff3d-objective" id="ff3dObjective">Loading battlefield...</div><div class="ff3d-phase" id="ff3dPhase">Prepare for battle</div></div>
+   <div class="ff3d-stats"><div class="ff3d-stat"><b id="ff3dScore">0</b><span>Score</span></div><div class="ff3d-stat"><b id="ff3dLives">3</b><span>Lives</span></div><div class="ff3d-stat"><b id="ff3dCombo">0</b><span>Combo</span></div><div class="ff3d-stat"><b id="ff3dTime">0</b><span>Time</span></div></div>
+  </div>
+  <div class="ff3d-cross"></div>
+  <div class="ff3d-bottom">
+   <div class="ff3d-panel ff3d-weapon" id="ff3dWeaponPanel"><strong>🚀 ROCKET LOADOUT</strong><div class="ff3d-weapon-list"><span id="w1">1 🔥 Fury</span><span id="w2">2 💥 Barrage</span><span id="w3">3 ⚡ Storm</span><span id="w4">4 ☄️ Meteor</span></div></div>
+   <div class="ff3d-panel ff3d-meter" id="ff3dMeterPanel"><div class="ff3d-meter-label"><span id="ff3dMeterName">🔥 Fury</span><b id="ff3dMeterValue">0%</b></div><div class="ff3d-meter-track"><div class="ff3d-meter-fill" id="ff3dMeterFill"></div></div></div>
+  </div>
+  <div class="ff3d-hint" id="ff3dHint">WASD / arrows move · mouse aim · click or SPACE fire</div>
+  <div class="ff3d-mobile"><div class="ff3d-stick" id="ff3dStick"><i id="ff3dThumb"></i></div><button class="ff3d-fire" id="ff3dFire">🔥 FIRE</button></div>
+ </div>
+</div>
+
 <canvas
     id="gameCanvas"
     width="960"
     height="600">
 </canvas>
+<div id="comboBanner" class="combo-banner" role="status" aria-live="polite"></div>
+<div id="furyModePanel" class="fury-mode-panel" aria-live="polite">🌋 FURY MODE ACTIVE <span id="furyModeSeconds">8</span>s<div class="fury-meter"><div id="furyMeterFill" class="fury-meter-fill"></div></div></div>
+<div id="modeBattleHud" class="mode-battle-hud" aria-live="polite"></div>
 
 
-<div class="controls">
-
-    <button
-        class="control-btn"
-        id="leftBtn">
-
-        ◀
-
-    </button>
-
-    <button
-        class="control-btn"
-        id="fireBtn">
-
-        🔥
-
-    </button>
-
-    <button
-        class="control-btn"
-        id="rightBtn">
-
-        ▶
-
-    </button>
-
+<div class="controls" aria-label="Mobile game HUD">
+    <button class="hud-fire" id="fireBtn" aria-label="Fire">🔥<span>FIRE</span></button>
+    <div class="hud-joystick" id="moveJoystick" aria-label="Move left or right" role="application">
+        <div class="hud-joystick-track"></div>
+        <div class="hud-joystick-thumb" id="joystickThumb"></div>
+        <span class="joy-left">◀</span>
+        <span class="joy-right">▶</span>
+    </div>
 </div>
 
 
@@ -1268,6 +1567,8 @@ Your real models are the exhibition layer.
     </b>
 
 </div>
+<div class="stat">CAREER TOTAL <b id="resultCareerTotal">0</b></div>
+<div class="stat">MATCHES PLAYED <b id="resultMatchesTotal">0</b></div>
 
 </div>
 
@@ -1358,6 +1659,149 @@ const ctx =
 
 
 /* =====================================================
+   FIRE & FURY AUDIO ENGINE — prerecorded assets
+===================================================== */
+const AUDIO_ASSETS = {
+  menu: 'sounds/menu-bgm.mp3',
+  battle: 'sounds/battle-bgm.mp3',
+  fury: 'sounds/final-fury-bgm.mp3',
+  launch: 'sounds/rocket-launch.mp3',
+  explosion: 'sounds/explosion.mp3',
+  rock: 'sounds/rock-destruction.mp3',
+  victory: 'sounds/victory.mp3',
+  defeat: 'sounds/defeat.mp3'
+};
+// Improved build: keep ALL game audio local to the SPCK sounds/ folder.
+// This avoids a network dependency for combo/power sounds.
+const LOCAL_SFX = {
+  combo: AUDIO_ASSETS.explosion,
+  fury: AUDIO_ASSETS.launch
+};
+const audioBank = {};
+let soundEnabled = true;
+let masterVolume = 0.75;
+let currentBgm = null;
+let currentBgmKind = null;
+let audioUnlocked = false;
+
+function makeAudio(src, loop=false){
+  const a = new Audio();
+  a.src = src;
+  a.preload = 'auto';
+  a.loop = loop;
+  a.volume = masterVolume;
+  a.addEventListener('error',()=>console.error('FIRE & FURY audio asset failed:',src));
+  return a;
+}
+
+function initAudio(){
+  if(audioUnlocked) return;
+  audioUnlocked = true;
+  audioBank.menu = makeAudio(AUDIO_ASSETS.menu,true);
+  audioBank.battle = makeAudio(AUDIO_ASSETS.battle,true);
+  audioBank.fury = makeAudio(AUDIO_ASSETS.fury,true);
+  audioBank.launch = makeAudio(AUDIO_ASSETS.launch);
+  audioBank.explosion = makeAudio(AUDIO_ASSETS.explosion);
+  audioBank.rock = makeAudio(AUDIO_ASSETS.rock);
+  audioBank.victory = makeAudio(AUDIO_ASSETS.victory);
+  audioBank.defeat = makeAudio(AUDIO_ASSETS.defeat);
+  audioBank.combo = makeAudio(LOCAL_SFX.combo);
+  audioBank.furySfx = makeAudio(LOCAL_SFX.fury);
+}
+
+function playSfx(name){
+  if(!soundEnabled) return;
+  initAudio();
+  const a = audioBank[name];
+  if(!a) return;
+  try{
+    a.pause();
+    a.currentTime = 0;
+    a.volume = masterVolume;
+    const p = a.play();
+    if(p && p.catch) p.catch(()=>{});
+  }catch(e){}
+}
+
+/* BGM is deliberately single-instance: exactly one track may play at a time. */
+function stopAllBgm(){
+  if(!audioUnlocked) return;
+  ['menu','battle','fury'].forEach(kind=>{
+    const a = audioBank[kind];
+    if(!a) return;
+    try{
+      a.pause();
+      a.currentTime = 0;
+    }catch(e){}
+  });
+  currentBgm = null;
+  currentBgmKind = null;
+}
+
+function playBgm(kind){
+  if(!soundEnabled) return;
+  initAudio();
+  const targetKind = (kind==='battle' || kind==='fury' || kind==='menu') ? kind : 'menu';
+  const target = audioBank[targetKind];
+  if(!target) return;
+
+  /* If the requested track is already the only active track, leave it alone. */
+  if(currentBgm === target && !target.paused && currentBgmKind === targetKind) return;
+
+  /* Hard-stop every BGM before starting the requested one. */
+  stopAllBgm();
+  currentBgm = target;
+  currentBgmKind = targetKind;
+  target.loop = true;
+  target.volume = masterVolume;
+  try{
+    const p = target.play();
+    if(p && p.catch) p.catch(()=>{});
+  }catch(e){}
+}
+
+function stopBgm(){
+  stopAllBgm();
+}
+
+function syncBgmForScreen(){
+  if(!soundEnabled) return;
+  const active = document.querySelector('.screen.active');
+  const id = active ? active.id : '';
+  if(id === 'results'){
+    stopBgm();
+    return;
+  }
+  if(id === 'game'){
+    playBgm(gameType === 'final' ? 'fury' : 'battle');
+    return;
+  }
+  playBgm('menu');
+}
+
+function toggleSound(){
+  soundEnabled = !soundEnabled;
+  const b = document.getElementById('soundToggle');
+  if(b) b.textContent = soundEnabled ? '🔊 SOUND ON' : '🔇 SOUND OFF';
+  if(soundEnabled){
+    initAudio();
+    syncBgmForScreen();
+  }else{
+    stopBgm();
+  }
+}
+
+function setMasterVolume(v){
+  masterVolume = Math.max(0,Math.min(1,Number(v)||0));
+  Object.values(audioBank).forEach(a=>{a.volume=masterVolume;});
+}
+
+/* Unlock audio objects on the first user gesture, but NEVER start menu BGM here.
+   Starting BGM here was the source of the cross-screen/mixed-BGM regression. */
+document.addEventListener('pointerdown',()=>{initAudio();},{once:true,passive:true});
+document.addEventListener('keydown',()=>{initAudio();},{once:true,passive:true});
+
+/* =====================================================
    GAME STATE
 ===================================================== */
 
@@ -1382,6 +1826,9 @@ let lastTime = 0;
 let spawnTimer = 0;
 
 let fireCooldown = 0;
+let screenShake = 0;
+let explosions = [];
+let eruptionTimer = 0;
 
 
 /*
@@ -1414,6 +1861,22 @@ let particles = [];
 
 let floatingTexts = [];
 
+/* NEXT-GENERATION MODE STATE */
+let modeRunStats = {kills:0,crystals:0,perfect:true,rocketType:0,room5:false,locked:false};
+let rocketLoadoutIndex = 0;
+let enemyWave = 1;
+let modeElapsed = 0;
+let modeEventTimer = 0;
+let volcanoHeat = 0;
+let finalChaos = 0;
+const ROCKET_LOADOUTS = [
+  {name:'FURY',icon:'🔥',speed:760,value:220,cooldown:.22},
+  {name:'BARRAGE',icon:'💥',speed:640,value:150,cooldown:.38,spread:1},
+  {name:'STORM',icon:'⚡',speed:900,value:180,cooldown:.16},
+  {name:'METEOR',icon:'☄️',speed:520,value:420,cooldown:.55,heavy:true}
+];
+
+
 
 /* =====================================================
    SCREEN CONTROL
@@ -1432,7 +1895,400 @@ function show(id){
         .classList.add("active");
 
     window.scrollTo(0,0);
+    syncBgmForScreen();
+}
 
+
+let activePlayer = "Guest";
+let finalAvatar = "🌋";
+let finalAvatarImage = null;
+const FINAL_AVATARS = new Set(["🌋","🚀","🦊","🐉","🦁","🤖","👩‍🚀","🛡️","🐯","⭐"]);
+const PLAYER_STORE_KEY = "fireFury_playerProfiles_v1";
+const FURY_AVATAR_PRESETS = [
+  {value:"🌋",name:"Volcano Guardian"},{value:"🚀",name:"Rocket Ace"},{value:"🐉",name:"Dragon"},
+  {value:"🦁",name:"Lion"},{value:"🐯",name:"Tiger"},{value:"🦊",name:"Fox"},{value:"🤖",name:"Robot"},
+  {value:"👩‍🚀",name:"Space Explorer"},{value:"🛡️",name:"Warrior"},{value:"⭐",name:"Star Hero"},{value:"🔥",name:"Fury Flame"},{value:"⚡",name:"Thunder"}
+];
+
+function isAvatarImage(value){ return /^https?:\/\//i.test(String(value||"")); }
+function avatarMarkup(value, size=56){
+  const v=String(value||"🌋");
+  if(isAvatarImage(v)) return `<img class="ff-avatar-img" src="${escapeHistoryText(v)}" alt="Player avatar" width="${size}" height="${size}" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🌋',className:'ff-avatar-fallback'}))">`;
+  return `<span class="ff-avatar-fallback" style="font-size:${Math.max(1.1,size/28)}rem">${escapeHistoryText(v)}</span>`;
+}
+function loadFinalAvatarImage(value){
+  finalAvatarImage=null;
+  if(!isAvatarImage(value)) return;
+  const img=new Image();
+  img.onload=()=>{ finalAvatarImage=img; if(typeof draw==='function') draw(); };
+  img.onerror=()=>{ finalAvatarImage=null; };
+  img.src=value;
+}
+
+function setPlayerAvatar(value, opts={sync:true}){
+  const clean=String(value||"").trim();
+  if(!clean) return;
+  if(isAvatarImage(clean)){
+    finalAvatar=clean.slice(0,1200);
+  }else{
+    finalAvatar=Array.from(clean).slice(0,2).join("");
+  }
+  loadFinalAvatarImage(finalAvatar);
+  const profiles=safeReadProfiles();
+  const profile=profiles[activePlayer]||{runs:[]};
+  profile.avatar=finalAvatar;
+  profiles[activePlayer]=profile;
+  safeWriteProfiles(profiles);
+  const status=document.getElementById("accountAvatarStatus");
+  if(status) status.innerHTML=isAvatarImage(finalAvatar) ? 'Current avatar: <span class="ff-avatar-inline">'+avatarMarkup(finalAvatar,44)+'</span>' : 'Current avatar: <span style="font-size:1.5em">'+escapeHistoryText(finalAvatar)+'</span>';
+  const preview=document.getElementById("avatarPreview");
+  if(preview) preview.innerHTML=isAvatarImage(finalAvatar) ? 'Current avatar: '+avatarMarkup(finalAvatar,72) : 'Current avatar: '+escapeHistoryText(finalAvatar);
+  const custom=document.getElementById("accountCustomAvatarInput");
+  if(custom && !isAvatarImage(finalAvatar)) custom.value="";
+  if(opts.sync!==false && ffSupabase && ffUser && !ffUser.is_anonymous){
+    ffSupabase.from("profiles").upsert({id:ffUser.id,username:activePlayer,avatar:finalAvatar},{onConflict:"id"}).catch(e=>console.warn("Avatar sync",e));
+  }
+  renderPlayerHistory();
+}
+
+async function uploadCustomAvatar(input){
+  const file=input?.files?.[0];
+  if(!file) return;
+  if(!ffUser?.id || ffUser.is_anonymous){
+    setAuthStatus("🔐 Please create or log in to a permanent account before uploading a custom image avatar.");
+    if(input) input.value="";
+    return;
+  }
+  if(!/^image\/(png|jpe?g|webp|gif)$/i.test(file.type)){
+    setAvatarUploadStatus("❌ Please choose a PNG, JPG, WEBP, or GIF image."); if(input) input.value=""; return;
+  }
+  if(file.size>6*1024*1024){
+    setAvatarUploadStatus("❌ Avatar image must be 6 MB or smaller."); if(input) input.value=""; return;
+  }
+  try{
+    setAvatarUploadStatus("⏳ Preparing your avatar…");
+    const blob=await resizeAvatarImage(file,512);
+    const ext=blob.type==='image/webp'?'webp':'jpg';
+    const path=`${ffUser.id}/avatar.${ext}`;
+    const {error:upErr}=await ffSupabase.storage.from("avatars").upload(path,blob,{contentType:blob.type,cacheControl:"3600",upsert:true});
+    if(upErr) throw upErr;
+    const {data:urlData}=ffSupabase.storage.from("avatars").getPublicUrl(path);
+    const publicUrl=(urlData?.publicUrl||"")+`?v=${Date.now()}`;
+    const {error:profileError}=await ffSupabase.from("profiles").upsert({id:ffUser.id,username:activePlayer,avatar:publicUrl},{onConflict:"id"});
+    if(profileError) throw profileError;
+    setPlayerAvatar(publicUrl,{sync:false});
+    setAvatarUploadStatus("✅ Avatar changed successfully. Your new image is now your FIRE & FURY avatar everywhere.");
+  }catch(e){
+    console.error("Avatar upload",e);
+    setAvatarUploadStatus("❌ Avatar upload failed: "+(e?.message||String(e)));
+  }finally{ if(input) input.value=""; }
+}
+function setAvatarUploadStatus(message){ const el=document.getElementById("avatarUploadStatus"); if(el) el.textContent=message; }
+function resizeAvatarImage(file,maxSide){
+  return new Promise((resolve,reject)=>{
+    const url=URL.createObjectURL(file), img=new Image();
+    img.onload=()=>{
+      const scale=Math.min(1,maxSide/Math.max(img.width,img.height));
+      const w=Math.max(1,Math.round(img.width*scale)), h=Math.max(1,Math.round(img.height*scale));
+      const c=document.createElement("canvas"); c.width=w; c.height=h;
+      const ctx=c.getContext("2d"); ctx.drawImage(img,0,0,w,h);
+      c.toBlob(blob=>{URL.revokeObjectURL(url); blob?resolve(blob):reject(new Error("Could not prepare image"));},"image/webp",0.86);
+    };
+    img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error("Could not read image"));};
+    img.src=url;
+  });
+}
+
+function setFinalAvatar(value){ setPlayerAvatar(value); }
+function useCurrentProfileAvatarForFinal(){
+  const profiles=safeReadProfiles();
+  const profile=profiles[activePlayer];
+  const avatar=profile?.avatar || finalAvatar || "🌋";
+  setPlayerAvatar(avatar,{sync:false});
+  const preview=document.getElementById("avatarPreview");
+  if(preview) preview.innerHTML=isAvatarImage(finalAvatar)
+    ? "Current avatar: "+avatarMarkup(finalAvatar,76)
+    : 'Current avatar: <span style="font-size:2.2rem">'+escapeHistoryText(finalAvatar)+'</span>';
+}
+
+function safeReadProfiles(){
+    try {
+        const raw = localStorage.getItem(PLAYER_STORE_KEY);
+        const parsed = raw ? JSON.parse(raw) : {};
+        return parsed && typeof parsed === "object" ? parsed : {};
+    } catch (error) { return {}; }
+}
+
+function safeWriteProfiles(profiles){
+    try { localStorage.setItem(PLAYER_STORE_KEY, JSON.stringify(profiles)); return true; }
+    catch (error) { return false; }
+}
+
+function toggleLeaderboard(){
+    const panel = document.getElementById("leaderboardPanel");
+    const button = document.getElementById("leaderboardToggle");
+    if (!panel || !button) return;
+    const opening = panel.hidden;
+    if (opening) renderLeaderboard();
+    panel.hidden = !opening;
+    panel.style.display = opening ? "block" : "none";
+    button.setAttribute("aria-expanded", String(opening));
+    button.textContent = opening ? "🏆 Hide Hall of Fame" : "🏆 View Hall of Fame";
+}
+
+function toggleAchievements(){
+    const panel = document.getElementById("achievementsPanel");
+    const button = document.getElementById("achievementsToggle");
+    if (!panel || !button) return;
+    const opening = panel.hidden;
+    if (opening) renderAchievements();
+    panel.hidden = !opening;
+    panel.style.display = opening ? "block" : "none";
+    button.setAttribute("aria-expanded", String(opening));
+    button.textContent = opening ? "🎖️ Hide Achievements" : "🎖️ My Achievements";
+}
+
+function showLocalDuelInfo(){ openMultiplayer(); }
+
+function toggleProfile(){
+    const panel = document.getElementById("profilePanel");
+    const button = document.getElementById("profileToggle");
+    if (!panel || !button) return;
+    const opening = panel.hidden;
+    if (opening) renderProfile();
+    panel.hidden = !opening;
+    panel.style.display = opening ? "block" : "none";
+    button.setAttribute("aria-expanded", String(opening));
+    button.textContent = opening ? "👤 Hide Profile" : "👤 My Profile";
+}
+
+function renderProfile(){
+    const host = document.getElementById("profilePanel");
+    if (!host) return;
+    const profiles = safeReadProfiles();
+    const profile = profiles[activePlayer] || { runs: [] };
+    const runs = Array.isArray(profile.runs) ? profile.runs : [];
+    const totalPoints = runs.reduce((sum, run) => sum + (Number(run.score) || 0), 0);
+    const bestScore = runs.reduce((best, run) => Math.max(best, Number(run.score) || 0), 0);
+    const bestCombo = runs.reduce((best, run) => Math.max(best, Number(run.bestCombo) || 0), 0);
+    const avatar=profile.avatar||"🌋";
+    host.innerHTML = `<h3>👤 ${escapeHistoryText(activePlayer)}’s Player Profile</h3><p>Your username and avatar are saved with your FIRE &amp; FURY account.</p><div class="ff-profile-identity"><div class="ff-profile-avatar">${avatarMarkup(avatar,96)}</div><div><div class="ff-profile-username">${escapeHistoryText(activePlayer)}</div><div class="ff-profile-sub">${ffUser?.is_anonymous ? "Guest account · temporary 13-hour session" : "Permanent FIRE & FURY account"}</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px"><div class="notice"><strong>🎮 Games</strong><br><span style="font-size:1.5em">${runs.length}</span></div><div class="notice"><strong>🏆 Best score</strong><br><span style="font-size:1.5em">${bestScore}</span></div><div class="notice"><strong>⭐ Total points</strong><br><span style="font-size:1.5em">${totalPoints}</span></div><div class="notice"><strong>🔥 Best combo</strong><br><span style="font-size:1.5em">${bestCombo}</span></div></div><p>Your username and custom avatar sync through Supabase.</p><div class="ff-avatar-box"><h4 style="margin:8px 0">🖼️ Your Custom Image Avatar</h4><p style="margin:5px 0 10px">Upload a square or portrait photo. FIRE &amp; FURY automatically resizes it for the profile, Hall of Fame, multiplayer and Final Fury.</p><input id="accountAvatarFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" onchange="uploadCustomAvatar(this)" style="display:none"><button class="btn" type="button" onclick="document.getElementById('accountAvatarFile')?.click()" ${ffUser?.is_anonymous ? 'disabled title="Create a permanent account to change your avatar"' : ''}>🖼️ Change Avatar</button><p id="avatarUploadStatus" style="margin:8px 0;font-size:.9em">${ffUser?.is_anonymous ? "Log in or create a permanent account to change your avatar." : "Choose a new PNG, JPG, WEBP or GIF image. Your new avatar replaces the current one everywhere."}</p><p id="accountAvatarStatus" style="margin:10px 0;font-size:.9em">Current avatar: ${isAvatarImage(finalAvatar)?avatarMarkup(finalAvatar,44):'<span style="font-size:1.5em">'+escapeHistoryText(finalAvatar)+'</span>'}</p></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn" type="button" onclick="switchPlayer()">Switch player</button><button class="btn" type="button" style="border-color:#d9534f;color:#ffb5ad" onclick="deleteFuryAccount()">🗑️ Delete my account</button>${ffUser ? '<button class="btn" type="button" onclick="logoutFuryAccount()">🚪 Log out</button>' : ''}</div><p style="font-size:.88em;color:#e8c9b5">🚪 Log out only ends the current session. 🗑️ Delete my account permanently removes the FIRE &amp; FURY account, online profile, scores, match data and avatar.</p>`;
+}
+
+const FURY_ACHIEVEMENT_CATALOG = [
+  // TIER 1 — the original five
+  {tier:1,id:"first_spark",icon:"🌱",title:"First Spark",description:"Complete your first game",test:m=>m.games>=1},
+  {tier:1,id:"regular_player",icon:"🎮",title:"Regular Player",description:"Complete 5 games",test:m=>m.games>=5},
+  {tier:1,id:"score_chaser",icon:"🔥",title:"Score Chaser",description:"Reach 1,000 points in one game",test:m=>m.bestScore>=1000},
+  {tier:1,id:"high_scorer",icon:"💎",title:"High Scorer",description:"Reach 5,000 points in one game",test:m=>m.bestScore>=5000},
+  {tier:1,id:"point_collector",icon:"🌟",title:"Point Collector",description:"Earn 10,000 total points",test:m=>m.totalPoints>=10000},
+
+  // TIER 2 — starts reasonable, then becomes deliberately vicious
+  {tier:2,id:"battlefield_baptism",icon:"⚔️",title:"Battlefield Baptism",description:"Complete 10 Rocket Battles",test:m=>m.missions.rocket>=10},
+  {tier:2,id:"volcanic_explorer",icon:"🌋",title:"Volcanic Explorer",description:"Complete 10 Volcano Rush missions",test:m=>m.missions.volcano>=10},
+  {tier:2,id:"fury_forged",icon:"🔥",title:"Fury Forged",description:"Complete 5 Final Fury missions",test:m=>m.missions.final>=5},
+  {tier:2,id:"combo_master",icon:"💥",title:"Combo Master",description:"Reach a 25-hit combo",test:m=>m.bestCombo>=25},
+  {tier:2,id:"deadeye",icon:"🎯",title:"Deadeye",description:"Destroy 50 battlefield targets",test:m=>m.rocketKills>=50},
+  {tier:2,id:"no_room_for_error",icon:"☠️",title:"No Room For Error",description:"Complete a game without losing a life",test:m=>m.perfectRuns>=1},
+
+  // TIER 3 — elite mastery
+  {tier:3,id:"rocket_warlord",icon:"🚀",title:"Rocket Warlord",description:"Reach a 50-hit combo",test:m=>m.bestCombo>=50},
+  {tier:3,id:"inferno_runner",icon:"🌋",title:"Inferno Runner",description:"Complete 25 Volcano Rush missions",test:m=>m.missions.volcano>=25},
+  {tier:3,id:"iron_sky",icon:"🛡️",title:"Iron Sky",description:"Win 25 Rocket Battles without losing a life",test:m=>m.rocketPerfect>=25},
+  {tier:3,id:"fury_survivor",icon:"💀",title:"Fury Survivor",description:"Complete 20 Final Fury missions",test:m=>m.missions.final>=20},
+  {tier:3,id:"point_titan",icon:"👑",title:"Point Titan",description:"Earn 100,000 total points",test:m=>m.totalPoints>=100000},
+  {tier:3,id:"last_stand",icon:"☄️",title:"Last Stand",description:"Finish a Final Fury run with exactly 1 life remaining",test:m=>m.finalOneLife>=1},
+
+  // TIER 4 — intentionally extreme endgame
+  {tier:4,id:"fury_ascendant",icon:"🔥",title:"Fury Ascendant",description:"Reach a 100-hit combo",test:m=>m.bestCombo>=100},
+  {tier:4,id:"three_worlds",icon:"🌌",title:"Three Worlds",description:"Complete 100 missions across all three modes",test:m=>m.games>=100 && m.missions.volcano>=20 && m.missions.rocket>=20 && m.missions.final>=20},
+  {tier:4,id:"untouchable",icon:"👁️",title:"Untouchable",description:"Complete 10 perfect Final Fury runs",test:m=>m.finalPerfect>=10},
+  {tier:4,id:"mysores_fury",icon:"👑",title:"Mysore's Fury",description:"Reach 250,000 total points",test:m=>m.totalPoints>=250000},
+  {tier:4,id:"impossible_fury",icon:"☠️",title:"Impossible Fury",description:"Reach 150-hit combo and finish a perfect Final Fury run",test:m=>m.bestCombo>=150 && m.finalPerfect>=1}
+];
+
+function achievementTierUnlocked(tier,m){
+  if(tier<=1) return true;
+  const prior=FURY_ACHIEVEMENT_CATALOG.filter(a=>a.tier===tier-1);
+  return prior.length>0 && prior.every(a=>a.test(m));
+}
+
+function getAchievementMetrics(){
+  const profiles=safeReadProfiles();
+  const profile=profiles[activePlayer]||{runs:[]};
+  const runs=Array.isArray(profile.runs)?profile.runs:[];
+  const missions={volcano:0,rocket:0,final:0};
+  let rocketKills=0,perfectRuns=0,rocketPerfect=0,finalOneLife=0,finalPerfect=0;
+  runs.forEach(r=>{
+    if(Object.prototype.hasOwnProperty.call(missions,r.mode)) missions[r.mode]++;
+    rocketKills += Number(r.rocketKills)||0;
+    if(r.perfect) perfectRuns++;
+    if(r.mode==='rocket' && r.perfect) rocketPerfect++;
+    if(r.mode==='final' && Number(r.endLives)===1) finalOneLife++;
+    if(r.mode==='final' && r.perfect) finalPerfect++;
+  });
+  return {
+    games:runs.length,
+    bestScore:runs.reduce((b,r)=>Math.max(b,Number(r.score)||0),0),
+    totalPoints:runs.reduce((t,r)=>t+(Number(r.score)||0),0),
+    bestCombo:runs.reduce((b,r)=>Math.max(b,Number(r.bestCombo)||0),0),
+    missions,
+    rocketKills,perfectRuns,rocketPerfect,finalOneLife,finalPerfect,
+    multiplayer:runs.filter(r=>r.multiplayer===true).length
+  };
+}
+
+function renderAchievements(){
+  const host=document.getElementById("achievementsPanel");
+  if(!host) return;
+  const m=getAchievementMetrics();
+  const tiers=[1,2,3,4];
+  const sections=tiers.map(tier=>{
+    const available=achievementTierUnlocked(tier,m);
+    const list=FURY_ACHIEVEMENT_CATALOG.filter(a=>a.tier===tier);
+    const cards=list.map(a=>{
+      const earned=!!a.test(m);
+      const locked=!available && !earned;
+      return `<div style="padding:12px;border:1px solid rgba(255,255,255,.18);border-radius:10px;opacity:${locked?.42:earned?1:.72};background:${earned?'rgba(255,180,40,.08)':'transparent'}"><strong>${a.icon} ${escapeHistoryText(a.title)}</strong><br><small>${escapeHistoryText(a.description)}</small><br><b>${earned?'✓ Unlocked':locked?'🔒 Tier Locked':'🔓 Available'}</b></div>`;
+    }).join('');
+    const title=tier===1?'TIER 1 · IGNITION':tier===2?'TIER 2 · FURY':tier===3?'TIER 3 · INFERNO':'TIER 4 · LEGEND';
+    const note=available?'Complete these to advance.':`🔒 Complete every Tier ${tier-1} achievement to unlock this tier.`;
+    return `<div style="margin:18px 0"><h4 style="margin:0 0 6px">${title}</h4><p style="margin:0 0 10px;color:#e8c9b5">${note}</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px">${cards}</div></div>`;
+  }).join('');
+  const unlocked=FURY_ACHIEVEMENT_CATALOG.filter(a=>a.test(m)).length;
+  host.innerHTML=`<h3>🎖️ FIRE &amp; FURY Achievements</h3><p><b>${unlocked}/${FURY_ACHIEVEMENT_CATALOG.length}</b> unlocked. The achievement ladder gets dramatically harder after the middle of Tier 2.</p>${sections}`;
+}
+
+async function renderLeaderboard(){
+    const host = document.getElementById("leaderboardPanel");
+    if (!host) return;
+    host.innerHTML = `<h3>🏆 FIRE &amp; FURY Hall of Fame</h3><p>Loading registered players…</p>`;
+    if (typeof multiplayerBackendReady === "function" && multiplayerBackendReady()) {
+        try {
+            if (!ffSupabase) await initMultiplayerBackend();
+            const {data:profiles,error:pErr}=await ffSupabase.from("profiles").select("id,username,avatar,created_at").order("created_at",{ascending:true});
+            if(pErr) throw pErr;
+            const {data:scores,error:sErr}=await ffSupabase.from("scores").select("user_id,score,best_combo");
+            if(sErr) throw sErr;
+            const byUser={};
+            (scores||[]).forEach(r=>{ const x=byUser[r.user_id] ||= {best:0,total:0,games:0,bestCombo:0}; const sc=Number(r.score)||0; x.best=Math.max(x.best,sc); x.total+=sc; x.games++; x.bestCombo=Math.max(x.bestCombo,Number(r.best_combo)||0); });
+            const standings=(profiles||[]).map(p=>({name:p.username,avatar:p.avatar||"🌋",...(byUser[p.id]||{best:0,total:0,games:0,bestCombo:0})})).sort((a,b)=>b.best-a.best||b.total-a.total||a.name.localeCompare(b.name));
+            const cards=standings.length?standings.map((player,index)=>`<div class="hof-player"><div class="hof-avatar">${avatarMarkup(player.avatar,52)}</div><div class="hof-name">#${index+1} ${escapeHistoryText(player.name)}</div><div class="hof-meta">Best ${player.best} · ${player.games} games · Total ${player.total}</div></div>`).join(""): '<div class="hof-player" style="grid-column:1/-1">No registered players yet.</div>';
+            host.innerHTML=`<h3>🏆 FIRE &amp; FURY Hall of Fame</h3><p>Global registered-player standings.</p><div class="hof-grid">${cards}</div>`;
+            return;
+        } catch(e) {
+            host.innerHTML += `<p style="color:#ffb5ad">Online Hall of Fame unavailable: ${escapeHistoryText(e.message||String(e))}</p>`;
+        }
+    }
+    const profiles = safeReadProfiles();
+    const standings = Object.entries(profiles).map(([name, profile]) => {
+        const runs = Array.isArray(profile && profile.runs) ? profile.runs : [];
+        const best = runs.reduce((max, run) => Math.max(max, Number(run.score) || 0), 0);
+        const total = runs.reduce((sum, run) => sum + (Number(run.score) || 0), 0);
+        return { name, avatar: profile && profile.avatar ? profile.avatar : "🌋", best, total, games: runs.length };
+    }).sort((a,b)=>b.best-a.best || b.total-a.total || a.name.localeCompare(b.name));
+    const cards = standings.length ? standings.map((player,index)=>`<div class="hof-player"><div class="hof-avatar">${avatarMarkup(player.avatar,52)}</div><div class="hof-name">#${index+1} ${escapeHistoryText(player.name)}</div><div class="hof-meta">Best ${player.best} · ${player.games} games · Total ${player.total}</div></div>`).join("") : '<div class="hof-player" style="grid-column:1/-1">No registered players yet.</div>';
+    host.innerHTML = `<h3>🏆 FIRE &amp; FURY Hall of Fame</h3><p>Local fallback — connect the online backend for the global list.</p><div class="hof-grid">${cards}</div>`;
+}
+
+function renderPlayerHistory(){
+    const host = document.getElementById("playerHistoryPanel");
+    if (!host) return;
+    const profiles = safeReadProfiles();
+    const profile = profiles[activePlayer] || { runs: [] };
+    const runs = Array.isArray(profile.runs) ? profile.runs.slice().reverse().slice(0, 12) : [];
+    const rows = runs.length ? runs.map(run => `<tr><td>${escapeHistoryText(run.date || "")}</td><td>${escapeHistoryText(run.mode || "")}</td><td>${Number(run.score) || 0}</td><td>${Number(run.bestCombo) || 0}</td><td>${escapeHistoryText(run.outcome || "")}</td></tr>`).join("") : '<tr><td colspan="5">No completed games yet. Play a mission to start your history!</td></tr>';
+    host.innerHTML = `<h3>📜 ${escapeHistoryText(activePlayer)}’s Gameplay History</h3><p>Recent completed runs on this browser</p><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;text-align:left"><thead><tr><th>Date</th><th>Mission</th><th>Score</th><th>Best combo</th><th>Result</th></tr></thead><tbody>${rows}</tbody></table></div><button class="btn" type="button" onclick="switchPlayer()">Switch player</button>`;
+    renderLeaderboard();
+    renderAchievements();
+    renderProfile();
+    updateHeader();
+}
+
+async function deleteFuryAccount(){
+    if(!ffSupabase || !ffUser){
+      alert("No FIRE & FURY account is currently signed in.");
+      return;
+    }
+    const username = activePlayer || ffUser.user_metadata?.username || "this player";
+    const confirmed = confirm(`DELETE means DELETE.\n\nThis permanently deletes the FIRE & FURY account for "${username}" and its online profile, scores, match data and avatar. You will be logged out and this cannot be undone.\n\nChoose Cancel if you only want to log out.`);
+    if(!confirmed) return;
+    try{
+      setAuthStatus("🗑️ Permanently deleting your FIRE & FURY account…");
+      const {error} = await ffSupabase.rpc("delete_my_account");
+      if(error) throw error;
+
+      const profiles = safeReadProfiles();
+      delete profiles[activePlayer];
+      safeWriteProfiles(profiles);
+      if(ffRequestChannel){try{await ffSupabase.removeChannel(ffRequestChannel);}catch(_){} ffRequestChannel=null;}
+      try{ await ffSupabase.auth.signOut(); }catch(_){}
+      ffUser=null;
+      activePlayer="Player";
+      finalAvatar="🌋";
+      document.getElementById("authLoginPassword")?.value && (document.getElementById("authLoginPassword").value="");
+      document.getElementById("authModal")?.classList.remove("show");
+      show("home");
+      setAuthStatus("🗑️ Account permanently deleted. You can create a new FIRE & FURY account anytime.");
+    }catch(e){
+      console.error("FIRE & FURY account deletion failed",e);
+      setAuthStatus("❌ Account was NOT deleted. "+(e?.message||e));
+      alert("Account was NOT deleted.\n\n"+(e?.message||e));
+    }
+}
+
+function escapeHistoryText(value){
+    return String(value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+}
+
+function switchPlayer(){
+    if(ffUser && !ffUser.is_anonymous){ alert("Your player name belongs to your FIRE & FURY account. Use Log out to switch accounts."); return; }
+    const entered = prompt("Enter your player name (same name to see your saved history):", activePlayer);
+    if (entered === null) return;
+    const name = entered.trim().replace(/\s+/g, " ").slice(0, 24);
+    if (!name) { alert("Please enter a name."); return; }
+    activePlayer = name;
+    renderPlayerHistory();
+}
+
+function saveCompletedRun(reason){
+    const profiles = safeReadProfiles();
+    const profile = profiles[activePlayer] || { runs: [] };
+    if (!Array.isArray(profile.runs)) profile.runs = [];
+    profile.runs.push({ date: new Date().toLocaleDateString(), mode: gameType, score, bestCombo, multiplayer:!!window.ffMultiplayerGame, outcome: reason === "LIVES" ? "Out of lives" : "Time completed" });
+    profile.runs = profile.runs.slice(-100);
+    profiles[activePlayer] = profile;
+    safeWriteProfiles(profiles);
+    renderPlayerHistory();
+    if(typeof multiplayerBackendReady === "function" && multiplayerBackendReady()) setTimeout(async()=>{
+        try{
+            if(!ffSupabase) await initMultiplayerBackend();
+            if(ffSupabase && ffUser){
+              const {error:scoreError}=await ffSupabase.from("scores").insert({user_id:ffUser.id,mode:gameType,score:Number(score)||0,best_combo:Number(bestCombo)||0});
+              if(scoreError) throw scoreError;
+              await refreshOnlineTotals();
+            }
+        }catch(e){ console.warn("Online score sync failed",e); }
+    },0);
+}
+
+function openGameArea(){
+  if(!ffUser || ffUser.is_anonymous){
+    openAuthGate();
+    setAuthStatus("🔐 Please log in or create a FIRE & FURY account to play.");
+    return;
+  }
+  show("missions");
+}
+
+function dismissStartScreen(){
+    if(ffUser && !ffUser.is_anonymous){
+        const ss=document.getElementById("startScreen");
+        if(ss) ss.classList.add("hidden");
+        show("home");
+        return;
+    }
+    openAuthGate();
 }
 
 
@@ -1440,12 +2296,49 @@ function show(id){
    SCORE
 ===================================================== */
 
+function getActivePlayerTotals(){
+    const profiles = safeReadProfiles();
+    const profile = profiles[activePlayer] || { runs: [] };
+    const runs = Array.isArray(profile.runs) ? profile.runs : [];
+    return {
+        totalPoints: runs.reduce((sum, run) => sum + (Number(run.score) || 0), 0),
+        matches: runs.length
+    };
+}
+
 function updateHeader(){
+    const totals = getActivePlayerTotals();
+    const scoreNode = document.getElementById("headerScore");
+    const matchesNode = document.getElementById("headerMatches");
+    if (scoreNode) scoreNode.textContent = totals.totalPoints;
+    if (matchesNode) matchesNode.textContent = totals.matches;
+}
 
-    document
-        .getElementById("headerScore")
-        .textContent = score;
-
+// For permanent accounts, Supabase is the source of truth for career totals.
+// LocalStorage remains a fast fallback/offline cache.
+let onlineTotalsRequestId = 0;
+async function refreshOnlineTotals(){
+  const requestId=++onlineTotalsRequestId;
+  if(!ffSupabase || !ffUser || ffUser.is_anonymous) return null;
+  try{
+    const {data,error}=await ffSupabase
+      .from("scores")
+      .select("score")
+      .eq("user_id",ffUser.id);
+    if(error) throw error;
+    if(requestId!==onlineTotalsRequestId) return null;
+    const rows=Array.isArray(data)?data:[];
+    const total=rows.reduce((sum,row)=>sum+(Number(row?.score)||0),0);
+    const matches=rows.length;
+    const scoreNode=document.getElementById("headerScore");
+    const matchesNode=document.getElementById("headerMatches");
+    if(scoreNode) scoreNode.textContent=total;
+    if(matchesNode) matchesNode.textContent=matches;
+    return {totalPoints:total,matches};
+  }catch(e){
+    console.warn("Online career totals unavailable",e);
+    return null;
+  }
 }
 
 
@@ -1453,28 +2346,44 @@ function updateHeader(){
    START GAME
 ===================================================== */
 
-function startGame(type){
+function startGameLegacy(type, multiplayer=false){
+
+    if(!canPlayFuryGame()){
+        openAuthGate();
+        setAuthStatus("🔐 Please log in or create a FIRE & FURY account to play.");
+        return;
+    }
 
     /*
         If another game is running, stop it first.
     */
 
     gameRunning = false;
+    endGameCalled = false;
 
     if(animationID){
-
         cancelAnimationFrame(animationID);
-
+        animationID = null;
     }
 
 
     gameType = type;
+    if(type==="final"){
+      const storedAvatar=safeReadProfiles()[activePlayer]?.avatar;
+      if(storedAvatar) setPlayerAvatar(storedAvatar,{sync:false});
+      else loadFinalAvatarImage(finalAvatar);
+    }
+    window.ffMultiplayerGame = !!multiplayer;
+    if(multiplayer){ ffMatch.localDone=false; ffMatch.opponentDone=false; ffMatch.opponentScore=0; ffLastBroadcast=0; updateMpBattleBar("⚔️ ONLINE DUEL • You: 0 • Opponent: 0"); } else { document.getElementById("mpBattleBar")?.classList.remove("show"); }
 
     score = 0;
 
     lives = 3;
 
     combo = 0;
+    furyModeRemaining = 0;
+    document.getElementById("furyModePanel")?.classList.remove("active");
+    document.getElementById("gameCanvas")?.classList.remove("fury-aura");
 
     bestCombo = 0;
 
@@ -1495,6 +2404,9 @@ function startGame(type){
     spawnTimer = .35;
 
     fireCooldown = 0;
+    screenShake = 0;
+    explosions = [];
+    eruptionTimer = 0;
 
     invincibilityTimer = 0;
 
@@ -1548,7 +2460,12 @@ function startGame(type){
 
                 ? "Shoot targets 🎯 and collect historical scrolls 📜!"
 
-                : "Survive the combined FIRE & FURY assault!";
+                : "Survive the combined FIRE & FURY assault! Shoot enemies and falling rocks with 🔥 or SPACE!";
+
+
+    /* Hide fire button in volcano mode (no shooting needed) */
+    document.getElementById("fireBtn").style.display =
+        type === "volcano" ? "none" : "";
 
 
     updateGameUI();
@@ -1585,12 +2502,29 @@ function gameLoop(now){
 
 
     lastTime = now;
+    if(furyModeRemaining > 0){
+        furyModeRemaining = Math.max(0, furyModeRemaining - dt);
+        const secondsEl = document.getElementById("furyModeSeconds");
+        const fillEl = document.getElementById("furyMeterFill");
+        if(secondsEl) secondsEl.textContent = furyModeRemaining.toFixed(1);
+        if(fillEl) fillEl.style.width = (100 * furyModeRemaining / FURY_MODE_SECONDS) + "%";
+        if(furyModeRemaining <= 0){
+            document.getElementById("furyModePanel")?.classList.remove("active");
+            document.getElementById("gameCanvas")?.classList.remove("fury-aura");
+        }
+    }
 
 
     update(dt);
 
+    if (!gameRunning) return;
     draw();
 
+    if(window.ffMultiplayerGame && ffMatch.channel && now-ffLastBroadcast>150){
+        ffLastBroadcast=now;
+        mpSend({kind:"score",userId:ffUser.id,score:score,combo:bestCombo});
+        updateMpBattleBar(`⚔️ ONLINE DUEL • You: ${score} • Opponent: ${ffMatch.opponentScore}`);
+    }
 
     if(gameRunning){
 
@@ -1606,7 +2540,11 @@ function gameLoop(now){
    UPDATE
 ===================================================== */
 
-function update(dt){
+function updateLegacy(dt){
+
+    // If the game already ended (e.g. last life lost), stop immediately
+    if(!gameRunning) return;
+
 
     /* TIME */
 
@@ -1674,7 +2612,8 @@ function update(dt){
 
     if(
         keys.fire &&
-        fireCooldown <= 0
+        fireCooldown <= 0 &&
+        gameType !== "volcano"   /* no shooting needed in volcano mode */
     ){
 
         fire();
@@ -1694,7 +2633,7 @@ function update(dt){
 
     if(spawnTimer <= 0){
 
-        spawnObject();
+        spawnObjectLegacy();
 
 
         /*
@@ -1716,235 +2655,168 @@ function update(dt){
 
 
     /* =================================================
-       NORMAL OBJECTS
+       NORMAL OBJECTS  (safer mark-and-sweep)
     ================================================= */
 
-    for(
-        let i=objects.length-1;
-        i>=0;
-        i--
-    ){
+    const removeNormal = new Set();
+
+    for (let i = 0; i < objects.length; i++) {
 
         const o = objects[i];
 
+        // Bullets handled in projectile section
+        if (o.type === "bullet") continue;
 
-        /*
-            Bullets are handled separately.
-        */
+        o.y += o.speed * dt;
 
-        if(o.type === "bullet")
-            continue;
-
-
-        o.y +=
-            o.speed * dt;
-
-
-        /*
-            Rotate physical objects.
-        */
-
-        if(
+        // Rotate physical objects
+        if (
             o.type === "enemy" ||
             o.type === "rock" ||
             o.type === "hazard"
-        ){
-
-            o.rotation +=
-                o.spin * dt;
-
+        ) {
+            o.rotation += o.spin * dt;
         }
 
-
-        /* =================================================
-           HAZARD COLLISION
-        ================================================= */
-
-        /*
-            THIS IS THE IMPORTANT FIX.
-
-            Only objects with:
-                o.hazard === true
-
-            can hurt the player.
+        /* HAZARD COLLISION
+           Only objects with o.hazard === true can hurt the player.
         */
-
-        if(
+        if (
             o.hazard === true &&
             invincibilityTimer <= 0 &&
-            collision(
-                player,
-                objectHitbox(o)
-            )
-        ){
-
+            collision(player, objectHitbox(o))
+        ) {
             playerHit();
-
-
-            /*
-                Remove the hazard immediately.
-                This prevents the same hazard from
-                hitting the player repeatedly.
-            */
-
-            objects.splice(i,1);
-
+            if (!gameRunning) return; // final life: stop this update immediately
+            removeNormal.add(i);
             continue;
-
         }
 
-
-        /* =================================================
-           COLLECTIBLE COLLISION
-        ================================================= */
-
-        if(
+        /* COLLECTIBLE COLLISION */
+        if (
             o.collectible === true &&
-            collision(
-                player,
-                objectHitbox(o)
-            )
-        ){
-
+            collision(player, objectHitbox(o))
+        ) {
             collectObject(o);
-
-            objects.splice(i,1);
-
+            removeNormal.add(i);
             continue;
-
         }
-
 
         /* OBJECT LEFT SCREEN */
-
-        if(
-            o.y >
-            canvas.height + 80
-        ){
-
-            objects.splice(i,1);
-
+        if (o.y > canvas.height + 80) {
+            removeNormal.add(i);
         }
+    }
 
+    // Apply removals (preserves order, no index corruption)
+    if (removeNormal.size > 0) {
+        objects = objects.filter((_, idx) => !removeNormal.has(idx));
     }
 
 
     /* =====================================================
-       PROJECTILES
+       PROJECTILES  (safer mark-and-sweep style)
     ===================================================== */
 
-    for(
-        let i=objects.length-1;
-        i>=0;
-        i--
-    ){
-
+    // 1. Move all bullets first
+    for (let i = 0; i < objects.length; i++) {
         const o = objects[i];
+        if (o.type === "bullet") {
+            o.y -= o.speed * dt;
+        }
+    }
 
+    // 2. Collect pairs (bulletIndex, targetIndex) that collide
+    const toDestroy = [];   // array of {bIdx, tIdx}
 
-        if(o.type !== "bullet")
-            continue;
+    for (let i = 0; i < objects.length; i++) {
+        const o = objects[i];
+        if (o.type !== "bullet") continue;
 
-
-        o.y -=
-            o.speed * dt;
-
-
-        let bulletDestroyed = false;
-
-
-        for(
-            let j=objects.length-1;
-            j>=0;
-            j--
-        ){
-
-            const target =
-                objects[j];
-
-
-            /*
-                Bullets can destroy ONLY shootable targets.
-            */
-
-            if(
-                target.shootable === true
-            ){
-
-                if(
+        for (let j = 0; j < objects.length; j++) {
+            const target = objects[j];
+            if (target.shootable === true) {
+                if (
                     collision(
-                        {
-                            x:o.x,
-                            y:o.y,
-                            width:8,
-                            height:18
-                        },
-
+                        { x: o.x, y: o.y, width: 8, height: 18 },
                         objectHitbox(target)
                     )
-                ){
-
-                    destroyTarget(target);
-
-
-                    objects.splice(j,1);
-
-
-                    /*
-                        The bullet's index can change
-                        when another object is removed.
-                    */
-
-                    const currentIndex =
-                        objects.indexOf(o);
-
-
-                    if(currentIndex !== -1){
-
-                        objects.splice(
-                            currentIndex,
-                            1
-                        );
-
-                    }
-
-
-                    bulletDestroyed = true;
-
-                    break;
-
+                ) {
+                    toDestroy.push({ bIdx: i, tIdx: j });
+                    break; // one target per bullet
                 }
-
             }
-
         }
+    }
 
+    // 3. Process destructions (highest indices first so splice stays valid)
+    //    and also remove off-screen bullets
+    const removeSet = new Set();
 
-        if(bulletDestroyed)
-            continue;
-
-
-        if(o.y < -30){
-
-            const currentIndex =
-                objects.indexOf(o);
-
-
-            if(currentIndex !== -1){
-
-                objects.splice(
-                    currentIndex,
-                    1
-                );
-
-            }
-
+    for (const pair of toDestroy) {
+        // destroy the target (score + particles)
+        if (!removeSet.has(pair.tIdx)) {
+            destroyTarget(objects[pair.tIdx]);
+            removeSet.add(pair.tIdx);
         }
+        removeSet.add(pair.bIdx);
+    }
 
+    // also mark off-screen bullets
+    for (let i = 0; i < objects.length; i++) {
+        const o = objects[i];
+        if (o.type === "bullet" && o.y < -30) {
+            removeSet.add(i);
+        }
+    }
+
+    // 4. Build new array without the removed ones (preserves relative order)
+    if (removeSet.size > 0) {
+        objects = objects.filter((_, idx) => !removeSet.has(idx));
+    }
+
+
+    /* =====================================================
+       HARD SAFETY CAPS  (prevents lag / crash after long play)
+    ===================================================== */
+
+    // Keep object count reasonable
+    if (objects.length > 90) {
+        // Prefer removing the oldest non-bullet first
+        objects = objects.filter((o, i) => {
+            if (objects.length <= 70) return true;
+            // drop some of the oldest falling objects
+            return i >= objects.length - 70 || o.type === "bullet";
+        });
+        // final hard trim
+        if (objects.length > 80) {
+            objects = objects.slice(-80);
+        }
+    }
+
+    // Cap particles hard
+    if (particles.length > 140) {
+        particles = particles.slice(-100);
+    }
+
+    // Cap floating texts
+    if (floatingTexts.length > 30) {
+        floatingTexts = floatingTexts.slice(-20);
     }
 
 
     updateParticles(dt);
+    updateExplosions(dt);
+
+    if (gameType === "volcano") {
+        eruptionTimer -= dt;
+        if (eruptionTimer <= 0) {
+            eruptionTimer = 0.45 + Math.random() * 0.8;
+            createEruptionBurst();
+        }
+    }
+
+    screenShake = Math.max(0, screenShake - dt * 22);
 
     updateFloatingTexts(dt);
 
@@ -1985,7 +2857,7 @@ function objectHitbox(o){
    SPAWN OBJECTS
 ===================================================== */
 
-function spawnObject(){
+function spawnObjectLegacy(){
 
     let o = {
 
@@ -2108,6 +2980,7 @@ function spawnObject(){
             o.good = false;
 
             o.hazard = true;
+            o.shootable = true;
 
         }
 
@@ -2153,6 +3026,9 @@ function spawnObject(){
 
             o.collectible = true;
 
+            // Scrolls can be collected by the player OR destroyed by FIRE.
+            o.shootable = true;
+
             o.value = 500;
 
         }
@@ -2181,6 +3057,7 @@ function spawnObject(){
             o.value = 250;
 
             o.hazard = true;
+            o.shootable = true;
 
         }
 
@@ -2195,6 +3072,9 @@ function spawnObject(){
             o.good = true;
 
             o.collectible = true;
+
+            // Scrolls can be collected by the player OR destroyed by FIRE.
+            o.shootable = true;
 
             o.value = 500;
 
@@ -2227,6 +3107,8 @@ function spawnObject(){
             o.good = false;
 
             o.hazard = true;
+            // Final Fury rocks must be valid projectile targets.
+            o.shootable = true;
 
         }
 
@@ -2242,6 +3124,38 @@ function spawnObject(){
    COLLECT OBJECT
 ===================================================== */
 
+let furyModeRemaining = 0;
+const FURY_MODE_SECONDS = 8;
+
+function showComboFeedback(kind){
+    const banner = document.getElementById("comboBanner");
+    const stat = document.getElementById("gameCombo");
+    if(stat){
+        stat.parentElement.classList.remove("combo-stat-hot");
+        void stat.parentElement.offsetWidth;
+        stat.parentElement.classList.add("combo-stat-hot");
+    }
+    if(!banner || combo < 2) return;
+    let message = `🔥 COMBO x${combo}`;
+    if(combo >= 10) message = `🌋 FURY UNLEASHED · x${combo}`;
+    else if(combo >= 5) message = `⚡ FURY STREAK · x${combo}`;
+    else if(combo === 3) message = `🔥 COMBO STARTED · x${combo}`;
+    if(combo >= 2) playSfx('combo');
+    banner.textContent = message + (kind === "target" ? " · IMPACT BONUS" : " · SCORE BONUS");
+    banner.classList.remove("show");
+    void banner.offsetWidth;
+    banner.classList.add("show");
+    if(combo >= 10 && furyModeRemaining <= 0){
+        playSfx('furySfx');
+        furyModeRemaining = FURY_MODE_SECONDS;
+        const panel = document.getElementById("furyModePanel");
+        if(panel) panel.classList.add("active");
+        const canvasEl = document.getElementById("gameCanvas");
+        if(canvasEl) canvasEl.classList.add("fury-aura");
+        banner.textContent = "🌋 FURY MODE ACTIVATED! · x" + combo;
+    }
+}
+
 function collectObject(o){
 
     const value =
@@ -2252,6 +3166,7 @@ function collectObject(o){
 
 
     combo++;
+    showComboFeedback("collect");
 
 
     bestCombo =
@@ -2259,6 +3174,11 @@ function collectObject(o){
             bestCombo,
             combo
         );
+
+    if(combo > 0 && combo % 5 === 0){
+        floatingText(o.x, o.y - 34, "🔥 FURY STREAK x" + combo + "!");
+        createParticles(o.x, o.y, 14, "#ffd15a");
+    }
 
 
     /*
@@ -2306,7 +3226,11 @@ function collectObject(o){
    FIRE
 ===================================================== */
 
-function fire(){
+function fireLegacy(){
+
+    playSfx('launch');
+    screenShake = Math.max(screenShake, 2.5);
+    createParticles(player.x, player.y - 28, 8, "#fff0a0");
 
     objects.push({
 
@@ -2339,6 +3263,7 @@ function fire(){
 
 function destroyTarget(o){
 
+    playSfx(o.type === 'rock' ? 'rock' : 'explosion');
     const value =
         o.value || 200;
 
@@ -2347,6 +3272,7 @@ function destroyTarget(o){
 
 
     combo++;
+    showComboFeedback("target");
 
 
     bestCombo =
@@ -2354,6 +3280,11 @@ function destroyTarget(o){
             bestCombo,
             combo
         );
+
+    if(combo > 0 && combo % 5 === 0){
+        floatingText(o.x, o.y - 34, "🔥 FURY STREAK x" + combo + "!");
+        createParticles(o.x, o.y, 14, "#ffd15a");
+    }
 
 
     if(combo >= 3){
@@ -2374,9 +3305,11 @@ function destroyTarget(o){
     createParticles(
         o.x,
         o.y,
-        15,
+        24,
         "#ff7a22"
     );
+    createExplosion(o.x, o.y, "#ffb52e");
+    screenShake = Math.max(screenShake, 7);
 
 }
 
@@ -2389,69 +3322,57 @@ function playerHit(){
 
     /*
         Safety check.
-
-        If the player is already invincible,
-        NOTHING happens.
+        If already invincible or game is stopping, do nothing.
     */
 
-    if(invincibilityTimer > 0)
+    if(invincibilityTimer > 0 || !gameRunning)
         return;
 
 
     lives--;
-
-
+    if(combo >= 3){
+        const banner = document.getElementById("comboBanner");
+        if(banner){banner.textContent = "💥 COMBO BROKEN! BUILD IT AGAIN";banner.classList.remove("show");banner.classList.add("break","show");}
+    }
     combo = 0;
 
+    // Start invincibility immediately
+    invincibilityTimer = INVINCIBILITY_TIME;
 
-    /*
-        Start invincibility immediately.
-    */
+    createParticles(player.x, player.y, 28, "#ff351d");
+    createExplosion(player.x, player.y, "#ff4b24");
+    screenShake = Math.max(screenShake, 10);
+    floatingText(player.x, player.y, "-1 ❤️");
 
-    invincibilityTimer =
-        INVINCIBILITY_TIME;
-
-
-    createParticles(
-        player.x,
-        player.y,
-        25,
-        "#ff351d"
-    );
-
-
-    floatingText(
-        player.x,
-        player.y,
-        "-1 ❤️"
-    );
-
-
-    /*
-        Visual feedback.
-    */
-
+    // Visual feedback
     canvas.classList.remove("hit");
-
-    /*
-        Force animation restart.
-    */
-
     void canvas.offsetWidth;
-
     canvas.classList.add("hit");
 
 
     if(lives <= 0){
-
         lives = 0;
-
         updateGameUI();
 
-        endGame("LIVES");
+        // HARD STOP - prevent any further processing this frame
+        gameRunning = false;
+        objects = [];
+        particles = [];
+        floatingTexts = [];
+        keys.left = false;
+        keys.right = false;
+        keys.fire = false;
 
+        if(animationID){
+            cancelAnimationFrame(animationID);
+            animationID = null;
+        }
+
+        // Call endGame on next microtask so current call stack finishes
+        Promise.resolve().then(() => {
+            endGame("LIVES");
+        });
     }
-
 }
 
 
@@ -2494,6 +3415,11 @@ function draw(){
     );
 
 
+    ctx.save();
+    if (screenShake > 0) {
+        ctx.translate((Math.random() - 0.5) * screenShake, (Math.random() - 0.5) * screenShake);
+    }
+
     drawBackground();
 
     drawObjects();
@@ -2501,6 +3427,8 @@ function draw(){
     drawPlayer();
 
     drawParticles();
+    drawExplosions();
+    ctx.restore();
 
     drawFloatingTexts();
 
@@ -2524,57 +3452,60 @@ function drawBackground(){
 
     if(gameType === "volcano"){
 
+        /* Significantly brighter volcanic sky */
         g.addColorStop(
             0,
-            "#261006"
+            "#7a3a1c"
         );
 
         g.addColorStop(
             .55,
-            "#160807"
+            "#5a2a16"
         );
 
         g.addColorStop(
             1,
-            "#080303"
+            "#3d1c10"
         );
 
     }
 
     else if(gameType === "rocket"){
 
+        /* Significantly brighter night sky */
         g.addColorStop(
             0,
-            "#080d25"
+            "#243868"
         );
 
         g.addColorStop(
             .55,
-            "#100a20"
+            "#2e2458"
         );
 
         g.addColorStop(
             1,
-            "#050306"
+            "#1a1638"
         );
 
     }
 
     else{
 
+        /* Significantly brighter final fury mix */
         g.addColorStop(
             0,
-            "#281006"
+            "#7a3a1c"
         );
 
         g.addColorStop(
             .5,
-            "#110817"
+            "#3a2460"
         );
 
         g.addColorStop(
             1,
-            "#050303"
+            "#201830"
         );
 
     }
@@ -2591,10 +3522,9 @@ function drawBackground(){
     );
 
 
-    /* STARS */
-
+    /* STARS - brighter still */
     ctx.fillStyle =
-        "#ffffff55";
+        "#ffffffee";
 
 
     for(
@@ -2626,7 +3556,7 @@ function drawBackground(){
     if(gameType === "volcano"){
 
         ctx.fillStyle =
-            "#ff5a1530";
+            "#ff8a4080";
 
 
         ctx.beginPath();
@@ -2650,7 +3580,7 @@ function drawBackground(){
 
 
         ctx.fillStyle =
-            "#ff781d22";
+            "#ffaa5070";
 
 
         ctx.beginPath();
@@ -2686,9 +3616,10 @@ function drawPlayer(){
     ctx.save();
 
 
+    const playerBob = Math.sin(performance.now() * 0.008) * 2;
     ctx.translate(
         player.x,
-        player.y
+        player.y + playerBob
     );
 
 
@@ -2790,11 +3721,16 @@ function drawPlayer(){
             "middle";
 
 
-        ctx.fillText(
-            "🌋",
-            0,
-            0
-        );
+        if(gameType === "final" && finalAvatarImage){
+            const size=player?.r||24;
+            ctx.drawImage(finalAvatarImage,-size,-size,size*2,size*2);
+        }else{
+            ctx.fillText(
+                gameType === "final" ? finalAvatar : "🌋",
+                0,
+                0
+            );
+        }
 
     }
 
@@ -2808,16 +3744,17 @@ function drawPlayer(){
    DRAW OBJECTS
 ===================================================== */
 
-function drawObjects(){
+function drawObjectsLegacy(){
 
     objects.forEach(o => {
 
         ctx.save();
 
 
+        const bob = Math.sin((performance.now() * 0.006) + o.x * 0.02) * (o.type === "bullet" ? 0 : 2);
         ctx.translate(
             o.x,
-            o.y
+            o.y + bob
         );
 
 
@@ -2963,26 +3900,19 @@ function drawObjects(){
         }
 
         else if(o.type === "bullet"){
-
-            ctx.fillStyle =
-                "#ffd04c";
-
-
-            ctx.shadowColor =
-                "#ff6b18";
-
-
-            ctx.shadowBlur =
-                15;
-
-
-            ctx.fillRect(
-                -4,
-                -10,
-                8,
-                22
-            );
-
+            const pulse = 0.8 + Math.sin(performance.now() * 0.035 + o.y) * 0.2;
+            const trail = ctx.createLinearGradient(0, 2, 0, 38);
+            trail.addColorStop(0, "rgba(255,250,180,.95)");
+            trail.addColorStop(.35, "rgba(255,140,24,.62)");
+            trail.addColorStop(1, "rgba(255,70,10,0)");
+            ctx.globalAlpha = pulse;
+            ctx.strokeStyle = trail;
+            ctx.lineWidth = 9;
+            ctx.lineCap = "round";
+            ctx.beginPath(); ctx.moveTo(0, 1); ctx.lineTo(0, 38); ctx.stroke();
+            ctx.fillStyle = "#fffbd0";
+            ctx.shadowColor = "#ff6417"; ctx.shadowBlur = 25;
+            ctx.beginPath(); ctx.arc(0, -3, 7.5 * pulse, 0, Math.PI * 2); ctx.fill();
         }
 
 
@@ -3003,6 +3933,10 @@ function createParticles(
     count,
     color
 ){
+
+    // Hard cap keeps effects bounded during long sessions.
+    const available = Math.max(0, 120 - particles.length);
+    count = Math.min(count, available);
 
     for(
         let i=0;
@@ -3125,6 +4059,64 @@ function drawParticles(){
 
 
 /* =====================================================
+   COMBAT ANIMATION EFFECTS
+===================================================== */
+
+function createExplosion(x, y, color){
+    explosions.push({x, y, radius:8, max:62, life:.38, color});
+    if (explosions.length > 24) explosions.shift();
+}
+
+function updateExplosions(dt){
+    explosions.forEach(e => {
+        e.life -= dt;
+        e.radius += (e.max - e.radius) * Math.min(1, dt * 10);
+    });
+    explosions = explosions.filter(e => e.life > 0);
+}
+
+function drawExplosions(){
+    explosions.forEach(e => {
+        const a = Math.max(0, e.life / .38);
+        ctx.save();
+        ctx.globalAlpha = a;
+        ctx.strokeStyle = e.color;
+        ctx.lineWidth = 3 + a * 5;
+        ctx.shadowColor = e.color;
+        ctx.shadowBlur = 18;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, e.radius, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.strokeStyle = "rgba(255,245,190," + (a * .75) + ")";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, e.radius * .62, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.globalAlpha = a * .7;
+        ctx.fillStyle = "#fff2a0";
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, Math.max(3, e.radius * .22), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    });
+}
+
+function createEruptionBurst(){
+    const x = canvas.width * (0.5 + (Math.random() - .5) * .16);
+    const y = canvas.height * .36;
+    for(let i=0;i<12 && particles.length<120;i++){
+        const life = .65 + Math.random() * .75;
+        particles.push({x:x+(Math.random()-.5)*22,y:y+(Math.random()-.5)*12,
+            vx:(Math.random()-.5)*210,vy:-100-Math.random()*260,
+            life,max:life,color:Math.random()<.55?"#ff7a22":"#ffd35c",
+            size:3+Math.random()*6});
+    }
+    if (Math.random() < .55) createExplosion(x, y, "#ff7a22");
+    screenShake = Math.max(screenShake, 2.5);
+}
+
+
+/* =====================================================
    FLOATING TEXT
 ===================================================== */
 
@@ -3133,6 +4125,8 @@ function floatingText(
     y,
     text
 ){
+
+    if (floatingTexts.length >= 24) floatingTexts.shift();
 
     floatingTexts.push({
 
@@ -3245,25 +4239,30 @@ function updateGameUI(){
    END GAME
 ===================================================== */
 
+let endGameCalled = false;
+
 function endGame(reason){
 
-    if(!gameRunning)
-        return;
-
+    // Strict single-run guard
+    if(endGameCalled) return;
+    endGameCalled = true;
 
     gameRunning = false;
 
-
-    cancelAnimationFrame(
-        animationID
-    );
-
+    if(animationID){
+        cancelAnimationFrame(animationID);
+        animationID = null;
+    }
 
     keys.left = false;
-
     keys.right = false;
-
     keys.fire = false;
+
+    // Clear everything
+    objects = [];
+    particles = [];
+    floatingTexts = [];
+    canvas.classList.remove("hit");
 
 
     const key =
@@ -3271,25 +4270,35 @@ function endGame(reason){
         gameType;
 
 
-    const old =
-        Number(
-            localStorage.getItem(key) ||
-            0
-        );
+    // Storage can be disabled in private/restricted contexts; never let it
+    // prevent the results screen from appearing.
+    let old = 0;
+    try {
+        old = Number(localStorage.getItem(key) || 0) || 0;
+    } catch (error) {
+        old = 0;
+    }
+
+    const best = Math.max(old, score);
+    try {
+        localStorage.setItem(key, String(best));
+    } catch (error) {
+        // Continue normally without persistent high scores.
+    }
 
 
-    const best =
-        Math.max(
-            old,
-            score
-        );
+    saveCompletedRun(reason);
 
-
-    localStorage.setItem(
-        key,
-        best
-    );
-
+    if(window.ffMultiplayerGame && ffMatch.channel){
+        ffMatch.localDone = true;
+        mpSend({kind:"done",userId:ffUser.id,score:Number(score)||0,bestCombo:Number(bestCombo)||0,mission:gameType});
+    }
+    const careerTotals = getActivePlayerTotals();
+    const careerTotalNode = document.getElementById("resultCareerTotal");
+    const matchesTotalNode = document.getElementById("resultMatchesTotal");
+    if (careerTotalNode) careerTotalNode.textContent = careerTotals.totalPoints;
+    if (matchesTotalNode) matchesTotalNode.textContent = careerTotals.matches;
+    updateHeader();
 
     document
         .getElementById("resultScore")
@@ -3353,6 +4362,7 @@ function endGame(reason){
 
     if(reason === "LIVES"){
 
+        playSfx('defeat');
         reasonText =
             "💥 You ran out of lives. The hazards finally got you.";
 
@@ -3360,6 +4370,7 @@ function endGame(reason){
 
     else{
 
+        playSfx('victory');
         reasonText =
             "⏱️ Time's up! You survived the mission timer.";
 
@@ -3389,6 +4400,25 @@ function endGame(reason){
 
     show("results");
 
+    if(window.ffMultiplayerGame) renderMultiplayerResult();
+
+}
+
+
+function renderMultiplayerResult(){
+  if(!ffMatch.id) return;
+  const el=document.getElementById("resultNotice"); if(!el) return;
+  document.getElementById("mpResultBlock")?.remove();
+  const block=document.createElement("div"); block.id="mpResultBlock"; block.style.marginTop="18px";
+  if(!ffMatch.opponentDone){
+    block.innerHTML='<b>⚔️ ONLINE DUEL</b><br>Waiting for your opponent to finish…<br><span style="color:#e8c9b5">Your score: '+(Number(score)||0)+' pts</span>';
+  }else{
+    const mine=Number(score)||0, theirs=Number(ffMatch.opponentScore)||0;
+    const result=mine>theirs?"🏆 VICTORY!":mine<theirs?"💥 DEFEAT":"🤝 DRAW!";
+    block.innerHTML='<div style="font-size:1.25em"><b>'+result+'</b></div><br><b>ONLINE DUEL RESULT</b><br>You: '+mine+' pts &nbsp; • &nbsp; Opponent: '+theirs+' pts';
+    updateMpBattleBar(result+"  You "+mine+" • Opponent "+theirs);
+  }
+  el.appendChild(block);
 }
 
 
@@ -3398,7 +4428,16 @@ function endGame(reason){
 
 function quitGame(){
 
+    // Stop whichever engine is currently active. The V3 build can run
+    // either the legacy canvas engine or the WebGL engine.
     gameRunning = false;
+    window.ffMultiplayerGame = false;
+    if(window.FF3D_STATE){
+        window.FF3D_STATE.running = false;
+        window.FF3D_STATE.locked = false;
+    }
+    const ff3dStage = document.getElementById('ff3dStage');
+    if(ff3dStage) ff3dStage.hidden = true;
 
 
     cancelAnimationFrame(
@@ -3509,77 +4548,78 @@ document.addEventListener(
 
 
 /* =====================================================
-   MOBILE CONTROLS
+   MOBILE HUD CONTROLS
+   FIRE = bottom-left action button.
+   JOYSTICK = bottom-right horizontal-only movement.
 ===================================================== */
 
-function holdButton(
-    element,
-    property
-){
+const moveJoystick = document.getElementById("moveJoystick");
+const joystickThumb = document.getElementById("joystickThumb");
+let joystickPointerId = null;
 
-    element.addEventListener(
-        "pointerdown",
-        e => {
-
-            e.preventDefault();
-
-            keys[property] = true;
-
-        }
-    );
-
-
-    element.addEventListener(
-        "pointerup",
-        e => {
-
-            e.preventDefault();
-
-            keys[property] = false;
-
-        }
-    );
-
-
-    element.addEventListener(
-        "pointercancel",
-        () => {
-
-            keys[property] = false;
-
-        }
-    );
-
-
-    element.addEventListener(
-        "pointerleave",
-        () => {
-
-            keys[property] = false;
-
-        }
-    );
-
+function resetJoystick(){
+    keys.left = false;
+    keys.right = false;
+    if(joystickThumb){
+        joystickThumb.style.transform = "translate(-50%,-50%)";
+    }
 }
 
+function updateJoystick(clientX){
+    if(!moveJoystick || !joystickThumb) return;
+    const rect = moveJoystick.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const maxTravel = Math.max(18, rect.width / 2 - joystickThumb.offsetWidth / 2 - 8);
+    let dx = clientX - centerX;
+    dx = Math.max(-maxTravel, Math.min(maxTravel, dx));
 
-holdButton(
-    document.getElementById("leftBtn"),
-    "left"
-);
+    const deadZone = Math.max(10, maxTravel * .12);
+    keys.left = dx < -deadZone;
+    keys.right = dx > deadZone;
+    joystickThumb.style.transform = `translate(calc(-50% + ${dx}px),-50%)`;
+}
 
+if(moveJoystick){
+    moveJoystick.addEventListener("pointerdown", e => {
+        e.preventDefault();
+        joystickPointerId = e.pointerId;
+        try { moveJoystick.setPointerCapture(e.pointerId); } catch(_){}
+        updateJoystick(e.clientX);
+    }, {passive:false});
 
-holdButton(
-    document.getElementById("rightBtn"),
-    "right"
-);
+    moveJoystick.addEventListener("pointermove", e => {
+        if(e.pointerId !== joystickPointerId) return;
+        e.preventDefault();
+        updateJoystick(e.clientX);
+    }, {passive:false});
 
+    const releaseJoystick = e => {
+        if(joystickPointerId !== null && e.pointerId !== undefined && e.pointerId !== joystickPointerId) return;
+        joystickPointerId = null;
+        resetJoystick();
+    };
+    moveJoystick.addEventListener("pointerup", releaseJoystick);
+    moveJoystick.addEventListener("pointercancel", releaseJoystick);
+    moveJoystick.addEventListener("lostpointercapture", releaseJoystick);
+}
 
-holdButton(
-    document.getElementById("fireBtn"),
-    "fire"
-);
+function holdFire(element){
+    if(!element) return;
+    element.addEventListener("pointerdown", e => {
+        e.preventDefault();
+        keys.fire = true;
+        try { element.setPointerCapture(e.pointerId); } catch(_){}
+    }, {passive:false});
+    const release = e => {
+        e.preventDefault();
+        keys.fire = false;
+    };
+    element.addEventListener("pointerup", release, {passive:false});
+    element.addEventListener("pointercancel", release, {passive:false});
+    element.addEventListener("lostpointercapture", () => { keys.fire = false; });
+}
 
+holdFire(document.getElementById("fireBtn"));
 
 /* =====================================================
    RESET BUTTON STATES
@@ -3607,5 +4647,981 @@ updateHeader();
 
 </script>
 
+
+<div id="authModal" class="ff-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div class="ff-modal-card" style="max-width:520px">
+    <h2 id="authTitle">🔥 FIRE &amp; FURY ACCOUNT</h2>
+    <p id="authSubtitle">Create a real player account to save your identity, scores and multiplayer profile online.</p>
+    <div id="authLoginForm">
+      <label style="display:block;margin:10px 0 5px">📧 Email</label>
+      <input id="authLoginEmail" type="email" autocomplete="email" placeholder="you@example.com" style="width:100%;box-sizing:border-box;padding:11px;border-radius:9px;border:1px solid #71401f;background:#160c08;color:#fff">
+      <label style="display:block;margin:10px 0 5px">🔑 Password</label>
+      <input id="authLoginPassword" type="password" autocomplete="current-password" placeholder="Your password" style="width:100%;box-sizing:border-box;padding:11px;border-radius:9px;border:1px solid #71401f;background:#160c08;color:#fff">
+      <div class="ff-row" style="justify-content:center;margin-top:12px">
+        <button class="btn gold" type="button" onclick="loginFuryAccount()">🔥 LOGIN</button>
+        <button class="btn" type="button" onclick="showAuthSignup()">CREATE ACCOUNT</button>
+      </div>
+      <button class="btn" type="button" style="margin-top:8px" onclick="sendFuryPasswordReset()">Forgot password?</button>
+    </div>
+    <div id="authSignupForm" hidden>
+      <label style="display:block;margin:10px 0 5px">👤 Player name</label>
+      <input id="authSignupUsername" maxlength="24" autocomplete="nickname" placeholder="Your FIRE &amp; FURY name" style="width:100%;box-sizing:border-box;padding:11px;border-radius:9px;border:1px solid #71401f;background:#160c08;color:#fff">
+      <label style="display:block;margin:10px 0 5px">📧 Email</label>
+      <input id="authSignupEmail" type="email" autocomplete="email" placeholder="you@example.com" style="width:100%;box-sizing:border-box;padding:11px;border-radius:9px;border:1px solid #71401f;background:#160c08;color:#fff">
+      <label style="display:block;margin:10px 0 5px">🔑 Password</label>
+      <input id="authSignupPassword" type="password" minlength="6" autocomplete="new-password" placeholder="At least 6 characters" style="width:100%;box-sizing:border-box;padding:11px;border-radius:9px;border:1px solid #71401f;background:#160c08;color:#fff">
+      <label style="display:block;margin:10px 0 5px">🔑 Confirm password</label>
+      <input id="authSignupConfirm" type="password" minlength="6" autocomplete="new-password" placeholder="Repeat password" style="width:100%;box-sizing:border-box;padding:11px;border-radius:9px;border:1px solid #71401f;background:#160c08;color:#fff">
+      <div class="ff-row" style="justify-content:center;margin-top:12px">
+        <button class="btn gold" type="button" onclick="createFuryAccount()">🚀 CREATE ACCOUNT</button>
+        <button class="btn" type="button" onclick="showAuthLogin()">BACK TO LOGIN</button>
+      </div>
+    </div><div id="authStatus" class="ff-status" style="margin-top:10px">Your account will be used for online multiplayer and global scores.</div>
+  </div>
+</div>
+
+<div id="multiplayerModal" class="ff-modal" role="dialog" aria-modal="true" aria-labelledby="mpTitle">
+  <div class="ff-modal-card">
+    <h2 id="mpTitle">👥 ONLINE MULTIPLAYER</h2>
+    <p>Challenge another FIRE &amp; FURY player on a different device.</p>
+    <div class="ff-row"><input id="mpOpponent" maxlength="24" placeholder="Opponent username" autocomplete="off"><button class="btn" type="button" onclick="sendMultiplayerRequest()">⚔️ Send Request</button></div>
+    <div id="mpIncoming" class="ff-status">Checking for incoming requests…</div>
+    <div class="ff-row" style="justify-content:center;margin:10px 0"><button class="btn gold" type="button" onclick="openFivePlayerRoom()">🚀 JOIN 5-WARRIOR ROCKET BATTLE</button></div>
+    <div id="mpMissionPicker" class="ff-status" style="margin-top:8px">
+      <b>🎮 Choose the online mission</b>
+      <div class="ff-row" style="justify-content:center">
+        <button class="btn" type="button" onclick="selectOnlineMission('volcano')">🌋 Volcano Rush</button>
+        <button class="btn" type="button" onclick="selectOnlineMission('rocket')">🚀 Rocket Battle</button>
+        <button class="btn" type="button" onclick="selectOnlineMission('final')">🔥 Final Fury</button>
+      </div>
+      <div id="mpMissionStatus" style="font-size:.9em;color:#f2d2b6">No mission selected yet.</div>
+    </div>
+    <div id="mpStatus" class="ff-status" style="margin-top:8px">Online multiplayer backend is not connected yet.</div><div id="mpReadyRow" class="ff-row" style="justify-content:center"></div>
+    <div class="ff-row" style="justify-content:flex-end"><button class="btn" type="button" onclick="closeMultiplayer()">Close</button></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ===== ONLINE MULTIPLAYER BACKEND HOOK =====
+   Put your Supabase project URL + publishable key here after creating the project.
+   Never put a service_role/secret key in this HTML file. */
+const FF_SUPABASE_URL = "https://owskmswgaehtefaqngmj.supabase.co";
+const FF_SUPABASE_KEY = "sb_publishable_gxEKXEcanTz1Nsb5ifgJkg_xKMe8PAd";
+let ffSupabase = null, ffUser = null, ffRequestChannel = null;
+
+function multiplayerBackendReady(){ return window.supabase && FF_SUPABASE_URL.startsWith("https://") && !FF_SUPABASE_URL.includes("YOUR_") && !FF_SUPABASE_KEY.includes("YOUR_"); }
+
+async function ensureSupabaseClient(){
+  if(!multiplayerBackendReady()) throw new Error("Supabase is not configured.");
+  if(!window.supabase || typeof window.supabase.createClient !== "function") throw new Error("Supabase client library did not load. Check your internet connection and reopen the game.");
+  if(!ffSupabase){
+    ffSupabase = window.supabase.createClient(FF_SUPABASE_URL, FF_SUPABASE_KEY, {
+      auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
+    });
+  }
+  return ffSupabase;
+}
+
+function setAuthStatus(t){ const el=document.getElementById("authStatus"); if(el) el.textContent=t; }
+function showAuthLogin(){
+  document.getElementById("authLoginForm")?.removeAttribute("hidden");
+  document.getElementById("authSignupForm")?.setAttribute("hidden","");
+  const t=document.getElementById("authTitle"); if(t) t.textContent="🔥 FIRE & FURY LOGIN";
+  const sub=document.getElementById("authSubtitle"); if(sub) sub.textContent="Log in to continue to your FIRE & FURY player account.";
+  setAuthStatus("Enter your email and password.");
+}
+function showAuthSignup(){
+  document.getElementById("authLoginForm")?.setAttribute("hidden","");
+  document.getElementById("authSignupForm")?.removeAttribute("hidden");
+  const t=document.getElementById("authTitle"); if(t) t.textContent="🔥 CREATE FIRE & FURY ACCOUNT";
+  const sub=document.getElementById("authSubtitle"); if(sub) sub.textContent="Your account keeps your player identity ready for multiplayer and online scores.";
+  setAuthStatus("Use a real email address you can access if email confirmation is enabled.");
+}
+function openAuthGate(){
+  document.getElementById("authModal")?.classList.add("show");
+  showAuthLogin();
+}
+function closeAuthGate(){ document.getElementById("authModal")?.classList.remove("show"); }
+
+// Close the login/signup/guest popup when the user taps the backdrop.
+// Taps/clicks inside the popup itself are left untouched.
+function installAuthOutsideClose(){
+  const modal=document.getElementById("authModal");
+  const card=modal?.querySelector(".ff-modal-card");
+  if(!modal || !card || modal.dataset.outsideCloseInstalled==="1") return;
+  modal.dataset.outsideCloseInstalled="1";
+  const closeIfOutside=(event)=>{
+    if(!modal.classList.contains("show")) return;
+    if(!card.contains(event.target)) closeAuthGate();
+  };
+  modal.addEventListener("pointerdown",closeIfOutside);
+  modal.addEventListener("click",closeIfOutside);
+}
+
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",installAuthOutsideClose);
+else installAuthOutsideClose();
+
+async function syncAuthenticatedProfile(user, preferredUsername){
+  const metadataName=String(user?.user_metadata?.username||preferredUsername||"Player").trim();
+  const cleanName=(metadataName||"Player").replace(/\s+/g," ").slice(0,24);
+  let onlineProfile=null;
+  try{
+    const {data:existing,error:lookupError}=await ffSupabase.from("profiles").select("username,avatar").eq("id",user.id).maybeSingle();
+    if(lookupError) throw lookupError;
+    onlineProfile=existing;
+  }catch(e){ console.warn("Profile lookup",e); }
+  activePlayer=onlineProfile?.username || cleanName || "Player";
+  if(onlineProfile?.avatar){ finalAvatar=onlineProfile.avatar; loadFinalAvatarImage(finalAvatar); }
+  const {error:profileError}=await ffSupabase.from("profiles").upsert(
+    {id:user.id,username:activePlayer,avatar:finalAvatar},
+    {onConflict:"id"}
+  );
+  if(profileError) throw new Error("Profile sync failed: "+profileError.message);
+  ffUser=user;
+  renderPlayerHistory();
+  updateHeader();
+  refreshOnlineTotals();
+}
+
+async function finishAuthenticatedEntry(){
+  if(!ffUser?.id) return false;
+  closeAuthGate();
+  const ss=document.getElementById("startScreen");
+  if(ss) ss.classList.add("hidden");
+  show("home");
+  setTimeout(()=>subscribeMultiplayerRequests(),0);
+  setTimeout(()=>setMpStatus("🟢 Online as "+activePlayer+". You can send a challenge request."),0);
+  return true;
+}
+
+async function initMultiplayerBackend(){
+  if(!multiplayerBackendReady()){ setMpStatus("⚠️ Multiplayer is not configured yet."); return false; }
+  try{
+    await ensureSupabaseClient();
+    const sessionResult=await ffSupabase.auth.getSession();
+    if(sessionResult.error) throw sessionResult.error;
+    const session=sessionResult.data?.session||null;
+    if(!session?.user?.id){
+      setMpStatus("🔐 Please log in or create a FIRE & FURY account first.");
+      return false;
+    }
+    if(session.user.is_anonymous){
+      setMpStatus("🔐 This game now uses real FIRE & FURY accounts. Please log in or create one.");
+      return false;
+    }
+    ffUser=session.user;
+    await syncAuthenticatedProfile(ffUser, activePlayer);
+    subscribeMultiplayerRequests();
+    setMpStatus("🟢 Online as "+activePlayer+". You can send a challenge request.");
+    return true;
+  }catch(e){
+    const msg=String(e?.message||e||"Unknown error");
+    setMpStatus("❌ Online setup error: "+msg);
+    console.warn("FIRE & FURY Supabase setup error",e);
+    return false;
+  }
+}
+
+
+function canPlayFuryGame(){
+  if(!ffUser?.id || ffUser.is_anonymous) return false;
+  return true;
+}
+
+async function loginFuryAccount(){
+  try{
+    await ensureSupabaseClient();
+    const email=(document.getElementById("authLoginEmail")?.value||"").trim().toLowerCase();
+    const password=document.getElementById("authLoginPassword")?.value||"";
+    if(!email || !password){setAuthStatus("📧 Enter your email and 🔑 password.");return;}
+    setAuthStatus("🔥 Logging you in…");
+    const {data,error}=await ffSupabase.auth.signInWithPassword({email,password});
+    if(error) throw error;
+    if(!data?.user){throw new Error("Login succeeded but no player account was returned.");}
+    await syncAuthenticatedProfile(data.user);
+    await finishAuthenticatedEntry();
+  }catch(e){
+    setAuthStatus("❌ "+(e?.message||e));
+    console.warn("FIRE & FURY login error",e);
+  }
+}
+
+async function createFuryAccount(){
+  try{
+    await ensureSupabaseClient();
+    const username=(document.getElementById("authSignupUsername")?.value||"").trim().replace(/\s+/g," ").slice(0,24);
+    const email=(document.getElementById("authSignupEmail")?.value||"").trim().toLowerCase();
+    const password=document.getElementById("authSignupPassword")?.value||"";
+    const confirm=document.getElementById("authSignupConfirm")?.value||"";
+    if(username.length<2){setAuthStatus("👤 Player name must be at least 2 characters.");return;}
+    if(!email || !email.includes("@")){setAuthStatus("📧 Enter a valid email address.");return;}
+    if(password.length<6){setAuthStatus("🔑 Password must be at least 6 characters.");return;}
+    if(password!==confirm){setAuthStatus("🔑 Passwords do not match.");return;}
+    setAuthStatus("🚀 Creating your FIRE & FURY account…");
+    const {data,error}=await ffSupabase.auth.signUp({email,password,options:{data:{username}}});
+    if(error) throw error;
+    if(data?.session?.user){
+      await syncAuthenticatedProfile(data.session.user,username);
+      await finishAuthenticatedEntry();
+      setAuthStatus("🔥 Account created!");
+    }else{
+      showAuthLogin();
+      const emailBox=document.getElementById("authLoginEmail"); if(emailBox) emailBox.value=email;
+      setAuthStatus("📧 Account created. Check your email to confirm the account, then log in here.");
+    }
+  }catch(e){
+    setAuthStatus("❌ "+(e?.message||e));
+    console.warn("FIRE & FURY signup error",e);
+  }
+}
+
+async function sendFuryPasswordReset(){
+  try{
+    await ensureSupabaseClient();
+    const email=(document.getElementById("authLoginEmail")?.value||"").trim().toLowerCase();
+    if(!email){setAuthStatus("📧 Enter your email first, then choose Forgot password.");return;}
+    setAuthStatus("📨 Sending password reset email…");
+    const {error}=await ffSupabase.auth.resetPasswordForEmail(email,{redirectTo:window.location.href});
+    if(error) throw error;
+    setAuthStatus("📨 If that email is registered, a password reset link has been sent.");
+  }catch(e){setAuthStatus("❌ "+(e?.message||e));}
+}
+
+async function logoutFuryAccount(){
+  if(!ffSupabase) return;
+  try{ await ffSupabase.auth.signOut(); }catch(e){console.warn(e);}
+  ffUser=null;
+  activePlayer="Player";
+  finalAvatar="🌋";
+  if(ffRequestChannel){try{await ffSupabase.removeChannel(ffRequestChannel);}catch(_){} ffRequestChannel=null;}
+  document.getElementById("authLoginPassword")?.value && (document.getElementById("authLoginPassword").value="");
+  document.getElementById("authModal")?.classList.remove("show");
+  show("home");
+  setAuthStatus("🚪 Logged out. You are logged out. Log in or create a FIRE & FURY account to start a game.");
+}
+
+function installAuthListener(){
+  if(!ffSupabase) return;
+  ffSupabase.auth.onAuthStateChange((event,session)=>{
+    if(event==="SIGNED_OUT"){ ffUser=null; }
+  });
+}
+
+// Prepare the real account system as soon as Supabase is available.
+(async()=>{
+  try{
+    await ensureSupabaseClient();
+    installAuthListener();
+    const {data}=await ffSupabase.auth.getSession();
+    if(data?.session?.user){
+      ffUser=data.session.user;
+      if(ffUser.is_anonymous){
+        // Guest profiles are no longer supported. Clear any old anonymous session.
+        await ffSupabase.auth.signOut();
+        ffUser=null;
+        activePlayer="Player";
+        finalAvatar="🌋";
+        return;
+      }
+      await syncAuthenticatedProfile(ffUser);
+      // IMPORTANT: keep the opening START SCREEN visible on every fresh page load.
+      // A persisted Supabase session may exist, but it must not silently remove
+      // the first page. The start screen is hidden only after the user explicitly
+      // chooses Login / Sign Up through finishAuthenticatedEntry().
+      show("home");
+      subscribeMultiplayerRequests();
+    }
+  }catch(e){ console.warn("FIRE & FURY account startup",e); }
+})();
+
+function setMpStatus(t){ const el=document.getElementById("mpStatus"); if(el) el.textContent=t; }
+
+function openMultiplayer(){ document.getElementById("multiplayerModal")?.classList.add("show"); initMultiplayerBackend(); }
+function closeMultiplayer(){ document.getElementById("multiplayerModal")?.classList.remove("show"); }
+
+async function sendMultiplayerRequest(){
+  const opponent=(document.getElementById("mpOpponent")?.value||"").trim().replace(/\s+/g," ").slice(0,24);
+  if(!opponent){setMpStatus("Enter the other player's username first.");return;}
+  if(!await initMultiplayerBackend()) return;
+  try{
+    const {data:target,error:findError}=await ffSupabase.from("profiles").select("id,username").ilike("username",opponent).maybeSingle();
+    if(findError) throw findError;
+    if(!target){setMpStatus("❌ That username is not registered online.");return;}
+    if(target.id===ffUser.id){setMpStatus("Choose another player.");return;}
+    const {data:req,error}=await ffSupabase.from("match_requests").insert({from_user:ffUser.id,to_user:target.id,status:"pending"}).select("id").single();
+    if(error) throw error;
+    setMpStatus("📨 Request sent to "+target.username+". Waiting for acceptance…");
+    // Realtime is fast when available, but the PC sender also uses a small
+    // database fallback so a browser/network that misses the UPDATE event
+    // can still enter the match after the other player accepts.
+    waitForAcceptedMatch(req?.id);
+  }catch(e){setMpStatus("❌ Could not send request: "+(e.message||e));}
+}
+
+function subscribeMultiplayerRequests(){
+  if(!ffSupabase||!ffUser)return;
+  if(ffRequestChannel){ ffSupabase.removeChannel(ffRequestChannel); ffRequestChannel=null; }
+  ffRequestChannel=ffSupabase.channel("ff-requests-"+ffUser.id)
+    .on("postgres_changes",{event:"INSERT",schema:"public",table:"match_requests",filter:"to_user=eq."+ffUser.id},payload=>showIncomingRequest(payload.new))
+    .on("postgres_changes",{event:"UPDATE",schema:"public",table:"match_requests",filter:"from_user=eq."+ffUser.id},async payload=>{
+      if(payload.new.status==="accepted"){
+        setMpStatus("✅ Your opponent accepted! Opening the match room…");
+        waitForAcceptedMatch(payload.new.id);
+      }
+    })
+    .subscribe(status=>{
+      if(status==="SUBSCRIBED") console.log("FIRE & FURY request channel connected");
+      if(status==="CHANNEL_ERROR" || status==="TIMED_OUT") setMpStatus("⚠️ Online requests connected to the database, but Realtime is unavailable. Check Supabase Realtime/RLS settings.");
+    });
+}
+async function waitForAcceptedMatch(requestId){
+  if(!requestId || !ffSupabase || !ffUser) return;
+  const started=Date.now();
+  const timeout=120000;
+  let lastStatus="pending";
+  while(Date.now()-started<timeout){
+    try{
+      const {data:req,error:reqError}=await ffSupabase.from("match_requests").select("id,status").eq("id",requestId).maybeSingle();
+      if(reqError) throw reqError;
+      if(req?.status && req.status!==lastStatus){
+        lastStatus=req.status;
+        if(req.status==="accepted") setMpStatus("✅ Opponent accepted! Opening the match room…");
+        if(req.status==="declined"){ setMpStatus("❌ Your opponent declined the request."); return; }
+      }
+      if(req?.status==="accepted"){
+        const {data:mp,error:mpError}=await ffSupabase
+          .from("matches")
+          .select("id")
+          .eq("created_by",ffUser.id)
+          .eq("status","active")
+          .order("created_at",{ascending:false})
+          .limit(1)
+          .maybeSingle();
+        if(mpError) throw mpError;
+        if(mp?.id){
+          await enterOnlineMatch(mp.id);
+          const inc=document.getElementById("mpIncoming");
+          if(inc) inc.innerHTML='<b>✅ Opponent accepted!</b><div class="ff-row">Choose the mission below, then press READY.</div>';
+          updateMpReadyButton();
+          return;
+        }
+      }
+    }catch(e){
+      console.warn("FIRE & FURY match polling",e);
+    }
+    await new Promise(resolve=>setTimeout(resolve,1500));
+  }
+}
+
+function showIncomingRequest(req){
+  const el=document.getElementById("mpIncoming"); if(!el)return;
+  el.innerHTML=`⚔️ <b>Multiplayer request received.</b> <button class="btn" type="button" onclick="acceptMultiplayerRequest('${String(req.id).replace(/'/g,"\\'")}')">Accept</button> <button class="btn" type="button" onclick="declineMultiplayerRequest('${String(req.id).replace(/'/g,"\\'")}')">Decline</button>`;
+}
+async function acceptMultiplayerRequest(id){
+  if(!ffSupabase){setMpStatus("Online backend is not connected.");return;}
+  const {data,error}=await ffSupabase.rpc("respond_to_match_request",{p_request_id:id,p_accept:true});
+  if(error){setMpStatus("❌ "+error.message);return;}
+  document.getElementById("mpIncoming").textContent="✅ Request accepted. Match room created.";
+  if(data){ await enterOnlineMatch(data); const inc=document.getElementById("mpIncoming"); if(inc) inc.innerHTML='<b>✅ Request accepted. Match room created.</b><div class="ff-row">Choose the mission below, then press READY.</div>'; updateMpReadyButton(); }
+}
+async function declineMultiplayerRequest(id){
+  if(!ffSupabase){setMpStatus("Online backend is not connected.");return;}
+  const {error}=await ffSupabase.rpc("respond_to_match_request",{p_request_id:id,p_accept:false});
+  if(error)setMpStatus("❌ "+error.message); else document.getElementById("mpIncoming").textContent="Request declined.";
+}
+let ffMatch = {id:null,channel:null,ready:false,opponentReady:false,opponentScore:0,opponentCombo:0,opponentDone:false,localDone:false,mission:null,opponentMission:null};
+
+function missionLabel(type){ return type==="volcano" ? "🌋 VOLCANO RUSH" : type==="rocket" ? "🚀 ROCKET BATTLE" : "🔥 FINAL FURY"; }
+function selectOnlineMission(type, announce=true){
+  if(!["volcano","rocket","final"].includes(type)) return;
+  if(ffMatch.opponentMission && ffMatch.opponentMission!==type){ setMpStatus("⚠️ Your opponent already selected "+missionLabel(ffMatch.opponentMission)+". Both players must use the same mission."); return; }
+  ffMatch.mission=type;
+  const st=document.getElementById("mpMissionStatus"); if(st) st.textContent="Selected: "+missionLabel(type);
+  if(announce && ffMatch.channel) mpSend({kind:"mission",userId:ffUser.id,mission:type});
+  updateMpReadyButton();
+}
+function updateMpReadyButton(){
+  const rr=document.getElementById("mpReadyRow"); if(!rr) return;
+  if(!ffMatch.channel){ rr.innerHTML=""; return; }
+  if(!ffMatch.mission){ rr.innerHTML='<span style="color:#f0cdb0">🎮 Choose a mission first.</span>'; return; }
+  if(ffMatch.opponentMission && ffMatch.opponentMission!==ffMatch.mission){ rr.innerHTML='<span style="color:#ffb58d">⚠️ Waiting for the same mission on both devices.</span>'; return; }
+  rr.innerHTML='<button class="btn gold" type="button" onclick="startMultiplayerReady()">🔥 READY FOR '+missionLabel(ffMatch.mission)+'</button>';
+}
+let ffLastBroadcast=0;
+
+async function enterOnlineMatch(matchId){
+  ffMatch={id:matchId,channel:null,ready:false,opponentReady:false,opponentScore:0,opponentCombo:0,opponentDone:false,localDone:false,mission:null,opponentMission:null};
+  if(!ffSupabase || !ffUser){ setMpStatus("❌ Multiplayer session is not ready."); return; }
+  setMpStatus("⚔️ Match found. Both players must press READY.");
+  const ch=ffSupabase.channel("ff-match-"+matchId);
+  ch.on("broadcast",{event:"match_event"},payload=>handleRemoteGameEvent(payload.payload)).subscribe(status=>{
+    if(status==="SUBSCRIBED"){
+      ffMatch.channel=ch;
+      updateMpBattleBar("🟡 Waiting for both players…");
+      ch.send({type:"broadcast",event:"match_event",payload:{kind:"hello",userId:ffUser.id,username:activePlayer,mission:ffMatch.mission}});
+      setMpStatus("🟢 Match room connected. Press READY to start.");
+      updateMpReadyButton();
+    }
+  });
+  window.ffActiveMatchChannel=ch; window.ffActiveMatchId=matchId;
+}
+
+function updateMpBattleBar(text){
+  const el=document.getElementById("mpBattleBar");
+  if(el){el.textContent=text;el.classList.add("show");}
+}
+
+async function mpSend(payload){
+  if(ffMatch.channel) await ffMatch.channel.send({type:"broadcast",event:"match_event",payload});
+}
+
+async function startMultiplayerReady(){
+  if(!ffMatch.id || !ffMatch.channel){setMpStatus("Connect to the match room first.");return;}
+  if(!ffMatch.mission){setMpStatus("🎮 Choose a mission before pressing READY.");return;}
+  if(ffMatch.opponentMission && ffMatch.opponentMission!==ffMatch.mission){setMpStatus("⚠️ Both players must choose the same mission.");return;}
+  ffMatch.ready=true;
+  await mpSend({kind:"ready",userId:ffUser.id,username:activePlayer,avatar:finalAvatar,mission:ffMatch.mission});
+  setMpStatus(ffMatch.opponentReady?"🔥 Both ready — battle starting!":"🟡 Ready. Waiting for your opponent…");
+  if(ffMatch.opponentReady && ffMatch.mission===ffMatch.opponentMission) launchMultiplayerBattle();
+}
+
+function launchMultiplayerBattle(){
+  if(!ffMatch.mission || (ffMatch.opponentMission && ffMatch.opponentMission!==ffMatch.mission)){ setMpStatus("⚠️ Mission selection is not synchronized yet."); return; }
+  closeMultiplayer();
+  document.getElementById("mpBattleBar")?.classList.add("show");
+  updateMpBattleBar("⚔️ ONLINE DUEL • "+missionLabel(ffMatch.mission)+" • Opponent score: 0");
+  startGame(ffMatch.mission,true);
+}
+
+function handleRemoteGameEvent(event){
+  if(!event || !ffMatch.id || event.userId===ffUser?.id) return;
+  if(event.kind==="hello"){
+    if(event.mission && ["volcano","rocket","final"].includes(event.mission) && !ffMatch.mission){
+      ffMatch.mission=event.mission;
+      ffMatch.opponentMission=event.mission;
+      const st=document.getElementById("mpMissionStatus"); if(st) st.textContent="Opponent selected: "+missionLabel(event.mission);
+      updateMpReadyButton();
+    }
+    if(ffMatch.ready) mpSend({kind:"ready",userId:ffUser.id,username:activePlayer,avatar:finalAvatar,mission:ffMatch.mission});
+    return;
+  }
+  if(event.kind==="mission"){
+    if(!["volcano","rocket","final"].includes(event.mission)) return;
+    ffMatch.opponentMission=event.mission;
+    if(!ffMatch.mission) ffMatch.mission=event.mission;
+    const st=document.getElementById("mpMissionStatus");
+    if(st) st.textContent="Opponent selected: "+missionLabel(event.mission);
+    if(ffMatch.mission!==event.mission){ ffMatch.ready=false; setMpStatus("⚠️ Opponent chose "+missionLabel(event.mission)+". Select the same mission to continue."); }
+    updateMpReadyButton();
+  }
+  if(event.kind==="ready"){
+    ffMatch.opponentReady=true;
+    if(event.mission) ffMatch.opponentMission=event.mission;
+    if(!ffMatch.mission && event.mission) ffMatch.mission=event.mission;
+    updateMpReadyButton();
+    setMpStatus(ffMatch.ready && ffMatch.mission===ffMatch.opponentMission?"🔥 Both ready — battle starting!":"🟡 Opponent is ready. Press READY to join.");
+    updateMpBattleBar("🟡 Opponent ready • "+(ffMatch.mission?missionLabel(ffMatch.mission):"Choose a mission"));
+    if(ffMatch.ready && ffMatch.mission===ffMatch.opponentMission) launchMultiplayerBattle();
+  }
+  if(event.kind==="score"){
+    ffMatch.opponentScore=Number(event.score)||0;
+    ffMatch.opponentCombo=Number(event.combo)||0;
+    if(gameRunning && ffMatch.id) updateMpBattleBar(`⚔️ ONLINE DUEL • You: ${score} • Opponent: ${ffMatch.opponentScore} • Combo ${ffMatch.opponentCombo}`);
+  }
+  if(event.kind==="done"){
+    ffMatch.opponentDone=true;
+    ffMatch.opponentScore=Number(event.score)||0;
+    if(gameRunning) updateMpBattleBar(`⚔️ Opponent finished: ${ffMatch.opponentScore} pts • Finish your run!`);
+    else { renderMultiplayerResult(); showMultiplayerWinner(); }
+  }
+}
+
+function showMultiplayerWinner(){
+  if(!ffMatch.id || !ffMatch.localDone || !ffMatch.opponentDone) return;
+  const mine=Number(score)||0, theirs=Number(ffMatch.opponentScore)||0;
+  const result=mine>theirs?"🏆 VICTORY!":mine<theirs?"💥 DEFEAT":"🤝 DRAW!";
+  const el=document.getElementById("mpBattleBar");
+  if(el) el.textContent=`${result}  You ${mine} • Opponent ${theirs}`;
+}
+/* =====================================================
+   FIRE & FURY — NEXT-GENERATION THREE-MODE ENGINE
+   Rocket Battle = battlefield combat
+   Volcano Rush = living volcanic exploration
+   Final Fury = combined endgame chaos
+===================================================== */
+function setModeHud(text){
+  const el=document.getElementById('modeBattleHud');
+  if(el){el.textContent=text;el.classList.toggle('show',!!text);}
+}
+
+function setModeBanner(type){
+  if(type==='rocket') setModeHud('🚀 ROCKET BATTLE · Mysorean rockets only · 1–4 switch rocket powers · Survive the British assault');
+  else if(type==='volcano') setModeHud('🌋 VOLCANO RUSH · Gather rare materials · Read the terrain · Survive the living volcano');
+  else setModeHud('🔥 FINAL FURY · Battlefield + volcano · The world gets more dangerous every wave');
+}
+
+function startGame(type,multiplayer=false){
+  modeRunStats={kills:0,crystals:0,perfect:true,rocketType:0};
+  rocketLoadoutIndex=0; enemyWave=1; modeElapsed=0; modeEventTimer=0; volcanoHeat=0; finalChaos=0;
+  startGameLegacy(type,multiplayer);
+  setModeBanner(type);
+  fitGameCanvas();
+  updateModeHud();
+}
+
+function updateModeHud(){
+  const el=document.getElementById('modeBattleHud');
+  if(!el||!gameRunning)return;
+  if(gameType==='rocket'){
+    const r=ROCKET_LOADOUTS[rocketLoadoutIndex];
+    el.textContent=`🚀 ${r.icon} ${r.name} ROCKET · Wave ${enemyWave} · ${modeRunStats.kills} enemy kills · 1–4 change rocket`;
+  }else if(gameType==='volcano'){
+    el.textContent=`🌋 VOLCANO RUSH · Wave ${enemyWave} · ${modeRunStats.crystals} rare materials · Heat ${Math.round(volcanoHeat)}%`;
+  }else{
+    el.textContent=`🔥 FINAL FURY · Chaos ${Math.round(finalChaos)}% · Wave ${enemyWave} · ${modeRunStats.kills} threats destroyed`;
+  }
+}
+
+function fitGameCanvas(){
+  if(!canvas)return;
+  const screen=document.getElementById('game');
+  if(!screen?.classList.contains('active'))return;
+  const vw=Math.max(280,window.innerWidth-16);
+  const vh=Math.max(240,window.innerHeight-150);
+  const scale=Math.min(vw/960,vh/600,1.15);
+  canvas.style.width=Math.round(960*scale)+'px';
+  canvas.style.height=Math.round(600*scale)+'px';
+}
+window.addEventListener('resize',fitGameCanvas,{passive:true});
+
+function spawnObject(){
+  /* Use the original resource/target system as the base, then add mode-specific threats. */
+  spawnObjectLegacy();
+  if(!gameRunning)return;
+  if(gameType==='rocket'){
+    const difficulty=Math.min(1,modeElapsed/45);
+    if(Math.random()<0.22+difficulty*.18){
+      const types=[
+        ['rifleman','🔫',190,1,180],
+        ['sharpshooter','🎯',145,1,320],
+        ['grenadier','💣',110,1,260],
+        ['artillery','🧨',85,1,420],
+        ['commander','👑',70,2,700]
+      ];
+      const pick=types[Math.floor(Math.random()*types.length)];
+      objects.push({x:40+Math.random()*(canvas.width-80),y:-55,size:42,speed:pick[2],rotation:0,spin:(Math.random()-.5)*3,type:pick[0],enemyUnit:true,hazard:true,shootable:true,value:pick[4],hp:pick[3],enemyFireTimer:.7+Math.random()*1.6});
+    }
+  }else if(gameType==='volcano'){
+    const difficulty=Math.min(1,modeElapsed/45);
+    if(Math.random()<.18+difficulty*.22){
+      const rare=Math.random()<.55;
+      objects.push({x:40+Math.random()*(canvas.width-80),y:-45,size:rare?36:48,speed:90+Math.random()*130,rotation:0,spin:(Math.random()-.5)*5,type:rare?'crystal':'lavafall',collectible:rare,hazard:!rare,value:rare?450:0,volcanic:true});
+    }
+  }else{
+    finalChaos=Math.min(100,finalChaos+0.08);
+    if(Math.random()<.18+Math.min(.22,modeElapsed/180)){
+      const type=Math.random()<.5?'eliteEnemy':'magmaCore';
+      objects.push({x:40+Math.random()*(canvas.width-80),y:-55,size:type==='eliteEnemy'?46:54,speed:120+Math.random()*170,rotation:0,spin:(Math.random()-.5)*5,type,enemyUnit:type==='eliteEnemy',hazard:true,shootable:true,value:type==='eliteEnemy'?500:650,hp:type==='eliteEnemy'?2:3,enemyFireTimer:.5+Math.random()});
+    }
+  }
+}
+
+function updateModeAI(dt){
+  modeElapsed += dt;
+  enemyWave=1+Math.floor(modeElapsed/8);
+  if(gameType==='volcano'){
+    volcanoHeat=Math.min(100,volcanoHeat+dt*(2.5+enemyWave*.35));
+    modeEventTimer-=dt;
+    if(modeEventTimer<=0){
+      modeEventTimer=1.2-Math.min(.55,enemyWave*.025);
+      if(Math.random()<.65){
+        objects.push({x:Math.random()*canvas.width,y:-35,size:28+Math.random()*28,speed:240+enemyWave*9,rotation:0,spin:3,type:'ember',hazard:true,shootable:false,value:0});
+      }
+    }
+  }
+  if(gameType==='rocket'||gameType==='final'){
+    for(const o of objects){
+      if(!o.enemyUnit||!o.enemyFireTimer)continue;
+      o.enemyFireTimer-=dt;
+      if(o.enemyFireTimer<=0 && o.y>20 && o.y<canvas.height*.62){
+        o.enemyFireTimer=Math.max(.38,1.6-enemyWave*.06)+Math.random()*.8;
+        objects.push({type:'enemyBullet',x:o.x,y:o.y+25,size:10,speed:260+enemyWave*8,rotation:0,spin:0,hazard:true,enemyProjectile:true});
+      }
+    }
+  }
+}
+
+function update(dt){
+  updateLegacy(dt);
+  if(gameRunning)updateModeAI(dt);
+  if(gameRunning)updateModeHud();
+}
+
+function fire(){
+  if(!gameRunning)return;
+  if(gameType==='volcano'){
+    /* Volcano Rush uses FIRE as a mining/clearing pulse. */
+    playSfx('rock');
+    let cleared=0;
+    for(const o of objects){
+      if((o.type==='crystal'||o.type==='lavafall'||o.type==='ember') && Math.abs(o.x-player.x)<105 && Math.abs(o.y-player.y)<115){
+        o._clear=true;
+        if(o.type==='crystal'){score+=o.value||450;modeRunStats.crystals++;cleared++;}
+      }
+    }
+    objects=objects.filter(o=>!o._clear);
+    createExplosion(player.x,player.y,'#ff9d2e');
+    screenShake=Math.max(screenShake,6);
+    return;
+  }
+  const r=ROCKET_LOADOUTS[rocketLoadoutIndex];
+  playSfx('launch');
+  const make=(x,spread=0)=>({type:'bullet',x,y:player.y-30,speed:r.speed,size:r.heavy?12:8,rocketKind:r.name,rocketValue:r.value,rocketSpread:spread,rocketHeavy:!!r.heavy});
+  objects.push(make(player.x));
+  if(r.spread){objects.push(make(player.x-18,-1),make(player.x+18,1));}
+  screenShake=Math.max(screenShake,r.heavy?6:2.5);
+  createParticles(player.x,player.y-28,r.heavy?14:8,'#fff0a0');
+}
+
+function drawObjects(){
+  drawObjectsLegacy();
+  /* Draw new enemies/projectiles on top of the original visual layer. */
+  for(const o of objects){
+    if(!['rifleman','sharpshooter','grenadier','artillery','commander','eliteEnemy','magmaCore','enemyBullet','crystal','lavafall','ember'].includes(o.type))continue;
+    ctx.save();ctx.translate(o.x,o.y);ctx.rotate(o.rotation||0);
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    const icons={rifleman:'🔫',sharpshooter:'🎯',grenadier:'💣',artillery:'🧨',commander:'👑',eliteEnemy:'⚔️',magmaCore:'🌋',enemyBullet:'✦',crystal:'💎',lavafall:'🔥',ember:'🔸'};
+    ctx.font=o.type==='enemyBullet'?'24px serif':o.type==='magmaCore'?'44px serif':'36px serif';
+    if(o.type==='enemyBullet'){ctx.shadowColor='#ff3b19';ctx.shadowBlur=18;ctx.fillStyle='#fff2a1';}
+    ctx.fillText(icons[o.type]||'?',0,0);
+    ctx.restore();
+  }
+}
+
+function draw(){
+  drawLegacy();
+  drawModeEffects();
+}
+
+/* Rename-compatible copy of the old renderer. */
+function drawLegacy(){
+  ctx.save();
+  if(screenShake>0)ctx.translate((Math.random()-.5)*screenShake,(Math.random()-.5)*screenShake);
+  drawBackground();drawObjects();drawPlayer();drawParticles();drawExplosions();drawFloatingTexts();
+  ctx.restore();
+}
+
+function drawModeEffects(){
+  if(!gameRunning)return;
+  ctx.save();
+  /* Weapon identity: every Mysorean rocket power has its own battlefield look. */
+  if(gameType==='rocket'){
+    const r=ROCKET_LOADOUTS[rocketLoadoutIndex];
+    ctx.save();ctx.translate(player.x,player.y-36);ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font='20px serif';ctx.shadowColor='#ff7b20';ctx.shadowBlur=14;ctx.fillText(r.icon,0,0);ctx.restore();
+    for(const o of objects){
+      if(o.type!=='bullet'||!o.rocketKind)continue;
+      ctx.save();ctx.translate(o.x,o.y);ctx.textAlign='center';ctx.textBaseline='middle';
+      const rr=ROCKET_LOADOUTS.find(x=>x.name===o.rocketKind)||ROCKET_LOADOUTS[0];
+      ctx.font=o.rocketHeavy?'18px serif':'14px serif';ctx.shadowColor=o.rocketHeavy?'#ff2a10':'#ffb02e';ctx.shadowBlur=o.rocketHeavy?20:12;ctx.fillText(rr.icon,0,0);ctx.restore();
+    }
+  }
+  if(gameType==='volcano'){
+    ctx.globalAlpha=.10+volcanoHeat/100*.18;ctx.fillStyle='#ff4d18';ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.globalAlpha=.55;ctx.strokeStyle='#ffb23d';ctx.lineWidth=2;
+    const y=canvas.height-22-Math.sin(performance.now()*.003)*8;
+    ctx.beginPath();ctx.moveTo(0,y);ctx.quadraticCurveTo(canvas.width*.25,y-18,canvas.width*.5,y+4);ctx.quadraticCurveTo(canvas.width*.75,y+22,canvas.width,y-6);ctx.stroke();
+  }else if(gameType==='rocket'){
+    ctx.globalAlpha=.22;ctx.strokeStyle='#d6c5ff';ctx.setLineDash([6,12]);ctx.lineWidth=1;
+    for(let x=80;x<canvas.width;x+=160){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();}
+    ctx.setLineDash([]);
+  }else{
+    ctx.globalAlpha=.16+finalChaos/100*.12;ctx.fillStyle='#ff2b16';ctx.fillRect(0,0,canvas.width,canvas.height);
+    if(enemyWave>=5){ctx.globalAlpha=.4;ctx.strokeStyle='#ff8b31';ctx.lineWidth=3;ctx.beginPath();ctx.arc(canvas.width/2,canvas.height/2,150+Math.sin(performance.now()*.004)*20,0,Math.PI*2);ctx.stroke();}
+  }
+  ctx.restore();
+}
+
+/* Input: 1–4 choose the Mysorean rocket power. */
+document.addEventListener('keydown',e=>{
+  if(!gameRunning||gameType!=='rocket')return;
+  const n=Number(e.key);
+  if(n>=1&&n<=4){rocketLoadoutIndex=n-1;modeRunStats.rocketType=rocketLoadoutIndex;updateModeHud();}
+});
+
+/* Track hits/achievements without breaking the original scoring system. */
+const _oldDestroyTarget=destroyTarget;
+destroyTarget=function(o){
+  if(o?.enemyUnit)modeRunStats.kills++;
+  _oldDestroyTarget(o);
+};
+const _oldCollectObject=collectObject;
+collectObject=function(o){
+  if(o?.type==='crystal')modeRunStats.crystals++;
+  _oldCollectObject(o);
+};
+const _oldPlayerHit=playerHit;
+playerHit=function(){
+  modeRunStats.perfect=false;
+  _oldPlayerHit();
+};
+
+/* Replace the run saver with a richer record while preserving its existing Supabase sync. */
+const _oldSaveCompletedRun=saveCompletedRun;
+saveCompletedRun=function(reason){
+  const snapshot={kills:modeRunStats.kills,crystals:modeRunStats.crystals,perfect:modeRunStats.perfect,endLives:lives};
+  const profiles=safeReadProfiles();
+  const profile=profiles[activePlayer]||{runs:[]};
+  if(!Array.isArray(profile.runs))profile.runs=[];
+  const last=profile.runs[profile.runs.length-1];
+  if(last && last.date===new Date().toLocaleDateString() && last.mode===gameType && Number(last.score)===Number(score)){
+    Object.assign(last,snapshot);
+  }else{
+    profile.runs.push({date:new Date().toLocaleDateString(),mode:gameType,score:Number(score)||0,bestCombo:Number(bestCombo)||0,multiplayer:!!window.ffMultiplayerGame,outcome:reason==='LIVES'?'Out of lives':'Time completed',...snapshot});
+    profile.runs=profile.runs.slice(-100);
+  }
+  profiles[activePlayer]=profile;safeWriteProfiles(profiles);
+  renderPlayerHistory();
+  if(typeof multiplayerBackendReady==='function'&&multiplayerBackendReady())setTimeout(async()=>{try{if(!ffSupabase)await initMultiplayerBackend();if(ffSupabase&&ffUser&&!ffUser.is_anonymous)await ffSupabase.from('scores').insert({user_id:ffUser.id,mode:gameType,score:Number(score)||0,best_combo:Number(bestCombo)||0});}catch(e){console.warn('Online score sync failed',e);}},0);
+};
+
+/* Outside-tap close for the expandable achievement/Hall of Fame/profile panels. */
+document.addEventListener('pointerdown',e=>{
+  const panels=[['achievementsPanel','achievementsToggle'],['leaderboardPanel','leaderboardToggle'],['profilePanel','profileToggle']];
+  for(const [pid,bid] of panels){
+    const panel=document.getElementById(pid),button=document.getElementById(bid);
+    if(!panel||panel.hidden)continue;
+    if(panel.contains(e.target)||button?.contains(e.target))continue;
+    panel.hidden=true;panel.style.display='none';
+    if(button){button.setAttribute('aria-expanded','false');button.textContent=pid==='achievementsPanel'?'🎖️ My Achievements':pid==='leaderboardPanel'?'🏆 View Hall of Fame':'👤 My Profile';}
+  }
+},{capture:true});
+
+/* Fit the game to the active device without distorting the internal 960×600 world. */
+setTimeout(fitGameCanvas,0);
+
+</script>
+<script id="ff5-room-engine">
+(()=>{
+'use strict';
+let R={channel:null,mission:null,players:{},isLeader:false,started:false,queueMode:true,launched:false};
+function esc(x){return String(x??'').replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m]));}
+function missionLabel(type){return type==='volcano'?'🌋 VOLCANO RUSH':type==='final'?'🔥 FINAL FURY':'🚀 ROCKET BATTLE';}
+function renderRoom(){const box=document.getElementById('ff5Slots');if(!box)return;const ps=Object.values(R.players).sort((a,b)=>String(a.userId).localeCompare(String(b.userId)));box.innerHTML=Array.from({length:5},(_,i)=>{const p=ps[i];if(!p)return `<div class="ff5-slot"><div class="ff5-avatar">${i+1}</div><b>WAITING</b><small>Warrior slot</small></div>`;const av=p.avatar&&/^https?:/i.test(p.avatar)?`<img src="${esc(p.avatar)}" alt="">`:'⚔️';return `<div class="ff5-slot filled"><div class="ff5-avatar">${av}</div><b>${esc(p.username||'Warrior')}</b><small>${i===0?'👑 Match leader':'⚔️ Warrior'}</small></div>`}).join('');const n=ps.length;const st=document.getElementById('ff5Status');if(st)st.textContent=n<5?`🟡 ${n}/5 warriors in matchmaking — waiting for ${5-n} more ${n===1?'warrior':'warriors'}…`:'🔥 5/5 warriors assembled — the war room is ready!';const b=document.getElementById('ff5Start');if(b){const leader=ps[0]?.userId===window.ffUser?.id;b.disabled=!(leader&&n>=5&&!R.launched);b.textContent=R.launched?'⚔️ ASSAULT STARTED':'🔥 START ASSAULT';}}
+async function openRoom(){
+ if(typeof initMultiplayerBackend==='function')try{await initMultiplayerBackend();}catch(e){}
+ if(!window.ffSupabase||!window.ffUser){alert('Please log in to join the 5-player online war room.');return;}
+ const chosen='rocket';
+ document.getElementById('ff5Room').classList.add('show');
+ if(R.channel){renderRoom();return;}
+ R={channel:null,mission:chosen,players:{},isLeader:false,started:false,queueMode:true,launched:false};
+ const ch=ffSupabase.channel('ff-five-matchmaking-'+chosen,{config:{presence:{key:ffUser.id}}});R.channel=ch;
+ const launchIfFull=async()=>{const ps=Object.values(R.players).sort((a,b)=>String(a.userId).localeCompare(String(b.userId)));if(ps.length<5||R.launched||ps[0]?.userId!==ffUser.id)return;R.launched=true;const ids=ps.slice(0,5).map(p=>p.userId);await ch.send({type:'broadcast',event:'war_room',payload:{kind:'launch',mission:'rocket',players:ids}});};
+ ch.on('presence',{event:'sync'},()=>{const state=ch.presenceState();R.players={};Object.values(state).flat().forEach(p=>{if(p?.userId)R.players[p.userId]=p});const ps=Object.values(R.players).sort((a,b)=>String(a.userId).localeCompare(String(b.userId)));R.isLeader=ps[0]?.userId===ffUser.id;renderRoom();launchIfFull();});
+ ch.on('broadcast',{event:'war_room'},({payload})=>{if(!payload)return;if(payload.kind==='launch'&&Array.isArray(payload.players)&&payload.players.includes(ffUser.id)&&!R.launched){R.launched=true;R.mission='rocket';document.getElementById('ff5Room').classList.remove('show');window.startGame3D?.('rocket',true,{room5:true,warriorIds:payload.players});}});
+ ch.subscribe(async status=>{if(status!=='SUBSCRIBED')return;await ch.track({userId:ffUser.id,username:activePlayer,avatar:typeof finalAvatar!=='undefined'?finalAvatar:'',joinedAt:Date.now()});renderRoom();});
+ const ms=document.getElementById('ff5Mission');if(ms)ms.textContent='Matchmaking: '+missionLabel(chosen)+' · first 5 real players are grouped together.';
+}
+window.openFivePlayerRoom=openRoom;
+window.leaveFiveRoom=async()=>{if(R.channel){try{await R.channel.untrack();await ffSupabase.removeChannel(R.channel);}catch(e){}}R={channel:null,mission:null,players:{},isLeader:false,started:false,queueMode:true,launched:false};document.getElementById('ff5Room')?.classList.remove('show');};
+document.getElementById('ff5Start')?.addEventListener('click',async()=>{if(!R.channel)return;const ps=Object.values(R.players).sort((a,b)=>String(a.userId).localeCompare(String(b.userId)));if(ps.length<5||ps[0]?.userId!==ffUser.id)return;R.launched=true;const ids=ps.slice(0,5).map(p=>p.userId);await R.channel.send({type:'broadcast',event:'war_room',payload:{kind:'launch',mission:'rocket',players:ids}});document.getElementById('ff5Room').classList.remove('show');window.startGame3D?.('rocket',true,{room5:true,warriorIds:ids});});
+})();
+</script>
+<script id="ff3d-engine">
+(()=>{
+'use strict';
+const S={canvas:null,gl:null,program:null,mode:'rocket',running:false,mp:false,score:0,lives:3,combo:0,time:0,last:0,spawn:0,wave:1,heat:0,chaos:0,crystals:0,kills:0,player:{x:0,y:1.3,z:8,ry:0,hp:100},cam:{x:0,y:3.2,z:13,ry:0,pitch:-.16},keys:{},joy:{x:0,y:0},fire:false,objects:[],shots:[],particles:[],rockets:[],shake:0,rocketType:0};
+const $=id=>document.getElementById(id); const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const TAU=Math.PI*2;
+function v3(x=0,y=0,z=0){return{x,y,z}} function add(a,b){return v3(a.x+b.x,a.y+b.y,a.z+b.z)} function sub(a,b){return v3(a.x-b.x,a.y-b.y,a.z-b.z)} function mul(a,n){return v3(a.x*n,a.y*n,a.z*n)} function len(a){return Math.hypot(a.x,a.y,a.z)} function norm(a){let l=len(a)||1;return mul(a,1/l)}
+function mat4(){return new Float32Array(16)}
+function ident(o){o.fill(0);o[0]=o[5]=o[10]=o[15]=1;return o}
+function persp(o,fovy,aspect,near,far){let f=1/Math.tan(fovy/2),nf=1/(near-far);o.fill(0);o[0]=f/aspect;o[5]=f;o[10]=(far+near)*nf;o[11]=-1;o[14]=2*far*near*nf;return o}
+function look(o,eye,center,up){let z=norm(sub(eye,center)),x=norm({x:up.y*z.z-up.z*z.y,y:up.z*z.x-up.x*z.z,z:up.x*z.y-up.y*z.x}),y={x:z.y*x.z-z.z*x.y,y:z.z*x.x-z.x*x.z,z:z.x*x.y-z.y*x.x};ident(o);o[0]=x.x;o[1]=y.x;o[2]=z.x;o[4]=x.y;o[5]=y.y;o[6]=z.y;o[8]=x.z;o[9]=y.z;o[10]=z.z;o[12]=-(x.x*eye.x+x.y*eye.y+x.z*eye.z);o[13]=-(y.x*eye.x+y.y*eye.y+y.z*eye.z);o[14]=-(z.x*eye.x+z.y*eye.y+z.z*eye.z);return o}
+function model(o,p,scale,ry=0){let c=Math.cos(ry),s=Math.sin(ry);ident(o);o[0]=c*scale.x;o[1]=0;o[2]=-s*scale.x;o[4]=0;o[5]=scale.y;o[6]=0;o[8]=s*scale.z;o[9]=0;o[10]=c*scale.z;o[12]=p.x;o[13]=p.y;o[14]=p.z;return o}
+function mulm(a,b){let r=mat4();for(let c=0;c<4;c++)for(let r0=0;r0<4;r0++)r[c*4+r0]=a[r0]*b[c*4]+a[4+r0]*b[c*4+1]+a[8+r0]*b[c*4+2]+a[12+r0]*b[c*4+3];return r}
+function shader(type,src){let sh=S.gl.createShader(type);S.gl.shaderSource(sh,src);S.gl.compileShader(sh);if(!S.gl.getShaderParameter(sh,S.gl.COMPILE_STATUS))throw Error(S.gl.getShaderInfoLog(sh));return sh}
+const VS=`attribute vec3 p;attribute vec3 n;uniform mat4 uP,uV,uM;varying vec3 N;varying vec3 W;void main(){vec4 w=uM*vec4(p,1.0);W=w.xyz;N=mat3(uM)*n;gl_Position=uP*uV*w;}`;
+const FS=`precision mediump float;uniform vec4 uC;uniform vec3 uLight;varying vec3 N;varying vec3 W;void main(){vec3 nn=normalize(N);float d=max(dot(nn,normalize(uLight-W)),0.0);float rim=pow(1.0-max(dot(nn,vec3(0,0,1)),0.0),2.0)*.12;gl_FragColor=vec4(uC.rgb*(.28+d*.72+rim),uC.a);}`;
+let cube;
+function initGL(){S.canvas=$('ff3dCanvas');S.gl=S.canvas.getContext('webgl',{antialias:true,alpha:false});if(!S.gl)throw Error('WebGL unavailable');let g=S.gl;S.program=g.createProgram();g.attachShader(S.program,shader(g.VERTEX_SHADER,VS));g.attachShader(S.program,shader(g.FRAGMENT_SHADER,FS));g.linkProgram(S.program);if(!g.getProgramParameter(S.program,g.LINK_STATUS))throw Error(g.getProgramInfoLog(S.program));g.useProgram(S.program);S.program.aP=g.getAttribLocation(S.program,'p');S.program.aN=g.getAttribLocation(S.program,'n');S.program.uP=g.getUniformLocation(S.program,'uP');S.program.uV=g.getUniformLocation(S.program,'uV');S.program.uM=g.getUniformLocation(S.program,'uM');S.program.uC=g.getUniformLocation(S.program,'uC');S.program.uL=g.getUniformLocation(S.program,'uLight');
+let verts=[],norms=[];const faces=[[[0,0,1],[[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]]],[[0,0,-1],[[1,-1,-1],[-1,-1,-1],[-1,1,-1],[1,1,-1]]],[[1,0,0],[[1,-1,1],[1,-1,-1],[1,1,-1],[1,1,1]]],[[-1,0,0],[[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1]]],[[0,1,0],[[-1,1,1],[1,1,1],[1,1,-1],[-1,1,-1]]],[[0,-1,0],[[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1]]]];for(const [n,q] of faces){for(let i=1;i<3;i++){for(const pt of [q[0],q[i],q[i+1]]){verts.push(...pt);norms.push(...n)}}}cube={count:verts.length/3,p:g.createBuffer(),n:g.createBuffer()};g.bindBuffer(g.ARRAY_BUFFER,cube.p);g.bufferData(g.ARRAY_BUFFER,new Float32Array(verts),g.STATIC_DRAW);g.bindBuffer(g.ARRAY_BUFFER,cube.n);g.bufferData(g.ARRAY_BUFFER,new Float32Array(norms),g.STATIC_DRAW);g.enableVertexAttribArray(S.program.aP);g.enableVertexAttribArray(S.program.aN);g.enable(g.DEPTH_TEST);g.enable(g.CULL_FACE);buildOrganicMeshes();resize();}
+function resize(){if(!S.canvas)return;let r=S.canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2),w=Math.max(1,Math.floor(r.width*d)),h=Math.max(1,Math.floor(r.height*d));if(S.canvas.width!==w||S.canvas.height!==h){S.canvas.width=w;S.canvas.height=h;}S.gl.viewport(0,0,S.canvas.width,S.canvas.height)}
+window.addEventListener('resize',resize,{passive:true});
+window.addEventListener('orientationchange',()=>setTimeout(resize,100),{passive:true});
+if(window.visualViewport) window.visualViewport.addEventListener('resize',()=>requestAnimationFrame(resize),{passive:true});
+if(window.ResizeObserver){const ro=new ResizeObserver(()=>resize());ro.observe(document.getElementById('ff3dStage'));}
+function drawBox(p,sc,col,ry=0){const g=S.gl,m=mat4();model(m,p,sc,ry);g.uniformMatrix4fv(S.program.uM,false,m);g.uniform4f(S.program.uC,col[0],col[1],col[2],col[3]??1);g.bindBuffer(g.ARRAY_BUFFER,cube.p);g.vertexAttribPointer(S.program.aP,3,g.FLOAT,false,0,0);g.bindBuffer(g.ARRAY_BUFFER,cube.n);g.vertexAttribPointer(S.program.aN,3,g.FLOAT,false,0,0);g.drawArrays(g.TRIANGLES,0,cube.count)}
+let organicMeshes={};
+function makeMesh(name,verts,norms){const g=S.gl,m={count:verts.length/3,p:g.createBuffer(),n:g.createBuffer()};g.bindBuffer(g.ARRAY_BUFFER,m.p);g.bufferData(g.ARRAY_BUFFER,new Float32Array(verts),g.STATIC_DRAW);g.bindBuffer(g.ARRAY_BUFFER,m.n);g.bufferData(g.ARRAY_BUFFER,new Float32Array(norms),g.STATIC_DRAW);organicMeshes[name]=m}
+function buildOrganicMeshes(){const seg=20,rings=10,sv=[],sn=[];for(let j=0;j<rings-1;j++){const p0=j/(rings-1)*Math.PI,p1=(j+1)/(rings-1)*Math.PI;for(let i=0;i<seg;i++){const a0=i/seg*Math.PI*2,a1=(i+1)/seg*Math.PI*2,q=[[Math.sin(p0)*Math.cos(a0),Math.cos(p0),Math.sin(p0)*Math.sin(a0)],[Math.sin(p0)*Math.cos(a1),Math.cos(p0),Math.sin(p0)*Math.sin(a1)],[Math.sin(p1)*Math.cos(a1),Math.cos(p1),Math.sin(p1)*Math.sin(a1)],[Math.sin(p1)*Math.cos(a0),Math.cos(p1),Math.sin(p1)*Math.sin(a0)]];for(const v of[q[0],q[1],q[2],q[0],q[2],q[3]]){sv.push(...v);sn.push(...v)}}}makeMesh('sphere',sv,sn);const cv=[],cn=[],s=20;for(let i=0;i<s;i++){const a0=i/s*Math.PI*2,a1=(i+1)/s*Math.PI*2;for(const v of[[0,-1,0],[Math.cos(a0),-1,Math.sin(a0)],[Math.cos(a1),-1,Math.sin(a1)],[0,1,0],[Math.cos(a1),1,Math.sin(a1)],[Math.cos(a0),1,Math.sin(a0)]]){cv.push(...v);cn.push(v[0],v[1],v[2])}for(const v of[[Math.cos(a0),-1,Math.sin(a0)],[Math.cos(a1),-1,Math.sin(a1)],[Math.cos(a1),1,Math.sin(a1)],[Math.cos(a0),-1,Math.sin(a0)],[Math.cos(a1),1,Math.sin(a1)],[Math.cos(a0),1,Math.sin(a0)]]){cv.push(...v);cn.push(v[0],0,v[2])}}makeMesh('cylinder',cv,cn)}
+function drawMesh(name,p,sc,col,ry=0){const g=S.gl,q=organicMeshes[name];if(!q)return;const m=mat4();model(m,p,sc,ry);g.uniformMatrix4fv(S.program.uM,false,m);g.uniform4f(S.program.uC,col[0],col[1],col[2],col[3]??1);g.bindBuffer(g.ARRAY_BUFFER,q.p);g.vertexAttribPointer(S.program.aP,3,g.FLOAT,false,0,0);g.bindBuffer(g.ARRAY_BUFFER,q.n);g.vertexAttribPointer(S.program.aN,3,g.FLOAT,false,0,0);g.drawArrays(g.TRIANGLES,0,q.count)}
+function drawGround(){drawMesh('sphere',v3(0,-3.15,0),v3(34,3,34),[.16,.12,.075,1]);for(let i=0;i<20;i++){const a=i*2.399,d=16+(i%5)*2.2;drawMesh('sphere',v3(Math.cos(a)*d,-.15,Math.sin(a)*d),v3(3.5+(i%3)*.8,.8+(i%2)*.35,2.8+(i%4)*.5),[.20,.16,.11,1],a*.37)}}
+function drawTree(x,z,s=1,rot=0){drawMesh('cylinder',v3(x,.9*s,z),v3(.34*s,1.15*s,.34*s),[.20,.11,.045,1],rot);drawMesh('sphere',v3(x,2.05*s,z),v3(1.25*s,1.35*s,1.05*s),[.07,.25,.10,1],rot*.3);drawMesh('sphere',v3(x-.45*s,2.0*s,z+.15*s),v3(.8*s,.9*s,.75*s),[.08,.30,.11,1],rot)}
+function drawRock(x,y,z,s,rot=0){drawMesh('sphere',v3(x,y,z),v3(s*1.15,s*.8,s*.9),[.25,.21,.17,1],rot)}
+function drawCharacter(o){const r=Math.max(.45,o.r||.8),h=Math.max(1.5,o.h||2.5),rot=o.ry||0,base=o.kind==='enemy'?[.32,.35,.39,1]:o.kind==='elite'?[.55,.09,.06,1]:[.78,.15,.035,1];drawMesh('sphere',v3(o.x-r*.28,.28,o.z),v3(r*.28,.18,r*.38),[.07,.06,.05,1],rot);drawMesh('sphere',v3(o.x+r*.28,.28,o.z),v3(r*.28,.18,r*.38),[.07,.06,.05,1],rot);drawMesh('sphere',v3(o.x,.75+h*.25,o.z),v3(r*.58,h*.48,r*.36),base,rot);drawMesh('cylinder',v3(o.x-r*.55,.82+h*.25,o.z),v3(.17,h*.36,.17),base,rot+.35);drawMesh('cylinder',v3(o.x+r*.55,.82+h*.25,o.z),v3(.17,h*.36,.17),base,rot-.35);drawMesh('sphere',v3(o.x,1.05+h*.72,o.z),v3(r*.40,r*.40,r*.40),[.48,.29,.18,1],rot);drawMesh('sphere',v3(o.x,1.18+h*.91,o.z),v3(r*.44,r*.20,r*.44),o.kind==='player'?[.78,.12,.035,1]:[.16,.17,.19,1],rot)}
+function drawTipu(o){drawMesh('sphere',v3(o.x,.75,o.z),v3(.72,1,.45),[.13,.30,.15,1]);drawMesh('sphere',v3(o.x,1.85,o.z),v3(.45,.45,.40),[.58,.34,.20,1]);drawMesh('sphere',v3(o.x,2.25,o.z),v3(.52,.18,.44),[.75,.12,.04,1]);drawMesh('cylinder',v3(o.x-.65,1.25,o.z),v3(.12,.7,.12),[.08,.07,.06,1],.45);drawMesh('cylinder',v3(o.x+.65,1.25,o.z),v3(.12,.7,.12),[.08,.07,.06,1],-.45)}
+function colorFor(kind){return kind==='enemy'?[.42,.45,.50,1]:kind==='elite'?[.62,.12,.08,1]:kind==='player'?[.85,.18,.04,1]:kind==='rock'?[.26,.20,.17,1]:kind==='tree'?[.08,.28,.10,1]:kind==='lava'?[.95,.12,.015,1]:kind==='crystal'?[.12,.75,1,1]:kind==='rocket'?[1,.5,.08,1]:[.35,.38,.45,1]}
+function terrain(){
+  drawGround();
+  const mode=S.mode;
+  if(mode==='rocket'){
+    for(let i=-12;i<=12;i++){const z=i*1.8,x=Math.sin(i*.27)*3.4;drawMesh('sphere',v3(x,-.08,z),v3(2.8,.18,1.3),[.29,.20,.11,1],Math.sin(i*.2)*.2)}
+    for(let i=0;i<20;i++){const a=i*2.51,d=11+(i%6)*2.5;drawTree(Math.cos(a)*d,Math.sin(a)*d,.85+(i%3)*.15,a)}
+    drawMesh('sphere',v3(0,1.35,-20),v3(13,1.2,.75),[.30,.23,.16,1]);
+    for(let i=-4;i<=4;i++)drawMesh('sphere',v3(i*2.5,1.9,-20.15),v3(1.05,2,.72),[.29,.22,.15,1]);
+  } else if(mode==='volcano'){
+    drawMesh('sphere',v3(0,-.35,-18),v3(8,2.8,8),[.20,.09,.055,1]);
+    drawMesh('sphere',v3(0,2.0,-18),v3(4.4,2.2,4.4),[.14,.07,.045,1]);
+    drawMesh('sphere',v3(0,3.6,-18),v3(1.8,.45,1.8),[.95,.16,.02,1]);
+    for(let i=0;i<9;i++){const a=i*.72,d=5+i%3*4;drawMesh('sphere',v3(Math.cos(a)*d,-.05,Math.sin(a)*d),v3(2.4,1.0,1.8),[.22,.10,.07,1],a);}
+    for(let i=0;i<5;i++){const x=-8+i*4;drawMesh('sphere',v3(x,.02,4),v3(.7,.35,7),[.72,.12,.025,1],.15*i);}
+    for(let i=0;i<14;i++){const a=i*2.4,d=7+(i%4)*2.5;drawRock(Math.cos(a)*d,.35,Math.sin(a)*d,.55+(i%3)*.22,a);}
+  } else {
+    /* Final Fury = battlefield + volcanic collapse */
+    for(let i=-9;i<=9;i++){const z=i*2.2,x=Math.sin(i*.4)*4;drawMesh('sphere',v3(x,-.05,z),v3(3.2,.2,1.4),[.27,.16,.10,1],i*.12)}
+    for(let i=0;i<16;i++){const a=i*2.6,d=10+(i%5)*2;drawTree(Math.cos(a)*d,Math.sin(a)*d,.8+(i%2)*.2,a)}
+    drawMesh('sphere',v3(0,.1,-18),v3(8,2.5,7),[.19,.08,.055,1]);
+    drawMesh('sphere',v3(0,2.2,-18),v3(3.6,2.0,3.6),[.13,.06,.04,1]);
+    for(let i=-3;i<=3;i++)drawMesh('sphere',v3(i*2.2,.05,-4),v3(.35,.18,5),[.82,.10,.02,1],i*.08);
+  }
+}
+function spawnWorld(){S.objects=[];for(let i=0;i<20;i++){const a=Math.random()*TAU,d=5+Math.random()*18;S.objects.push({kind:Math.random()<.42?'tree':'rock',x:Math.cos(a)*d,y:0,z:Math.sin(a)*d,r:.7+Math.random()*1.2,h:1+Math.random()*2,ry:Math.random()*TAU})}if(S.mode!=='rocket')for(let i=0;i<12;i++){const a=Math.random()*TAU,d=5+Math.random()*18;S.objects.push({kind:'crystal',x:Math.cos(a)*d,y:.3,z:Math.sin(a)*d,r:.45,h:1.2,rot:Math.random()*TAU})}}
+function drawActor(o,now){if(o.kind==='tipu'){drawTipu(o);return}if(o.kind==='tree'){drawTree(o.x,o.z,Math.max(.7,o.h/3),o.ry||0);return}if(o.kind==='rock'){drawRock(o.x,o.y+.45,o.z,Math.max(.45,o.r||.8),o.ry||0);return}if(o.kind==='player'||o.kind==='enemy'||o.kind==='elite'){drawCharacter(o);return}if(o.kind==='crystal'){drawMesh('sphere',v3(o.x,o.y+.75,o.z),v3(.42,.9,.42),colorFor(o.kind),o.rot||0);return}if(o.kind==='rocket'){drawMesh('cylinder',v3(o.x,o.y,o.z),v3(.14,.55,.14),colorFor(o.kind),o.ry||0);return}drawMesh('sphere',v3(o.x,o.y+.5,o.z),v3(o.r||.5,o.h||.8,o.r||.5),colorFor(o.kind),o.ry||0)}
+let dtGlobal=.016;
+function hud(){
+  const mode=S.mode;
+  $('ff3dScore').textContent=Math.floor(S.score);$('ff3dLives').textContent=S.lives;$('ff3dCombo').textContent=S.combo;$('ff3dTime').textContent=Math.max(0,Math.ceil(S.time));
+  $('ff3dMode').textContent=mode==='rocket'?'🚀 ROCKET BATTLE':mode==='volcano'?'🌋 VOLCANO RUSH':'🔥 FINAL FURY';
+  $('ff3dSubtitle').textContent=mode==='rocket'?'Mysorean battlefield':mode==='volcano'?'Volcanic exploration':'Combined warzone survival';
+  const phase=S.room5?(S.locked?'MYSOREAN CAMP · WAITING FOR AAKRAMAN':'5-WARRIOR ROCKET ASSAULT'):(mode==='rocket'?`British assault · Wave ${S.wave}`:mode==='volcano'?`Explore · volcanic heat ${Math.round(S.heat)}%`:`Wave ${S.wave} · chaos ${Math.round(S.chaos)}%`);
+  $('ff3dPhase').textContent=phase;
+  $('ff3dObjective').textContent=S.room5?(S.locked?'Tipu Sultan will release the warriors.':'Leave the camp and destroy the British assault!'):(mode==='rocket'?`Destroy enemies · ${S.kills} defeated · Rocket power ${S.rocketType+1}`:mode==='volcano'?`Explore the volcanic world · collect ${S.crystals} crystals`: `Survive the battlefield and volcanic collapse`);
+  const wp=$('ff3dWeaponPanel'),mp=$('ff3dMeterPanel'),hint=$('ff3dHint');
+  if(wp)wp.style.display=mode==='rocket'?'block':'none';
+  if(mp)mp.style.display=mode==='rocket'?'none':'block';
+  if(hint)hint.textContent=mode==='volcano'?'WASD / arrows move · explore · FIRE clears nearby hazards':mode==='final'?'WASD / arrows move · mouse aim · click or SPACE fire':'WASD / arrows move · mouse aim · click or SPACE fire · 1–4 rocket powers';
+  if(mode==='rocket'){
+    ['w1','w2','w3','w4'].forEach((id,i)=>$(id)?.classList.toggle('active',S.rocketType===i));
+  }else{
+    const value=mode==='volcano'?Math.round(S.heat):Math.round(S.chaos),name=mode==='volcano'?'🌋 VOLCANIC HEAT':'🔥 CHAOS';$('ff3dMeterName').textContent=name;$('ff3dMeterValue').textContent=value+'%';$('ff3dMeterFill').style.width=Math.max(0,Math.min(100,value))+'%';
+  }
+}
+function update3D(dt){
+  const forward = (S.keys.w||S.keys.ArrowUp?1:0) + (S.keys.s||S.keys.ArrowDown?-1:0);
+  const strafe = (S.keys.d||S.keys.ArrowRight?1:0) + (S.keys.a||S.keys.ArrowLeft?-1:0);
+  let mx=strafe + S.joy.x, mz=forward - S.joy.y;
+  const ml=Math.hypot(mx,mz); if(ml>1){mx/=ml;mz/=ml;}
+  const speed=S.mode==='volcano'?5.6:S.mode==='final'?6.2:6.8;
+  S.player.x=clamp(S.player.x+mx*speed*dt,-28,28);
+  S.player.z=clamp(S.player.z+mz*speed*dt,-28,28);
+  if(ml>.05) S.player.ry=Math.atan2(mx,mz);
+  if(S.mode==='volcano') S.heat=clamp(S.heat+dt*(1.8+S.wave*.18),0,100);
+  if(S.mode==='final') S.chaos=clamp(S.chaos+dt*(2.2+S.wave*.25),0,100);
+  S.time=Math.max(0,S.time-dt);
+  S.spawn-=dt;
+  if(S.spawn<=0){
+    S.spawn=Math.max(.55,1.5-S.wave*.06);
+    const a=Math.random()*TAU,d=18+Math.random()*7;
+    if(S.mode==='rocket'||S.mode==='final') S.objects.push({kind:Math.random()<.18?'elite':'enemy',x:Math.cos(a)*d,y:0,z:Math.sin(a)*d,r:.65,h:2.2,ry:a+Math.PI});
+    else if(Math.random()<.65) S.objects.push({kind:'rock',x:Math.cos(a)*d,y:.1,z:Math.sin(a)*d,r:.55+Math.random()*.5,h:1,ry:a});
+  }
+  for(const o of S.objects){
+    if(o.kind==='enemy'||o.kind==='elite'){
+      const dx=S.player.x-o.x,dz=S.player.z-o.z,dd=Math.hypot(dx,dz)||1;
+      o.x += dx/dd*dt*(o.kind==='elite'?1.2:.8+S.wave*.025);
+      o.z += dz/dd*dt*(o.kind==='elite'?1.2:.8+S.wave*.025);
+      if(dd<1.35 && S.player.inv<=0){S.player.hp-=12;S.player.inv=.7;S.lives=Math.max(0,S.lives-0.25);S.shake=.18;}
+    }
+  }
+  S.player.inv=Math.max(0,S.player.inv-dt);
+  for(const q of S.shots){q.x+=q.dx*dt*22;q.z+=q.dz*dt*22;q.life-=dt;}
+  for(const q of S.shots){
+    for(const o of S.objects){
+      if((o.kind==='enemy'||o.kind==='elite')&&!o.dead&&Math.hypot(q.x-o.x,q.z-o.z)<1.1){
+        o.dead=true;q.life=0;S.kills++;S.combo++;S.score+=o.kind==='elite'?500:150;S.shake=.12;playSfx('explosion');break;
+      }
+    }
+  }
+  S.shots=S.shots.filter(q=>q.life>0&&Math.abs(q.x)<40&&Math.abs(q.z)<40);
+  S.objects=S.objects.filter(o=>!o.dead);
+  if(S.mode==='volcano'){
+    for(const o of S.objects){
+      if(o.kind==='crystal'&&Math.hypot(S.player.x-o.x,S.player.z-o.z)<1.5){o.dead=true;S.crystals++;S.score+=300;playSfx('rock');}
+    }
+    S.objects=S.objects.filter(o=>!o.dead);
+  }
+  if(S.lives<=0||S.player.hp<=0) finish(false,'DEFEAT');
+  else if(S.time<=0) finish(true,'TIME');
+}
+function fire3D(){
+  if(!S.running||S.locked)return;
+  playSfx('launch');
+  const yaw=S.player.ry;
+  S.shots.push({x:S.player.x,z:S.player.z,dx:Math.sin(yaw),dz:Math.cos(yaw),life:1.5});
+  S.combo=Math.min(99,S.combo+1);
+}
+function render3D(){
+  const g=S.gl;if(!g)return;
+  resize();
+  g.clearColor(S.mode==='volcano'?.035:S.mode==='final'?.018:.012,S.mode==='volcano'?.012:.008,.018,1);
+  g.clear(g.COLOR_BUFFER_BIT|g.DEPTH_BUFFER_BIT);
+  const aspect=S.canvas.width/Math.max(1,S.canvas.height),P=mat4(),V=mat4();
+  persp(P,Math.PI/3,aspect,.1,100);
+  const yaw=S.player.ry;
+  const desired=v3(S.player.x-Math.sin(yaw)*7,4.4,S.player.z-Math.cos(yaw)*7);
+  S.cam.x+=(desired.x-S.cam.x)*Math.min(1,dtGlobal*7);
+  S.cam.y+=(desired.y-S.cam.y)*Math.min(1,dtGlobal*7);
+  S.cam.z+=(desired.z-S.cam.z)*Math.min(1,dtGlobal*7);
+  look(V,v3(S.cam.x,S.cam.y,S.cam.z),v3(S.player.x,1.1,S.player.z),v3(0,1,0));
+  g.useProgram(S.program);g.uniformMatrix4fv(S.program.uP,false,P);g.uniformMatrix4fv(S.program.uV,false,V);g.uniform3f(S.program.uLight,-8,14,6);
+  terrain();
+  drawCharacter({kind:'player',x:S.player.x,y:0,z:S.player.z,r:1,h:2.2,ry:S.player.ry});
+  for(const o of S.objects)drawActor(o,performance.now());
+  for(const q of S.shots)drawMesh('cylinder',v3(q.x,.95,q.z),v3(.10,.45,.10),colorFor('rocket'),Math.atan2(q.dx,q.dz));
+}
+function loop(t){if(!S.running)return;dtGlobal=Math.min(.033,(t-S.last)/1000||.016);S.last=t;update3D(dtGlobal);render3D();hud();requestAnimationFrame(loop)}
+function finish(win,reason){if(!S.running)return;S.running=false;window.ffMultiplayerGame=!!S.mp;let finalScore=Math.floor(S.score+(win?500:0));S.score=finalScore;hud();try{if(typeof score!=='undefined')score=finalScore;if(typeof bestCombo!=='undefined')bestCombo=Math.max(bestCombo,S.combo);if(typeof gameType!=='undefined')gameType=S.mode;if(typeof saveCompletedRun==='function')saveCompletedRun(reason)}catch(e){console.warn(e)}$('ff3dObjective').textContent=win?'🏆 MISSION COMPLETE — FIRE & FURY!':'💀 YOU FELL — THE FURY WINS THIS ROUND';setTimeout(()=>{$('ff3dStage').hidden=true;let old=$('gameCanvas');if(old)old.style.display='';show('missions');},2200)}
+function campObjects(){S.objects=[];
+  // Mysorean camp: curved palisade, tents, trees and a central command area.
+  for(let i=0;i<14;i++){const a=Math.PI+(i/13)*Math.PI,d=5.8,x=Math.cos(a)*d,z=7+Math.sin(a)*d;S.objects.push({kind:'rock',x:x,y:0,z:z,r:.5,h:.7,ry:a});}
+  for(let i=0;i<6;i++){S.objects.push({kind:'tree',x:-10+i*4,y:0,z:10+(i%2)*1.4,r:.8,h:3,ry:i*.35});}
+  S.objects.push({kind:'tipu',x:0,y:0,z:1.5,r:1.05,h:2.8,ry:0});
+  // camp banners / gate posts are architectural accents
+  S.objects.push({kind:'rock',x:-3.8,y:0,z:6,r:.55,h:2.7,ry:0},{kind:'rock',x:3.8,y:0,z:6,r:.55,h:2.7,ry:0});
+}
+function speakAttack(){try{const u=new SpeechSynthesisUtterance('आक्रमण!');u.lang='hi-IN';u.rate=.78;u.pitch=.72;u.volume=1;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+function campIntro(){const box=$('ff5Intro'),title=$('ff5IntroTitle'),text=$('ff5IntroText');if(!box)return;box.style.display='flex';S.locked=true;title.textContent='MYSOREAN CAMP';text.textContent='Tipu Sultan: “Warriors, prepare yourselves…”';setTimeout(()=>{title.textContent='TIPU SULTAN';text.textContent='आक्रमण!';speakAttack();},1800);setTimeout(()=>{title.textContent='🔥 ASSAULT BEGINS';text.textContent='Leave the base. The battlefield is yours.';S.locked=false;},3400);setTimeout(()=>{box.style.display='none';},4500);}
+function begin(type,multi,opts={}){if(opts.room5&&type!=='rocket')type='rocket';S.mode=type;S.mp=!!multi;S.room5=!!opts.room5&&type==='rocket';window.ffMultiplayerGame=!!multi;gameType=type;S.running=true;S.score=0;S.lives=3;S.combo=0;S.time=type==='final'?120:150;S.spawn=.4;S.wave=1;S.heat=0;S.chaos=0;S.crystals=0;S.kills=0;S.rocketType=0;S.objects=[];S.shots=[];S.particles=[];S.player={x:0,y:1.3,z:S.room5?7:8,ry:0,hp:100,inv:0};S.cam={x:0,y:3.2,z:S.room5?12:13};$('ff3dStage').hidden=false;let old=$('gameCanvas');if(old)old.style.display='none';$('fireBtn')?.style.setProperty('display','none');$('modeBattleHud')?.classList.remove('show');try{initAudio(); playSfx('launch');}catch(e){console.warn('3D audio start:',e)}show('game');try{if(typeof gameRunning!=='undefined')gameRunning=false}catch(e){}if(S.room5){campObjects();campIntro();}else{spawnWorld();}hud();requestAnimationFrame(()=>resize());S.last=performance.now();requestAnimationFrame(loop)}
+window.startGame3D=begin;window.FF3D_STATE=S;
+window.addEventListener('keydown',e=>{S.keys[e.key]=true;if(e.code==='Space'){e.preventDefault();fire3D()}let n=Number(e.key);if(n>=1&&n<=4)S.rocketType=n-1});window.addEventListener('keyup',e=>S.keys[e.key]=false);
+S.mouseActive=false;window.addEventListener('mousemove',e=>{if(!$('ff3dStage')||$('ff3dStage').hidden)return;S.mouseActive=true;let r=S.canvas.getBoundingClientRect();S.aimX=(e.clientX-r.left-r.width/2)/(r.width/2);S.aimZ=1});window.addEventListener('mousedown',e=>{if(e.button===0&&$('ff3dStage')&&!$('ff3dStage').hidden)fire3D()});
+const stick=$('ff3dStick'),thumb=$('ff3dThumb');if(stick){let set=e=>{let r=stick.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2,l=Math.hypot(x,y),m=Math.max(1,r.width/2-22);if(l>m){x=x/l*m;y=y/l*m}S.joy.x=x/m;S.joy.y=y/m;thumb.style.transform=`translate(${x}px,${y}px)`};stick.addEventListener('pointerdown',e=>{stick.setPointerCapture(e.pointerId);set(e)});stick.addEventListener('pointermove',e=>{if(e.buttons)set(e)});stick.addEventListener('pointerup',()=>{S.joy.x=S.joy.y=0;thumb.style.transform='translate(0,0)'})}$('ff3dFire')?.addEventListener('pointerdown',e=>{e.preventDefault();fire3D()});
+try{initGL();buildOrganicMeshes()}catch(e){console.error('FIRE & FURY 3D engine:',e)}
+const originalStart=window.startGame;window.startGame=function(type,multi=false){
+  // Preserve the V3 account requirement even though the WebGL engine is now the active renderer.
+  if(typeof canPlayFuryGame==='function' && !canPlayFuryGame()){
+    if(typeof openAuthGate==='function') openAuthGate();
+    if(typeof setAuthStatus==='function') setAuthStatus('🔐 Please log in or create a FIRE & FURY account to play.');
+    return;
+  }
+  if(!S.gl){alert('This device/browser does not support the FIRE & FURY 3D engine.');return}
+  begin(type,multi);
+};
+})();
+</script>
+<script>
+/* ===== RELEASE SAFETY NET ===== */
+window.addEventListener('error',function(e){
+  console.error('FIRE & FURY runtime error:',e.error||e.message);
+  const msg=document.getElementById('gameMessage');
+  if(msg && document.getElementById('game')?.classList.contains('active')){
+    msg.textContent='⚠️ FIRE & FURY recovered from a temporary game error. You can quit and restart the mission.';
+  }
+});
+window.addEventListener('unhandledrejection',function(e){
+  console.warn('FIRE & FURY async warning:',e.reason);
+});
+</script>
 </body>
 </html>
